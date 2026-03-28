@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Lenis for Smooth Scrolling (Lando Norris style buttery scroll)
     const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
         gestureDirection: 'vertical',
         smooth: true,
-        mouseMultiplier: 1,
+        mouseMultiplier: 0.9,
         smoothTouch: false,
         touchMultiplier: 2,
         infinite: false,
@@ -24,62 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     gsap.ticker.lagSmoothing(0);
 
-    // Custom Cursor Logic
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
-    
-    window.addEventListener('mousemove', (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
-        
-        cursorDot.style.left = `${posX}px`;
-        cursorDot.style.top = `${posY}px`;
-        
-        // Slight delay on outline for smooth trailing effect
-        cursorOutline.animate({
-            left: `${posX}px`,
-            top: `${posY}px`
-        }, { duration: 500, fill: "forwards" });
-    });
 
-    // Custom Cursor expansion on hover
-    const hoverTargets = document.querySelectorAll('.hover-target, a, button');
-    hoverTargets.forEach(target => {
-        target.addEventListener('mouseenter', () => {
-            cursorDot.classList.add('active');
-            cursorOutline.classList.add('active');
-        });
-        target.addEventListener('mouseleave', () => {
-            cursorDot.classList.remove('active');
-            cursorOutline.classList.remove('active');
-        });
-    });
 
-    // Magnetic Button Effect for Machine Section
-    const magneticButtons = document.querySelectorAll('.machine-panel .btn-primary');
-    magneticButtons.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            gsap.to(btn, {
-                x: x * 0.3,
-                y: y * 0.3,
-                duration: 0.6,
-                ease: "power2.out"
-            });
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, {
-                x: 0,
-                y: 0,
-                duration: 0.6,
-                ease: "elastic.out(1, 0.3)"
-            });
-        });
-    });
+
 
     // Full Screen Menu Logic
     const menuBtn = document.querySelector('.menu-btn');
@@ -133,11 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
     clipReveals.forEach(elem => {
         gsap.to(elem, {
             y: "0%",
-            duration: 1.6,
-            ease: "power3.out",
+            duration: 2.2,
+            ease: "expo.out",
             scrollTrigger: {
                 trigger: elem.parentElement,
-                start: "top 90%",
+                start: "top 92%",
                 toggleActions: "play none none reverse"
             }
         });
@@ -198,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: {
             trigger: ".section-machines",
             pin: true,           
-            scrub: true, 
+            scrub: 1.2, 
             snap: 1 / (machinePanels.length - 1),
             end: () => "+=" + (machinesWrapper.scrollWidth - window.innerWidth),
             onUpdate: (self) => {
@@ -291,4 +238,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Hero Landing Animation
+    const tlHero = gsap.timeline();
+    tlHero.from(".hero-subheading", { opacity: 0, y: 30, duration: 1.5, ease: "expo.out", delay: 0.5 })
+          .from(".hero-heading .clip-reveal > *", { y: "110%", duration: 2, stagger: 0.15, ease: "expo.out" }, "-=1.2")
+          .from(".hero-socials .social-icon", { opacity: 0, x: -30, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=1.5");
 });
