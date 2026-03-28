@@ -20,6 +20,12 @@
 
 <body class="loading">
 
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-text">AUTOMOBILI <span class="accent-text">ARDENT</span></div>
+        </div>
+    </div>
+
 
 
     <!-- Full Screen Menu Overlay -->
@@ -113,19 +119,35 @@
     </div>
 
     <header id="main-header" class="hover-target">
+        <!-- Left side for Mobile, hidden on Desktop -->
+        <div class="mobile-nav-trigger mobile-only">
+            <button class="menu-btn hover-target" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <a href="#" class="mobile-login-text">LOGIN</a>
+        </div>
+
         <div class="logo">ARDENT</div>
+
         <nav class="nav-menu">
-            <a href="#" class="nav-link-btn hover-target"><span class="text-anim"
-                    data-text="LOGIN"><span>LOGIN</span></span></a>
-            <a href="#" class="nav-link-btn btn-highlight hover-target">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <!-- Desktop Only: Login -->
+            <a href="#" class="nav-link-btn hover-target desktop-only">
+                <span class="text-anim" data-text="LOGIN"><span>LOGIN</span></span>
+            </a>
+
+            <!-- Visible on Both -->
+            <a href="#" class="nav-link-btn btn-highlight hover-target header-store-btn">
+                <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
-                <span class="text-anim" data-text="STORE"><span>STORE</span></span>
             </a>
-            <button class="menu-btn hover-target" aria-label="Menu">
+
+            <!-- Desktop Only: Menu Toggle -->
+            <button class="menu-btn hover-target desktop-only" aria-label="Menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
@@ -142,7 +164,7 @@
                     <video autoplay loop muted playsinline
                         poster="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=1920">
                         <source
-                            src="https://assets.mixkit.co/videos/preview/mixkit-driving-a-car-on-a-winding-mountain-road-41031-large.mp4"
+                            src="porsche.mp4"
                             type="video/mp4">
                     </video>
                     <div class="overlay"></div>
@@ -454,8 +476,7 @@
 
                             <!-- Small refined editorial inset image -->
                             <div class="cta-float-product clip-img-reveal delay-3 hover-target">
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400"
-                                    alt="Apex Driving Shoes">
+                                <img src="cap.png" alt="Apex Driving Shoes">
                             </div>
                         </div>
                     </div>
@@ -464,8 +485,7 @@
                     <div class="cta-right">
                         <!-- Main large vertical image -->
                         <div class="cta-main-img clip-img-reveal hover-target">
-                            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=1000"
-                                alt="Model wearing Ardent Apparel">
+                            <img src="hoodie.png" alt="Model wearing Ardent Apparel">
                         </div>
 
                         <!-- Bottom Right Plaque (Minimalist) -->
@@ -479,8 +499,7 @@
 
                         <!-- Top Left secondary product inset -->
                         <div class="cta-float-secondary clip-img-reveal delay-2 hover-target">
-                            <img src="https://images.unsplash.com/photo-1588665793012-78d1045a1f6a?auto=format&fit=crop&q=80&w=400"
-                                alt="Heritage Duffle">
+                            <img src="duffle.png" alt="Heritage Duffle">
                         </div>
                     </div>
 
@@ -589,20 +608,27 @@
 
             <!-- PREMIUM MAIN FOOTER -->
             <footer class="main-footer">
-                <div class="footer-container">
-
-                    <!-- Top Branding Row -->
-                    <div class="footer-branding">
-                        <div class="f-logo-wrap">
-                            <span class="f-logo">ARDENT</span>
-                        </div>
-                        <div class="f-header-wrap">
-                            <h2 class="f-main-heading">ALWAYS <span class="accent-text">BEYOND</span><br>THE LIMITS.
-                            </h2>
-                        </div>
+                <!-- Top Marquee (Moved to top for mobile layout) -->
+                <div class="footer-marquee">
+                    <div class="f-marquee-content">
+                        <span>PORSCHE</span>
+                        <span>FERRARI</span>
+                        <span>LAMBORGHINI</span>
+                        <span>MCLAREN</span>
+                        <span>BUGATTI</span>
+                        <span>ASTON MARTIN</span>
+                        <!-- Clone -->
+                        <span>PORSCHE</span>
+                        <span>FERRARI</span>
+                        <span>LAMBORGHINI</span>
+                        <span>MCLAREN</span>
+                        <span>BUGATTI</span>
+                        <span>ASTON MARTIN</span>
                     </div>
+                </div>
 
-                    <!-- Split Navigation Section -->
+                <div class="footer-container">
+                    <!-- Navigation Section -->
                     <div class="footer-nav-section">
                         <div class="f-nav-col f-nav-left">
                             <span class="f-label">PAGES</span>
@@ -623,8 +649,7 @@
                         <!-- Central Icon/Mark -->
                         <div class="f-center-mark">
                             <div class="f-mark-a">A</div>
-                            <img src="https://images.unsplash.com/photo-1544833130-1849887556f0?auto=format&fit=crop&q=80&w=400"
-                                alt="Ardent Helm" class="f-center-img">
+                            <img src="aaa-logo.png" alt="Ardent Helm" class="f-center-img">
                         </div>
 
                         <div class="f-nav-col f-nav-right">
@@ -642,6 +667,17 @@
                         </div>
                     </div>
 
+                    <!-- Branding Row (Moved below nav for mobile) -->
+                    <div class="footer-branding">
+                        <div class="f-logo-wrap">
+                            <img src="aaa-logo.png" alt="Automobili Ardent Logo" class="f-logo-img">
+                        </div>
+                        <div class="f-header-wrap">
+                            <h2 class="f-main-heading">ALWAYS <span class="accent-text">BEYOND</span><br>THE LIMITS.
+                            </h2>
+                        </div>
+                    </div>
+
                     <!-- Enquiries Button -->
                     <div class="f-cta-wrap">
                         <a href="#" class="btn-enquiry hover-target">
@@ -652,25 +688,6 @@
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg>
                         </a>
-                    </div>
-                </div>
-
-                <!-- Footer Partner Marquee (Subtle) -->
-                <div class="footer-marquee">
-                    <div class="f-marquee-content">
-                        <span>PORSCHE</span>
-                        <span>FERRARI</span>
-                        <span>LAMBORGHINI</span>
-                        <span>MCLAREN</span>
-                        <span>BUGATTI</span>
-                        <span>ASTON MARTIN</span>
-                        <!-- Clone -->
-                        <span>PORSCHE</span>
-                        <span>FERRARI</span>
-                        <span>LAMBORGHINI</span>
-                        <span>MCLAREN</span>
-                        <span>BUGATTI</span>
-                        <span>ASTON MARTIN</span>
                     </div>
                 </div>
 

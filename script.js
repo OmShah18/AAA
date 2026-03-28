@@ -1,6 +1,32 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // Preloader Animation Timeline
+    const tlPreloader = gsap.timeline({
+        onComplete: () => {
+            document.body.classList.remove('loading');
+            document.querySelector('.preloader').style.display = 'none';
+            if (typeof tlHero !== 'undefined') tlHero.play();
+        }
+    });
+
+    tlPreloader.fromTo(".preloader-text", 
+        { y: "110%", opacity: 0 }, 
+        { y: "0%", opacity: 1, duration: 1.5, ease: "power4.out", delay: 0.5 }
+    )
+    .to(".preloader-content", {
+        opacity: 0,
+        y: "-50%",
+        duration: 0.8,
+        ease: "power2.in",
+        delay: 0.8
+    })
+    .to(".preloader", {
+        yPercent: -100,
+        duration: 1.2,
+        ease: "expo.inOut"
+    }, "-=0.2");
 
     // Initialize Lenis for Smooth Scrolling (Lando Norris style buttery scroll)
     const lenis = new Lenis({
@@ -29,9 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Full Screen Menu Logic
-    const menuBtn = document.querySelector('.menu-btn');
+    const menuButtons = document.querySelectorAll('.menu-btn');
     const closeBtn = document.querySelector('.menu-close-btn');
     const menuOverlay = document.querySelector('.menu-overlay');
+
     // Infinite Vertical Marquee in Menu
     const vStrips = document.querySelectorAll('.v-strip');
     vStrips.forEach(strip => {
@@ -64,10 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
           .fromTo(".m-link", { y: "110%" }, { y: "0%", duration: 1, stagger: 0.08, ease: "expo.out" }, "-=0.8")
           .from(".menu-footer", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.6");
           
-    menuBtn.addEventListener('click', () => {
-        menuOverlay.classList.add('menu-active');
-        lenis.stop(); // Prevent scrolling underneath
-        tlMenu.play();
+    menuButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            menuOverlay.classList.add('menu-active');
+            lenis.stop(); // Prevent scrolling underneath
+            tlMenu.play();
+        });
     });
     
     closeBtn.addEventListener('click', () => {
@@ -239,8 +268,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Hero Landing Animation
-    const tlHero = gsap.timeline();
-    tlHero.from(".hero-subheading", { opacity: 0, y: 30, duration: 1.5, ease: "expo.out", delay: 0.5 })
+    const tlHero = gsap.timeline({ paused: true });
+    tlHero.from(".hero-subheading", { opacity: 0, y: 30, duration: 1.5, ease: "expo.out", delay: 0.1 })
           .from(".hero-heading .clip-reveal > *", { y: "110%", duration: 2, stagger: 0.15, ease: "expo.out" }, "-=1.2")
           .from(".hero-socials .social-icon", { opacity: 0, x: -30, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=1.5");
 });
