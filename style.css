@@ -1,15 +1,18 @@
 :root {
-    --primary: #FFD000;
+    --primary: #ffca27;
     --black: #0c0c0c;
     --black-light: #161616;
     --white: #ffffff;
-    --text-dark: #222222;
+    --text-dark: #232527;
 
     /* Consolidated Font System */
-    --font-primary: 'Oswald', sans-serif;
+    --font-primary: 'Gunplay', sans-serif;
     /* Headings & Display */
-    --font-secondary: 'Inter', sans-serif;
+    --font-secondary: 'Nexa', sans-serif;
     /* Body & Informational */
+    --font-heading: 'Gunplay', sans-serif;
+    --font-editorial: 'Gunplay', sans-serif;
+    --font-body: 'Nexa', sans-serif;
 }
 
 * {
@@ -1211,7 +1214,8 @@ header.scrolled .header-logo-img {
         position: relative;
         width: 100%;
         left: 0;
-        margin-bottom: -40px; /* Force overlap */
+        margin-bottom: -40px;
+        /* Force overlap */
         z-index: 1;
     }
 
@@ -2206,7 +2210,8 @@ header.scrolled .header-logo-img {
     }
 
     .footer-marquee {
-        order: -1; /* TOP */
+        order: -1;
+        /* TOP */
         margin-bottom: 3rem;
         border: none;
         background: transparent;
@@ -2298,7 +2303,8 @@ header.scrolled .header-logo-img {
     }
 
     .f-main-heading .accent-text {
-        color: var(--white); /* White as per image */
+        color: var(--white);
+        /* White as per image */
     }
 
     .f-logo-wrap {
@@ -2366,7 +2372,7 @@ header.scrolled .header-logo-img {
         opacity: 0.4;
         font-size: 0.6rem;
     }
-    
+
     .legal-bg-shape {
         display: none;
     }
@@ -2402,7 +2408,8 @@ header.scrolled .header-logo-img {
         gap: 4rem;
     }
 
-    .cta-left, .cta-right {
+    .cta-left,
+    .cta-right {
         width: 100%;
         padding: 0;
     }
