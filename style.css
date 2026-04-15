@@ -1439,7 +1439,19 @@ header.scrolled .header-logo-img {
     }
 
     .blog-card {
-        flex: 0 0 calc((100% - 1.8rem) / 2);
+        flex: 0 0 100%;
+    }
+
+    .blog-card-desc {
+        display: none;
+    }
+
+    .blog-card-title {
+        margin-bottom: 0.4rem;
+    }
+
+    .blog-img-wrapper {
+        margin-bottom: 0.8rem;
     }
 
     .blog-header-left {
@@ -1739,7 +1751,104 @@ header.scrolled .header-logo-img {
 
     .social-card {
         width: 55vw;
+        cursor: pointer;
     }
+
+    /* Disable hover effects on mobile - tap handles it */
+    .social-fan-container:hover .social-card {
+        margin: initial;
+        transform: initial;
+        z-index: initial;
+    }
+    .social-card:nth-child(1) { transform: rotate(-12deg) translateY(20px); margin-right: -10%; z-index: 1; }
+    .social-card:nth-child(2) { transform: rotate(-6deg) translateY(5px); margin-right: -10%; z-index: 2; }
+    .social-card:nth-child(3) { transform: rotate(0deg) translateY(0px); z-index: 3; }
+    .social-card:nth-child(4) { transform: rotate(6deg) translateY(5px); margin-left: -10%; z-index: 2; }
+    .social-card:nth-child(5) { transform: rotate(12deg) translateY(20px); margin-left: -10%; z-index: 1; }
+
+    .social-card:hover {
+        transform: unset !important;
+        z-index: unset !important;
+    }
+}
+
+/* Social Card Fullscreen Lightbox (Mobile Tap) */
+.social-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.social-lightbox.active {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.social-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.social-lightbox-img-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 85vw;
+    max-width: 420px;
+    aspect-ratio: 9 / 16;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.social-lightbox-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.social-lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.social-lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.social-lightbox-counter {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    font-family: var(--font-secondary);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 /* FULL SCREEN MENU */
@@ -2006,7 +2115,8 @@ header.scrolled .header-logo-img {
 .m-bottom-section {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 3rem;
     align-items: center;
     width: 100%;
@@ -2031,6 +2141,7 @@ header.scrolled .header-logo-img {
 
 .m-social {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
 }
 
@@ -2508,8 +2619,8 @@ header.scrolled .header-logo-img {
     }
 
     .cta-container {
-        flex-direction: column-reverse;
-        gap: 4rem;
+        flex-direction: column;
+        gap: 3rem;
     }
 
     .cta-left,
@@ -2519,7 +2630,8 @@ header.scrolled .header-logo-img {
     }
 
     .cta-heading {
-        font-size: 4rem;
+        font-size: clamp(2.5rem, 10vw, 3.8rem);
+        line-height: 1.1;
     }
 
     .blog-grid {
@@ -2532,13 +2644,35 @@ header.scrolled .header-logo-img {
         font-size: 16vw;
     }
 
+    .menu-left {
+        display: none;
+    }
+
     .menu-right {
-        padding: 20% 10%;
+        flex: 1;
+        width: 100%;
+        padding: 20% 5%;
+    }
+
+    .m-bottom-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
     }
 
     .machine-info {
         width: 100%;
         padding: 1.5rem;
+    }
+
+    .machine-img-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.8;
     }
 
     .machine-name {

@@ -435,4 +435,62 @@ document.addEventListener('DOMContentLoaded', () => {
     tlHero.from(".hero-subheading", { opacity: 0, y: 30, duration: 1.5, ease: "expo.out", delay: 0.1 })
         .from(".hero-heading .clip-reveal > *", { y: "110%", duration: 2, stagger: 0.15, ease: "expo.out" }, "-=1.2")
         .from(".hero-socials .social-icon", { opacity: 0, x: -30, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=1.5");
+
+    // ===== MOBILE SOCIAL CARD LIGHTBOX =====
+    const lightbox = document.getElementById('socialLightbox');
+    const lightboxImg = document.getElementById('socialLightboxImg');
+    const lightboxCounter = document.getElementById('socialLightboxCounter');
+    const lightboxClose = lightbox?.querySelector('.social-lightbox-close');
+    const lightboxBackdrop = lightbox?.querySelector('.social-lightbox-backdrop');
+    const socialCards = document.querySelectorAll('.social-fan-container .social-card');
+
+    if (lightbox && socialCards.length) {
+        let lightboxOpen = false;
+
+        function openLightbox(card, index) {
+            if (window.innerWidth > 768) return; // Only on mobile
+            const img = card.querySelector('img');
+            if (!img) return;
+
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightboxCounter.textContent = `${index + 1} / ${socialCards.length}`;
+            lightbox.classList.add('active');
+            lightboxOpen = true;
+
+            // Animate in with GSAP
+            const tl = gsap.timeline();
+            tl.fromTo(lightboxBackdrop, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" })
+              .fromTo(lightbox.querySelector('.social-lightbox-img-wrapper'),
+                { scale: 0.7, opacity: 0, y: 60 },
+                { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, "-=0.25")
+              .fromTo(lightboxClose, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, "-=0.3")
+              .fromTo(lightboxCounter, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, "-=0.2");
+        }
+
+        function closeLightbox() {
+            if (!lightboxOpen) return;
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    lightbox.classList.remove('active');
+                    lightboxOpen = false;
+                }
+            });
+            tl.to(lightbox.querySelector('.social-lightbox-img-wrapper'),
+                { scale: 0.8, opacity: 0, y: 40, duration: 0.35, ease: "power2.in" })
+              .to(lightboxClose, { opacity: 0, duration: 0.2 }, "-=0.3")
+              .to(lightboxCounter, { opacity: 0, duration: 0.2 }, "-=0.3")
+              .to(lightboxBackdrop, { opacity: 0, duration: 0.3, ease: "power2.in" }, "-=0.15");
+        }
+
+        socialCards.forEach((card, i) => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                openLightbox(card, i);
+            });
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxBackdrop.addEventListener('click', closeLightbox);
+    }
 });

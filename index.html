@@ -96,21 +96,21 @@
                                 data-text="CONTACT"><span>CONTACT</span></span></a></div>
                 </nav>
                 <div class="menu-footer">
-                    <div class="m-wreath">ARDENT NETWORK <br> EST. 2026</div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%; flex-wrap: wrap; gap: 1.5rem;">
+                        <div class="m-wreath">ARDENT NETWORK <br> EST. 2026</div>
+                        <div class="m-social">
+                            <a href="#" class="hover-target"><span class="text-anim"
+                                    data-text="INSTAGRAM"><span>INSTAGRAM</span></span></a>
+                            <a href="#" class="hover-target"><span class="text-anim"
+                                    data-text="LINKEDIN"><span>LINKEDIN</span></span></a>
+                            <a href="#" class="hover-target"><span class="text-anim"
+                                    data-text="YOUTUBE"><span>YOUTUBE</span></span></a>
+                        </div>
+                    </div>
                     <div class="m-bottom-section">
                         <div class="m-sub-links">
                             <a href="#" class="hover-target"><span class="text-anim"
                                     data-text="BUSINESS ENQUIRIES"><span>BUSINESS ENQUIRIES</span></span></a>
-                        </div>
-                        <div class="m-social">
-                            <a href="#" class="hover-target"><span class="text-anim"
-                                    data-text="TIKTOK"><span>TIKTOK</span></span></a>
-                            <a href="#" class="hover-target"><span class="text-anim"
-                                    data-text="INSTAGRAM"><span>INSTAGRAM</span></span></a>
-                            <a href="#" class="hover-target"><span class="text-anim"
-                                    data-text="YOUTUBE"><span>YOUTUBE</span></span></a>
-                            <a href="#" class="hover-target"><span class="text-anim"
-                                    data-text="TWITCH"><span>TWITCH</span></span></a>
                         </div>
                     </div>
                 </div>
@@ -162,9 +162,13 @@
             <!-- Hero Section -->
             <section class="panel hero">
                 <div class="video-container">
-                    <video autoplay loop muted playsinline
+                    <video class="desktop-only" autoplay loop muted playsinline
                         poster="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=1920">
                         <source src="hero.mp4" type="video/mp4">
+                    </video>
+                    <video class="mobile-only" autoplay loop muted playsinline
+                        poster="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=1920">
+                        <source src="hero-mobile.mp4" type="video/mp4">
                     </video>
                     <div class="overlay"></div>
                 </div>
@@ -768,6 +772,21 @@
             </footer>
 
         </div>
+    </div>
+
+    <!-- Social Card Lightbox (Mobile) -->
+    <div class="social-lightbox" id="socialLightbox">
+        <div class="social-lightbox-backdrop"></div>
+        <button class="social-lightbox-close" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="social-lightbox-img-wrapper">
+            <img id="socialLightboxImg" src="" alt="Social Post">
+        </div>
+        <div class="social-lightbox-counter" id="socialLightboxCounter"></div>
     </div>
 
     <script src="script.js"></script>
