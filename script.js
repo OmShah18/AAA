@@ -8,15 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('loading');
             document.querySelector('.preloader').style.display = 'none';
             if (typeof tlHero !== 'undefined') tlHero.play();
-
-            // Kickstart hero videos (Mobile fix)
-            const videos = document.querySelectorAll('.video-container video');
-            videos.forEach(v => {
-                v.play().catch(() => {
-                    // Fail silently, fallback listener will handle it
-                    console.log("Autoplay blocked, waiting for interaction");
-                });
-            });
         }
     });
 
@@ -502,19 +493,4 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxClose.addEventListener('click', closeLightbox);
         lightboxBackdrop.addEventListener('click', closeLightbox);
     }
-
-    // Global interaction fallback to start video playback if blocked by browser
-    const startVideosOnInteraction = () => {
-        const videos = document.querySelectorAll('.video-container video');
-        videos.forEach(v => {
-            if (v.paused) {
-                v.play().catch(err => console.log("Manual play failed:", err));
-            }
-        });
-        window.removeEventListener('click', startVideosOnInteraction);
-        window.removeEventListener('touchstart', startVideosOnInteraction);
-    };
-
-    window.addEventListener('click', startVideosOnInteraction);
-    window.addEventListener('touchstart', startVideosOnInteraction);
 });

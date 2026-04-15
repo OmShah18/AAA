@@ -87,17 +87,9 @@ body {
     display: flex !important;
 }
 
-video.desktop-only {
-    display: block !important;
-}
-
 @media (max-width: 768px) {
     .mobile-only {
         display: flex !important;
-    }
-
-    video.mobile-only {
-        display: block !important;
     }
 
     .desktop-only {
