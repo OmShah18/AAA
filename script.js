@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Preloader Animation Timeline
     const tlPreloader = gsap.timeline({
         onComplete: () => {
@@ -11,22 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    tlPreloader.fromTo(".preloader-text", 
-        { y: "110%", opacity: 0 }, 
+    tlPreloader.fromTo(".preloader-text",
+        { y: "110%", opacity: 0 },
         { y: "0%", opacity: 1, duration: 1.5, ease: "power4.out", delay: 0.5 }
     )
-    .to(".preloader-content", {
-        opacity: 0,
-        y: "-50%",
-        duration: 0.8,
-        ease: "power2.in",
-        delay: 0.8
-    })
-    .to(".preloader", {
-        yPercent: -100,
-        duration: 1.2,
-        ease: "expo.inOut"
-    }, "-=0.2");
+        .to(".preloader-content", {
+            opacity: 0,
+            y: "-50%",
+            duration: 0.8,
+            ease: "power2.in",
+            delay: 0.8
+        })
+        .to(".preloader", {
+            yPercent: -100,
+            duration: 1.2,
+            ease: "expo.inOut"
+        }, "-=0.2");
 
     // Initialize Lenis for Smooth Scrolling (Lando Norris style buttery scroll)
     const lenis = new Lenis({
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Keep ScrollTrigger in sync with Lenis
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time)=>{
-      lenis.raf(time * 1000);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
     });
 
     gsap.ticker.lagSmoothing(0);
@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     vStrips.forEach(strip => {
         // Clone the content for seamless looping
         strip.innerHTML += strip.innerHTML;
-        
+
         const parent = strip.parentElement;
         const isUp = parent.classList.contains('v-col-up');
-        
+
         // Use a GSAP tween for the infinite loop
         if (isUp) {
             gsap.to(strip, { yPercent: -50, ease: "none", duration: 30, repeat: -1 });
@@ -78,19 +78,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Create Menu Timeline
-    const tlMenu = gsap.timeline({ 
-        paused: true, 
-        onReverseComplete: () => { 
-            menuOverlay.classList.remove('menu-active'); 
-            lenis.start(); 
-        } 
+    const tlMenu = gsap.timeline({
+        paused: true,
+        onReverseComplete: () => {
+            menuOverlay.classList.remove('menu-active');
+            lenis.start();
+        }
     });
-    
+
     tlMenu.to(menuOverlay, { opacity: 1, duration: 0.5, ease: "expo.inOut" })
-          .from(".vertical-marquee-gallery", { opacity: 0, x: -50, duration: 1.2, ease: "power3.out" }, "-=0.3")
-          .fromTo(".m-link", { y: "110%" }, { y: "0%", duration: 1, stagger: 0.08, ease: "expo.out" }, "-=0.8")
-          .from(".menu-footer", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.6");
-          
+        .from(".vertical-marquee-gallery", { opacity: 0, x: -50, duration: 1.2, ease: "power3.out" }, "-=0.3")
+        .fromTo(".m-link", { y: "110%" }, { y: "0%", duration: 1, stagger: 0.08, ease: "expo.out" }, "-=0.8")
+        .from(".menu-footer", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.6");
+
     menuButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             menuOverlay.classList.add('menu-active');
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tlMenu.play();
         });
     });
-    
+
     closeBtn.addEventListener('click', () => {
         tlMenu.reverse();
     });
@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Image Clip Reveals
     const imgReveals = gsap.utils.toArray('.panel:not(.section-machines) .clip-img-reveal');
     imgReveals.forEach(imgCont => {
-        gsap.fromTo(imgCont, 
+        gsap.fromTo(imgCont,
             { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
-            { 
+            {
                 clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
                 duration: 2,
                 ease: "expo.inOut",
@@ -166,15 +166,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const machinesWrapper = document.querySelector(".machines-wrapper");
     const machinePanels = gsap.utils.toArray(".machine-panel");
     const progressBar = document.querySelector(".scroll-progress-bar");
-    
+
     // Create the horizontal scroll tween on the wrapper
     const scrollTween = gsap.to(machinesWrapper, {
         x: () => -(machinesWrapper.scrollWidth - window.innerWidth),
         ease: "none",
         scrollTrigger: {
+            id: "machinesST",
             trigger: ".section-machines",
-            pin: true,           
-            scrub: 1.2, 
+            pin: true,
+            scrub: 1.2,
             snap: 1 / (machinePanels.length - 1),
             end: () => "+=" + (machinesWrapper.scrollWidth - window.innerWidth),
             onUpdate: (self) => {
@@ -188,10 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Image Parallax Effect
         const img = panel.querySelector(".machine-img");
         if (img) {
-            gsap.fromTo(img, 
-                { xPercent: -15 }, 
+            gsap.fromTo(img,
+                { xPercent: -15 },
                 {
-                    xPercent: 15,    
+                    xPercent: 15,
                     ease: "none",
                     scrollTrigger: {
                         trigger: panel,
@@ -209,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (imgCont) {
             gsap.fromTo(imgCont,
                 { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
-                { 
+                {
                     clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
                     duration: 1.5,
                     ease: "expo.out",
@@ -230,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Text reveals
         const textElements = panel.querySelectorAll(".clip-reveal > *");
         if (textElements.length) {
-            gsap.fromTo(textElements, 
+            gsap.fromTo(textElements,
                 { y: "110%" },
                 {
                     y: "0%",
@@ -267,9 +268,171 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ===== LATEST NEWS CAROUSEL =====
+    const blogTrack = document.querySelector('.blog-carousel-track');
+    const blogCards = document.querySelectorAll('.blog-card');
+    const prevBtn = document.querySelector('.blog-nav-prev');
+    const nextBtn = document.querySelector('.blog-nav-next');
+    if (blogTrack && blogCards.length && prevBtn && nextBtn) {
+        let currentPage = 0;
+        let cardsPerView = 4;
+        let cardWidth = 0;
+        let gap = 0;
+        let maxPage = 0;
+        function calculateCarousel() {
+            const wrapperWidth = document.querySelector('.blog-carousel-wrapper').offsetWidth;
+
+            // Get visible cards count based on breakpoint
+            if (window.innerWidth <= 768) {
+                cardsPerView = 2;
+            } else if (window.innerWidth <= 1024) {
+                cardsPerView = 3;
+            } else {
+                cardsPerView = 4;
+            }
+            // Calculate gap and card width from actual DOM
+            const trackStyles = window.getComputedStyle(blogTrack);
+            gap = parseFloat(trackStyles.gap) || 28.8; // 1.8rem fallback
+            cardWidth = blogCards[0].offsetWidth;
+
+            maxPage = Math.max(0, blogCards.length - cardsPerView);
+
+            // Clamp current page
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+
+            updateCarousel();
+        }
+        function updateCarousel() {
+            const offset = currentPage * (cardWidth + gap);
+            blogTrack.style.transform = `translateX(-${offset}px)`;
+
+            // Update button states
+            prevBtn.disabled = currentPage <= 0;
+            nextBtn.disabled = currentPage >= maxPage;
+        }
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updateCarousel();
+            }
+        });
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < maxPage) {
+                currentPage++;
+                updateCarousel();
+            }
+        });
+        // Initial calculation
+        calculateCarousel();
+        // Recalculate on resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(calculateCarousel, 200);
+        });
+    }
+
+    // Global Vertical Section Snapping (Seamless)
+    const panelsForSnap = gsap.utils.toArray(".panel");
+    let snapPoints = [];
+
+    function updateSnapPoints() {
+        const maxScroll = ScrollTrigger.maxScroll(window);
+        if (maxScroll === 0) return;
+
+        snapPoints = panelsForSnap.map(panel => {
+            const st = ScrollTrigger.create({ trigger: panel, start: "top top" });
+            const startPos = st.start / maxScroll;
+            st.kill();
+            return startPos;
+        });
+
+        // Ensure the footer/bottom of page is a valid snap point
+        snapPoints.push(1);
+
+        // Deduplicate, normalize to 0-1, and sort
+        snapPoints = [...new Set(snapPoints)].map(p => Math.min(1, Math.max(0, p))).sort((a, b) => a - b);
+    }
+
+    ScrollTrigger.addEventListener("refresh", updateSnapPoints);
+
+    ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        snap: {
+            snapTo: (progress) => {
+                const maxScroll = ScrollTrigger.maxScroll(window);
+                if (maxScroll === 0) return progress;
+
+                const currentScroll = progress * maxScroll;
+                const machinesST = ScrollTrigger.getById("machinesST");
+
+                // Do not force vertical snapping while navigating the horizontal pinned scroll
+                if (machinesST && currentScroll > machinesST.start + 5 && currentScroll < machinesST.end - 5) {
+                    return progress;
+                }
+
+                return gsap.utils.snap(snapPoints, progress);
+            },
+            duration: { min: 0.4, max: 0.8 },
+            delay: 0.05,
+            ease: "power2.inOut"
+        }
+    });
+
+    // Footer Reveal Animations
+    // Heading section
+    gsap.from('.footer-heading-section', {
+        y: 40,
+        opacity: 0,
+        duration: 1.5,
+        ease: "expo.out",
+        scrollTrigger: {
+            trigger: '.main-footer',
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    // Nav columns stagger
+    const footerNavItems = gsap.utils.toArray('.main-footer .f-nav-col, .main-footer .f-nav-center');
+    footerNavItems.forEach((col, i) => {
+        gsap.from(col, {
+            y: 30,
+            opacity: 0,
+            duration: 1.2,
+            delay: i * 0.12,
+            ease: "expo.out",
+            scrollTrigger: {
+                trigger: '.footer-container',
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            }
+        });
+    });
+
+    // CTA button
+    gsap.from('.footer-cta-section', {
+        y: 20,
+        opacity: 0,
+        duration: 1,
+        delay: 0.2,
+        ease: "expo.out",
+        scrollTrigger: {
+            trigger: '.footer-cta-section',
+            start: "top 95%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    // Ensure snapPoints are ready
+    ScrollTrigger.refresh();
+
     // Hero Landing Animation
     const tlHero = gsap.timeline({ paused: true });
     tlHero.from(".hero-subheading", { opacity: 0, y: 30, duration: 1.5, ease: "expo.out", delay: 0.1 })
-          .from(".hero-heading .clip-reveal > *", { y: "110%", duration: 2, stagger: 0.15, ease: "expo.out" }, "-=1.2")
-          .from(".hero-socials .social-icon", { opacity: 0, x: -30, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=1.5");
+        .from(".hero-heading .clip-reveal > *", { y: "110%", duration: 2, stagger: 0.15, ease: "expo.out" }, "-=1.2")
+        .from(".hero-socials .social-icon", { opacity: 0, x: -30, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=1.5");
 });
