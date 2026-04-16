@@ -334,53 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Global Vertical Section Snapping (Seamless)
-    const panelsForSnap = gsap.utils.toArray(".panel");
-    let snapPoints = [];
 
-    function updateSnapPoints() {
-        const maxScroll = ScrollTrigger.maxScroll(window);
-        if (maxScroll === 0) return;
-
-        snapPoints = panelsForSnap.map(panel => {
-            const st = ScrollTrigger.create({ trigger: panel, start: "top top" });
-            const startPos = st.start / maxScroll;
-            st.kill();
-            return startPos;
-        });
-
-        // Ensure the footer/bottom of page is a valid snap point
-        snapPoints.push(1);
-
-        // Deduplicate, normalize to 0-1, and sort
-        snapPoints = [...new Set(snapPoints)].map(p => Math.min(1, Math.max(0, p))).sort((a, b) => a - b);
-    }
-
-    ScrollTrigger.addEventListener("refresh", updateSnapPoints);
-
-    ScrollTrigger.create({
-        start: 0,
-        end: "max",
-        snap: {
-            snapTo: (progress) => {
-                const maxScroll = ScrollTrigger.maxScroll(window);
-                if (maxScroll === 0) return progress;
-
-                const currentScroll = progress * maxScroll;
-                const machinesST = ScrollTrigger.getById("machinesST");
-
-                // Do not force vertical snapping while navigating the horizontal pinned scroll
-                if (machinesST && currentScroll > machinesST.start + 5 && currentScroll < machinesST.end - 5) {
-                    return progress;
-                }
-
-                return gsap.utils.snap(snapPoints, progress);
-            },
-            duration: { min: 0.4, max: 0.8 },
-            delay: 0.05,
-            ease: "power2.inOut"
-        }
-    });
 
     // Footer Reveal Animations
     // Heading section
@@ -427,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Ensure snapPoints are ready
+    // Refresh ScrollTrigger
     ScrollTrigger.refresh();
 
     // Hero Landing Animation
@@ -493,4 +447,28 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxClose.addEventListener('click', closeLightbox);
         lightboxBackdrop.addEventListener('click', closeLightbox);
     }
+    
+    // YouTube Video Click-to-Play (inline iframe)
+    const ytCards = document.querySelectorAll('.yt-video-wrapper[data-yt-id]');
+    ytCards.forEach(card => {
+        card.addEventListener('click', () => {
+            if (card.classList.contains('is-playing')) return;
+
+            // Pause any other playing videos
+            ytCards.forEach(other => {
+                if (other !== card && other.classList.contains('is-playing')) {
+                    other.classList.remove('is-playing');
+                    const otherIframe = other.querySelector('.yt-iframe-player');
+                    if (otherIframe) otherIframe.src = '';
+                }
+            });
+
+            const videoId = card.dataset.ytId;
+            const iframe = card.querySelector('.yt-iframe-player');
+            if (iframe && videoId) {
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&playsinline=1`;
+                card.classList.add('is-playing');
+            }
+        });
+    });
 });
