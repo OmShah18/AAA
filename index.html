@@ -8,8 +8,9 @@
     <meta name="description" content="Private Automotive Club & Elite Network">
     <link rel="stylesheet" href="style.css">
     <!-- Fonts -->
-    <link href="https://fonts.cdnfonts.com/css/gunplay" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/nexa" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
 
     <!-- GSAP & ScrollTrigger & Lenis -->
@@ -19,6 +20,7 @@
 </head>
 
 <body class="loading">
+    <div class="site-global-grid"></div>
 
     <div class="preloader">
         <div class="preloader-content">
@@ -143,7 +145,7 @@
             </a>
 
             <!-- Visible on Both -->
-            <a href="#" class="nav-link-btn btn-highlight hover-target header-store-btn">
+            <a href="#" class="btn-primary hover-target header-store-btn">
                 <span class="text-anim" data-text="STORE"><span>STORE</span></span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -177,6 +179,7 @@
                     </video>
                     <div class="overlay"></div>
                 </div>
+                <div class="noise-overlay"></div>
 
                 <div class="hero-content">
                     <div class="clip-reveal">
@@ -188,14 +191,14 @@
                     <div class="clip-reveal delay-2">
                         <p class="hero-subheading">PRIVATE AUTOMOTIVE CLUB & ELITE NETWORK</p>
                     </div>
-                    <div class="clip-reveal delay-3" style="margin-top: 2rem;">
+                    <div class="clip-reveal delay-3 hero-cta-reveal">
                         <a href="#" class="btn-primary hover-target"><span class="text-anim"
                                 data-text="REQUEST ACCESS"><span>REQUEST ACCESS</span></span></a>
                     </div>
                 </div>
 
                 <div class="hero-socials">
-                    <div class="clip-reveal delay-1" style="padding: 10px; margin: -10px;">
+                    <div class="clip-reveal delay-1 hero-social-wrap">
                         <a href="https://www.instagram.com/automobiliardent?igsh=dGt3ZGdsa3hveGdm"
                             class="social-icon hover-target" aria-label="Instagram" target="_blank">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -206,7 +209,7 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="clip-reveal delay-2" style="padding: 10px; margin: -10px;">
+                    <div class="clip-reveal delay-2 hero-social-wrap">
                         <a href="https://www.facebook.com/share/1ByAXpayXC/?mibextid=wwXIfr"
                             class="social-icon hover-target" aria-label="Facebook" target="_blank">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -215,7 +218,7 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="clip-reveal delay-3" style="padding: 10px; margin: -10px;">
+                    <div class="clip-reveal delay-3 hero-social-wrap">
                         <a href="https://youtube.com/@automobiliardent?si=uphvj8sMBzOWh6aR"
                             class="social-icon hover-target" aria-label="YouTube" target="_blank">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -254,29 +257,48 @@
 
             <!-- SECTION 2: MACHINES (Horizontal Scroll) -->
             <section class="panel section-machines">
+                <div class="machines-section-label">
+                    <span class="machines-label-line"></span>
+                    <span class="machines-label-text">THE MACHINES</span>
+                </div>
                 <div class="scroll-progress-container">
-                    <div class="scroll-progress-bar"></div>
+                    <div class="scroll-progress-dots">
+                        <span class="progress-dot active" data-index="0"></span>
+                        <span class="progress-dot" data-index="1"></span>
+                        <span class="progress-dot" data-index="2"></span>
+                    </div>
+                    <div class="scroll-progress-bar-track">
+                        <div class="scroll-progress-bar"></div>
+                    </div>
                 </div>
                 <div class="machines-wrapper">
                     <!-- Car 1 -->
                     <div class="machine-panel hover-target">
                         <div class="machine-content">
                             <div class="machine-info">
-                                <div class="clip-reveal"><span class="m-num">01 / 03</span></div>
-                                <div class="clip-reveal">
-                                    <h3 class="machine-name">PHANTOM</h3>
+                                <div class="clip-reveal"><span class="m-num">01</span><span class="m-num-divider">/</span><span class="m-num-total">03</span></div>
+                                <div class="machine-name-group">
+                                    <div class="clip-reveal">
+                                        <h3 class="machine-name">PHANTOM</h3>
+                                    </div>
+                                    <div class="clip-reveal">
+                                        <h3 class="machine-name outline-text">VANTAGE</h3>
+                                    </div>
                                 </div>
-                                <div class="clip-reveal">
-                                    <h3 class="machine-name outline-text">VANTAGE</h3>
-                                </div>
+                                <div class="machine-accent-line clip-reveal delay-1"></div>
                                 <div class="clip-reveal delay-1">
                                     <p class="machine-desc">A masterpiece of aerodynamic engineering and brutal power.
                                         Built for the elite, designed to dominate.</p>
                                 </div>
-                                <div class="text-center clip-reveal delay-2"
-                                    style="margin-top: 2.5rem; display: flex; justify-content: center; width: 100%;">
+                                <div class="machine-specs clip-reveal delay-2">
+                                    <div class="machine-spec"><span class="spec-value">720</span><span class="spec-label">BHP</span></div>
+                                    <div class="machine-spec"><span class="spec-value">2.9</span><span class="spec-label">0-100</span></div>
+                                    <div class="machine-spec"><span class="spec-value">340</span><span class="spec-label">KM/H</span></div>
+                                </div>
+                                <div class="clip-reveal delay-2 machine-cta-wrap">
                                     <a href="#" class="btn-primary hover-target">
                                         <span class="text-anim" data-text="DISCOVER"><span>DISCOVER</span></span>
+                                        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                     </a>
                                 </div>
                             </div>
@@ -292,21 +314,29 @@
                     <div class="machine-panel hover-target">
                         <div class="machine-content">
                             <div class="machine-info">
-                                <div class="clip-reveal"><span class="m-num">02 / 03</span></div>
-                                <div class="clip-reveal">
-                                    <h3 class="machine-name">STORM</h3>
+                                <div class="clip-reveal"><span class="m-num">02</span><span class="m-num-divider">/</span><span class="m-num-total">03</span></div>
+                                <div class="machine-name-group">
+                                    <div class="clip-reveal">
+                                        <h3 class="machine-name">STORM</h3>
+                                    </div>
+                                    <div class="clip-reveal">
+                                        <h3 class="machine-name outline-text">APEX</h3>
+                                    </div>
                                 </div>
-                                <div class="clip-reveal">
-                                    <h3 class="machine-name outline-text">APEX</h3>
-                                </div>
+                                <div class="machine-accent-line clip-reveal delay-1"></div>
                                 <div class="clip-reveal delay-1">
                                     <p class="machine-desc">Raw emotion meets precision control. Relentless acceleration
                                         and a completely driver-focused cockpit.</p>
                                 </div>
-                                <div class="text-center clip-reveal delay-2"
-                                    style="margin-top: 2.5rem; display: flex; justify-content: center; width: 100%;">
-                                    <a href="#" class="btn-primary btn-accent-dark hover-target">
+                                <div class="machine-specs clip-reveal delay-2">
+                                    <div class="machine-spec"><span class="spec-value">680</span><span class="spec-label">BHP</span></div>
+                                    <div class="machine-spec"><span class="spec-value">3.1</span><span class="spec-label">0-100</span></div>
+                                    <div class="machine-spec"><span class="spec-value">325</span><span class="spec-label">KM/H</span></div>
+                                </div>
+                                <div class="clip-reveal delay-2 machine-cta-wrap">
+                                    <a href="#" class="btn-primary hover-target">
                                         <span class="text-anim" data-text="DISCOVER"><span>DISCOVER</span></span>
+                                        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                     </a>
                                 </div>
                             </div>
@@ -322,21 +352,29 @@
                     <div class="machine-panel hover-target">
                         <div class="machine-content">
                             <div class="machine-info">
-                                <div class="clip-reveal"><span class="m-num">03 / 03</span></div>
-                                <div class="clip-reveal">
-                                    <h3 class="machine-name">NOVA</h3>
+                                <div class="clip-reveal"><span class="m-num">03</span><span class="m-num-divider">/</span><span class="m-num-total">03</span></div>
+                                <div class="machine-name-group">
+                                    <div class="clip-reveal">
+                                        <h3 class="machine-name">NOVA</h3>
+                                    </div>
+                                    <div class="clip-reveal">
+                                        <h3 class="machine-name outline-text">ZENITH</h3>
+                                    </div>
                                 </div>
-                                <div class="clip-reveal">
-                                    <h3 class="machine-name outline-text">ZENITH</h3>
-                                </div>
+                                <div class="machine-accent-line clip-reveal delay-1"></div>
                                 <div class="clip-reveal delay-1">
                                     <p class="machine-desc">The ultimate grand tourer. Striking the perfect balance
                                         between extreme track performance and absolute luxury.</p>
                                 </div>
-                                <div class="text-center clip-reveal delay-2"
-                                    style="margin-top: 2.5rem; display: flex; justify-content: center; width: 100%;">
-                                    <a href="#" class="btn-primary btn-accent-dark hover-target">
+                                <div class="machine-specs clip-reveal delay-2">
+                                    <div class="machine-spec"><span class="spec-value">750</span><span class="spec-label">BHP</span></div>
+                                    <div class="machine-spec"><span class="spec-value">2.7</span><span class="spec-label">0-100</span></div>
+                                    <div class="machine-spec"><span class="spec-value">355</span><span class="spec-label">KM/H</span></div>
+                                </div>
+                                <div class="clip-reveal delay-2 machine-cta-wrap">
+                                    <a href="#" class="btn-primary hover-target">
                                         <span class="text-anim" data-text="DISCOVER"><span>DISCOVER</span></span>
+                                        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                     </a>
                                 </div>
                             </div>
@@ -500,7 +538,9 @@
                         <div class="product-details">
                             <h3 class="product-title">Cotton T-shirt with embroidered Ferrari logo</h3>
                             <p class="product-price">€390</p>
-                            <a href="#" class="product-shop-link hover-target">SHOP THIS</a>
+                            <a href="#" class="btn-primary hover-target">
+                                <span class="text-anim" data-text="SHOP"><span>SHOP</span></span>
+                            </a>
                         </div>
                     </div>
                     <!-- Product 2 -->
@@ -513,20 +553,25 @@
                             <h3 class="product-title">Fingerless nappa gloves</h3>
                             <p class="product-price">€390</p>
                             <p class="product-colors">2 Colors</p>
-                            <a href="#" class="product-shop-link hover-target">SHOP THIS</a>
+                            <a href="#" class="btn-primary hover-target">
+                                <span class="text-anim" data-text="SHOP"><span>SHOP</span></span>
+                            </a>
                         </div>
                     </div>
                     <!-- Product 3 -->
                     <div class="product-item hover-target clip-reveal delay-2">
                         <div class="product-img-box">
                             <span class="product-badge">NEW IN</span>
-                            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=400" alt="Suede nappa and nylon sneakers">
+                            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=400"
+                                alt="Suede nappa and nylon sneakers">
                         </div>
                         <div class="product-details">
                             <h3 class="product-title">Suede nappa and nylon sneakers</h3>
                             <p class="product-price">€850</p>
                             <p class="product-colors">2 Colors</p>
-                            <a href="#" class="product-shop-link hover-target">SHOP THIS</a>
+                            <a href="#" class="btn-primary hover-target">
+                                <span class="text-anim" data-text="SHOP"><span>SHOP</span></span>
+                            </a>
                         </div>
                     </div>
                     <!-- Product 4 -->
@@ -539,9 +584,140 @@
                             <h3 class="product-title">Baseball cap with metal Prancing Horse</h3>
                             <p class="product-price">€135</p>
                             <p class="product-colors">10 Colors</p>
-                            <a href="#" class="product-shop-link hover-target">SHOP THIS</a>
+                            <a href="#" class="btn-primary hover-target">
+                                <span class="text-anim" data-text="SHOP"><span>SHOP</span></span>
+                            </a>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5.6: FEATURED BLOGS (Charles Leclerc Style) -->
+            <section class="panel section-featured-blogs" id="featured-blogs">
+                <!-- Pinned Left Title -->
+                <div class="fb-pinned-title desktop-only">
+                    <span class="fb-title-text">FEATURED BLOGS</span>
+                </div>
+                
+                <div class="scroll-progress-container fb-progress-container">
+                    <div class="scroll-progress-dots fb-progress-dots">
+                        <span class="progress-dot active" data-index="0"></span>
+                        <span class="progress-dot" data-index="1"></span>
+                        <span class="progress-dot" data-index="2"></span>
+                    </div>
+                    <div class="scroll-progress-bar-track">
+                        <div class="scroll-progress-bar fb-progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="featured-blogs-wrapper">
+
+                    <!-- Blog Item 1 -->
+                    <div class="fb-item hover-target">
+                        <div class="fb-text-col">
+                            <div class="fb-line-divider fb-reveal-line"></div>
+                            <div class="fb-category fb-reveal">
+                                <span class="fb-cat-dot"></span>
+                                <span class="fb-cat-text">ENGINEERING</span>
+                            </div>
+                            <div class="fb-heading-group">
+                                <div class="fb-reveal"><h3 class="fb-heading">THE ART OF</h3></div>
+                                <div class="fb-reveal"><h3 class="fb-heading">AERODYNAMICS</h3></div>
+                            </div>
+                            <div class="fb-reveal">
+                                <p class="fb-desc">Precision. Innovation. Obsession. At the core of every Ardent lies a relentless pursuit of aerodynamic perfection — where Formula 1™ ground-effect principles meet road-legal engineering, delivering unprecedented downforce and balance at every speed.</p>
+                            </div>
+                            <div class="fb-reveal">
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="EXPLORE"><span>EXPLORE</span></span>
+                                    <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="fb-img-col">
+                            <div class="fb-img-wrapper fb-reveal-img">
+                                <img src="blog-1.png" alt="The Art of Aerodynamics" loading="lazy" class="fb-img">
+                            </div>
+                            
+                            <!-- Small overlay card where video plays -->
+                            <div class="fb-video-card hover-target">
+                                <video autoplay loop muted playsinline>
+                                    <source src="hero-mobile.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Item 2 -->
+                    <div class="fb-item hover-target">
+                        <div class="fb-text-col">
+                            <div class="fb-line-divider fb-reveal-line"></div>
+                            <div class="fb-category fb-reveal">
+                                <span class="fb-cat-dot"></span>
+                                <span class="fb-cat-text">LIFESTYLE</span>
+                            </div>
+                            <div class="fb-heading-group">
+                                <div class="fb-reveal"><h3 class="fb-heading">BEYOND THE</h3></div>
+                                <div class="fb-reveal"><h3 class="fb-heading">HORIZON</h3></div>
+                            </div>
+                            <div class="fb-reveal">
+                                <p class="fb-desc">Every journey begins where the road disappears. Discover the Ardent driving experience along the Mediterranean's most iconic coastal routes — where raw performance meets unforgettable landscapes and the freedom of the open road.</p>
+                            </div>
+                            <div class="fb-reveal">
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="EXPLORE"><span>EXPLORE</span></span>
+                                    <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="fb-img-col">
+                            <div class="fb-img-wrapper fb-reveal-img">
+                                <img src="blog-2.png" alt="Beyond The Horizon" loading="lazy" class="fb-img">
+                            </div>
+                            <!-- Small overlay card where video plays -->
+                            <div class="fb-video-card hover-target">
+                                <video autoplay loop muted playsinline>
+                                    <source src="hero.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Item 3 -->
+                    <div class="fb-item hover-target">
+                        <div class="fb-text-col">
+                            <div class="fb-line-divider fb-reveal-line"></div>
+                            <div class="fb-category fb-reveal">
+                                <span class="fb-cat-dot"></span>
+                                <span class="fb-cat-text">CRAFTSMANSHIP</span>
+                            </div>
+                            <div class="fb-heading-group">
+                                <div class="fb-reveal"><h3 class="fb-heading">THE DRIVER'S</h3></div>
+                                <div class="fb-reveal"><h3 class="fb-heading">SANCTUARY</h3></div>
+                            </div>
+                            <div class="fb-reveal">
+                                <p class="fb-desc">Step inside the cockpit where every stitch, every surface, and every control has been meticulously crafted for the driver. The Ardent interior is not just a space — it's an instrument of precision, designed to amplify the visceral connection between man and machine.</p>
+                            </div>
+                            <div class="fb-reveal">
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="EXPLORE"><span>EXPLORE</span></span>
+                                    <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="fb-img-col">
+                            <div class="fb-img-wrapper fb-reveal-img">
+                                <img src="blog-3.png" alt="The Driver's Sanctuary" loading="lazy" class="fb-img">
+                            </div>
+                            <!-- Small overlay card where video plays -->
+                            <div class="fb-video-card hover-target">
+                                <video autoplay loop muted playsinline>
+                                    <source src="hero-mobile.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
@@ -550,7 +726,7 @@
                 <div class="blog-header">
                     <div class="blog-header-left">
                         <h2 class="blog-title">LATEST NEWS</h2>
-                        <a href="#" class="blog-view-all hover-target">
+                        <a href="#" class="btn-primary hover-target">
                             <span class="text-anim" data-text="VIEW ALL"><span>VIEW ALL</span></span>
                         </a>
                     </div>
@@ -583,8 +759,9 @@
                                 <h3 class="blog-card-title">Introducing Ardent Golf</h3>
                                 <p class="blog-card-desc">Ardent today announces the launch of an exciting new venture,
                                     Ardent Golf.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -598,8 +775,9 @@
                                 <h3 class="blog-card-title">Phantom V1 Hot Weather Testing in Arizona</h3>
                                 <p class="blog-card-desc">Discover how we pushed the V1 to balance its world-beating
                                     supercar performance with capability in the most challenging conditions.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -615,8 +793,9 @@
                                 <p class="blog-card-desc">Discover Ardent's aerodynamics. Advanced Aerodynamics
                                     Architect reveals how Formula 1™-inspired ground effect delivers unprecedented grip,
                                     balance, and downforce.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -632,8 +811,9 @@
                                 <p class="blog-card-desc">Test driver Dani Marcos reveals what it means to shape an
                                     Ardent supercar from behind the wheel – tuning every detail until it all comes
                                     together.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -648,8 +828,9 @@
                                 <p class="blog-card-desc">The Ardent Vantage has won another standout automotive award,
                                     being named the Auto Express Performance Car of the Year at the 2025 New Car Awards.
                                 </p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -663,8 +844,9 @@
                                 <h3 class="blog-card-title">Ardent V1 Interior: Optimised, Focused, Innovative</h3>
                                 <p class="blog-card-desc">Explore the personal stories behind the V1's interior –
                                     innovative seats, new steering wheel, and bespoke Ardent InnoKnit material.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -679,8 +861,9 @@
                                 <p class="blog-card-desc">Unseen but all-important, the software of an Ardent acts like
                                     a central nervous system, coordinating every part of the car. Senior Software
                                     Validation Manager is responsible for stress-testing the software.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -694,8 +877,9 @@
                                 <h3 class="blog-card-title">Ardent Aerocell: Meet the Team Behind V1's Monocoque</h3>
                                 <p class="blog-card-desc">Explore the personal stories behind the V1's Aerocell, the
                                     most advanced lightweight carbon monocoque inspired by Formula 1™.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -710,8 +894,9 @@
                                 <p class="blog-card-desc">Body engineer Jon Preece takes our cars to the extreme,
                                     testing them under the most intense environmental conditions – so every Ardent that
                                     leaves our factory is primed for ultimate performance.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
 
@@ -725,8 +910,9 @@
                                 <h3 class="blog-card-title">Ardent V1 Winter Testing in the Arctic</h3>
                                 <p class="blog-card-desc">Discover how we pushed the V1 to balance its world-beating
                                     supercar performance with capability in the most challenging conditions.</p>
-                                <span class="blog-card-link"><span class="text-anim" data-text="READ MORE"><span>READ
-                                            MORE</span></span></span>
+                                <a href="#" class="btn-primary hover-target">
+                                    <span class="text-anim" data-text="READ MORE"><span>READ MORE</span></span>
+                                </a>
                             </a>
                         </div>
                     </div>
@@ -737,8 +923,8 @@
             <!-- SECTION 7: SOCIALS -->
             <section class="panel section-socials">
                 <div class="socials-container">
-                    <div class="socials-title-group clip-reveal" style="text-align: center;">
-                        <h2 class="socials-title" style="line-height: 1;">EXPLORE THE<br><span class="socials-title-serif"
+                    <div class="socials-title-group clip-reveal">
+                        <h2 class="socials-title">EXPLORE THE<br><span class="socials-title-serif"
                                 style="color: #ffca27;">SOCIALS</span></h2>
                     </div>
 
@@ -854,6 +1040,7 @@
 
                 <div class="footer-inner-dark">
                     <div class="footer-background-lines"></div>
+                    <div class="noise-overlay"></div>
 
                     <!-- Infinite Car Brand Icon Carousel (Top of Footer) -->
                     <div class="footer-brand-carousel">
@@ -938,14 +1125,13 @@
 
                     <!-- Business Enquiries CTA -->
                     <div class="footer-cta-section">
-                        <a href="#" class="btn-enquiry hover-target">
+                        <a href="#" class="btn-primary hover-target">
                             <span class="text-anim" data-text="BUSINESS ENQUIRIES"><span>BUSINESS
                                     ENQUIRIES</span></span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="8" y1="12" x2="16" y2="12"></line>
-                                <polyline points="12 8 16 12 12 16"></polyline>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </a>
                     </div>
