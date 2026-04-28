@@ -4090,6 +4090,25 @@ header.scrolled .header-logo-img {
     position: relative; z-index: 10; text-align: center; color: var(--white);
     padding: 0 5% 80px; max-width: 900px; width: 100%;
 }
+.blog-back-btn {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
+    text-decoration: none; color: rgba(255,255,255,0.5);
+    font-family: var(--font-heading); font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    transition: color 0.4s, transform 0.4s;
+    z-index: 10;
+}
+.blog-back-btn:hover {
+    color: var(--white);
+    transform: translateX(-50%) translateY(-3px);
+}
+.blog-back-btn svg {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.blog-back-btn:hover svg {
+    transform: translateX(-5px);
+}
 .blog-hero-tag {
     display: inline-block; padding: 0.4rem 1.2rem;
     border: 1px solid rgba(255,255,255,0.3); border-radius: 3px;
