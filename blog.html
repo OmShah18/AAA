@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 1925 Rolls-Royce Road Odyssey — Automobili Ardent</title>
+    <meta name="description" content="The final showcase of celebrating a century of the Rolls-Royce Phantom.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- SAME stylesheet as home page -->
+    <link rel="stylesheet" href="style.css">
+    <!-- SAME scripts as home page -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+</head>
+
+<body>
+    <div class="site-global-grid"></div>
+
+    <!-- Full Screen Menu Overlay (SAME as home page) -->
+    <div class="menu-overlay">
+        <div class="menu-bg-image"></div>
+        <div class="menu-bg-lines"></div>
+        <div class="menu-top-bar">
+            <div class="logo logo-menu"><img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img"></div>
+            <div class="menu-top-right">
+                <a href="#" class="btn-store hover-target">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                </a>
+                <button class="menu-close-btn hover-target" aria-label="Close Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+        <div class="menu-content-wrapper">
+            <div class="menu-left">
+                <div class="vertical-marquee-gallery">
+                    <div class="v-col v-col-up"><div class="v-strip">
+                        <div class="v-img"><img src="header-images/pexels-odobesku-9018708.jpg" alt="Detail"></div>
+                        <div class="v-img"><img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&q=80&w=800" alt="Car Rear"></div>
+                        <div class="v-img"><img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&q=80&w=800" alt="Car Side"></div>
+                        <div class="v-img"><img src="header-images/pexels-michael-obstoj-1772571864-31867049.jpg" alt="Detail Texture"></div>
+                    </div></div>
+                    <div class="v-col v-col-down"><div class="v-strip">
+                        <div class="v-img"><img src="header-images/pexels-dante-juhasz-62201650-16613452.jpg" alt="Drive Action"></div>
+                        <div class="v-img"><img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=800" alt="Road View"></div>
+                        <div class="v-img"><img src="header-images/pexels-julian-largo-622163228-17377373.jpg" alt="Detail Part"></div>
+                        <div class="v-img"><img src="header-images/pexels-wolfart-33397573.jpg" alt="Action Drive"></div>
+                    </div></div>
+                </div>
+            </div>
+            <div class="menu-right">
+                <nav class="menu-nav-links">
+                    <div class="m-link-wrapper"><a href="index.html" class="m-link hover-target"><span class="text-anim" data-text="HOME"><span>HOME</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="#" class="m-link hover-target"><span class="text-anim" data-text="ABOUT"><span>ABOUT</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="#" class="m-link hover-target m-active"><span class="text-anim" data-text="BLOGS"><span>BLOGS</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="#" class="m-link hover-target"><span class="text-anim" data-text="CONTACT"><span>CONTACT</span></span></a></div>
+                </nav>
+                <div class="menu-footer">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%; flex-wrap: wrap; gap: 1.5rem;">
+                        <div class="m-wreath">ARDENT NETWORK <br> EST. 2026</div>
+                        <div class="m-social">
+                            <a href="https://www.facebook.com/share/1ByAXpayXC/?mibextid=wwXIfr" class="hover-target" target="_blank"><span class="text-anim" data-text="FACEBOOK"><span>FACEBOOK</span></span></a>
+                            <a href="https://www.instagram.com/automobiliardent?igsh=dGt3ZGdsa3hveGdm" class="hover-target" target="_blank"><span class="text-anim" data-text="INSTAGRAM"><span>INSTAGRAM</span></span></a>
+                            <a href="https://youtube.com/@automobiliardent?si=uphvj8sMBzOWh6aR" class="hover-target" target="_blank"><span class="text-anim" data-text="YOUTUBE"><span>YOUTUBE</span></span></a>
+                        </div>
+                    </div>
+                    <div class="m-bottom-section">
+                        <div class="m-sub-links">
+                            <a href="#" class="hover-target"><span class="text-anim" data-text="BUSINESS ENQUIRIES"><span>BUSINESS ENQUIRIES</span></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER (SAME as home page) -->
+    <header id="main-header" class="hover-target">
+        <div class="mobile-nav-trigger mobile-only">
+            <button class="menu-btn hover-target" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <a href="#" class="mobile-login-text">LOGIN</a>
+        </div>
+        <div class="logo"><img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img"></div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-link-btn hover-target desktop-only">
+                <span class="text-anim" data-text="LOGIN"><span>LOGIN</span></span>
+            </a>
+            <a href="#" class="btn-primary hover-target header-store-btn">
+                <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            </a>
+            <button class="menu-btn hover-target desktop-only" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Smooth Scroll Wrapper for Lenis -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- ─── BLOG ARTICLE (Dark) ─── -->
+            <main class="blog-page">
+
+                <!-- ─── FULL SCREEN BLOG HERO ─── -->
+                <section class="blog-hero">
+                    <img class="blog-hero-bg" src="https://images.unsplash.com/photo-1549317661-bd32c8ce0637?auto=format&fit=crop&q=80&w=1920" alt="1925 Rolls-Royce Road Odyssey">
+                    <div class="overlay"></div>
+                    <div class="noise-overlay"></div>
+
+                    <div class="blog-hero-content">
+                        <span class="blog-hero-tag">FINAL TIMELINE</span>
+                        <h1 class="blog-hero-title">The 1925 Rolls-Royce<br>Road Odyssey.</h1>
+                        <div class="blog-hero-meta">
+                            <span class="blog-hero-author">By Automobili Ardent</span>
+                            <span class="blog-hero-meta-divider"></span>
+                            <span class="blog-hero-date">14 October 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="blog-hero-scroll">
+                        <span class="blog-hero-scroll-text">SCROLL</span>
+                        <div class="blog-hero-scroll-line"></div>
+                    </div>
+                </section>
+
+                <!-- ─── BLOG ARTICLE ─── -->
+                <article class="blog-article" id="blog-article">
+                    <div class="blog-article-inner">
+                        <div class="blog-meta-row">
+                            <div class="blog-meta-left"><span class="blog-tag">FINAL TIMELINE</span></div>
+                            <div class="blog-meta-right"><time class="blog-date" datetime="2025-10-14">14/10/2025</time></div>
+                        </div>
+                        <div class="blog-title-block">
+                            <h1 class="blog-title">The 1925 Rolls-Royce Road Odyssey.</h1>
+                            <p class="blog-subtitle">The final showcase of celebrating a century of the Rolls-Royce Phantom.</p>
+                        </div>
+                        <div class="blog-hero-image">
+                            <img src="https://images.unsplash.com/photo-1563720223809-b9c9f9760226?auto=format&fit=crop&q=80&w=1600" alt="1925 Rolls-Royce Barker Tourer" loading="eager">
+                        </div>
+                        <div class="blog-body">
+                            <p>In the current era of advancements and a new century, we love fast cars, modern cars, and even more so, hybrids. As the number of cars has increased over the decades, we have been met with heavy traffic and worsening road conditions, yet we continue to seek the most from our journeys in the comfort of modern cars. However, we feel the absence of custom coach-built, purpose-built vintage cars. What if we brought back the classics to experience the roads of today?</p>
+                            <div class="blog-inline-tags"><span class="blog-tag tag-accent">RACES</span></div>
+                            <div class="blog-inline-image">
+                                <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=1600" alt="Vintage car on the open road" loading="lazy">
+                            </div>
+                            <p>In 2025, we celebrated 100 years of the Rolls-Royce Phantom. Known for its "best car in the world" reputation, the marque represented peak 1920s bespoke design, along with a sporty and high-performance character for that era. To mark this automotive artistry and celebrate India's growing motoring culture, a story was created. A true ardent collector and custodian of classics, Mr. Ramji Malik undertook a 4,000 km expedition from the northernmost peaks to the southernmost shores of India in his 1925 Rolls-Royce Barker Tourer.</p>
+                            <p>A route was set from Kashmir to Kanyakumari, and a 30-day journey soon commenced. Having previously curated drives across the country and restored and driven rare automobiles, Mr. Malik sought to experience the beauty of Indian roads in a century-old Rolls-Royce, an open-top tourer powered by a 7.7-litre straight-six engine producing approximately 100 bhp. The drive traced through major Indian cities, bringing together collectors, enthusiasts and communities across the country at various showcases.</p>
+                            <p>"Some days were smooth; some days we had to push the limits," said Mr. Malik. Beginning in Jammu and navigating through winding roads and expansive highways, the journey involved battling traffic and adapting to diverse climates. The crew supported the expedition with a flatbed truck that followed the route for quick fixes and refuelling when needed. Driven by Mr. Malik himself and accompanied by his son, the car covered 200–250 km each day, steadily progressing to the final leg of the journey at Kanyakumari.</p>
+                            <p>The successful odyssey was made possible by a relentless pursuit to see it through, making it a grand celebration, "The Final Showcase." Hosted by Mr. Yohan Poonawalla at the Poonawalla Stud Farms in honour of the brand, the journey and the moment. A legendary collector at heart, he presented his own Rolls-Royce collection, including historic Phantoms such as the celebrated "Kashmir I," Phantom II once owned by Sir Malcolm Campbell, Phantom V commissioned for the Emir of Qatar and Phantom VI built for Her Majesty Queen Elizabeth II, alongside the centenary Phantom I that completed the expedition.</p>
+                            <p>A spectacle graced by esteemed guests, it served as a fitting tribute to conclude the milestone. As the story of the marque continues to fascinate us, this remarkable chapter serves as a reminder to preserve and celebrate its heritage while reconnecting future generations with the motoring story of a bygone era.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ─── PHOTO GALLERY ─── -->
+                <section class="blog-gallery-section" id="blog-gallery">
+                    <div class="blog-gallery-inner">
+                        <div class="blog-gallery-header">
+                            <h2 class="blog-gallery-title">Photo Gallery</h2>
+                        </div>
+                        <div class="blog-gallery-grid">
+                            <div class="blog-gallery-item hover-target" data-gallery-idx="0">
+                                <img src="https://images.unsplash.com/photo-1563720223809-b9c9f9760226?auto=format&fit=crop&q=80&w=600" alt="Rolls-Royce at grand estate" loading="lazy">
+                            </div>
+                            <div class="blog-gallery-item hover-target" data-gallery-idx="1">
+                                <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=600" alt="Classic car on the road" loading="lazy">
+                            </div>
+                            <div class="blog-gallery-item hover-target" data-gallery-idx="2">
+                                <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&q=80&w=600" alt="Vintage automobile detail" loading="lazy">
+                            </div>
+                            <div class="blog-gallery-item hover-target" data-gallery-idx="3">
+                                <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=600" alt="Heritage car front view" loading="lazy">
+                            </div>
+                            <div class="blog-gallery-item hover-target" data-gallery-idx="4">
+                                <img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&q=80&w=600" alt="Classic interior detail" loading="lazy">
+                            </div>
+                            <div class="blog-gallery-item hover-target" data-gallery-idx="5">
+                                <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=600" alt="Vintage car at venue" loading="lazy">
+                            </div>
+                            <div class="blog-gallery-item hover-target" data-gallery-idx="6">
+                                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600" alt="Classic car side profile" loading="lazy">
+                            </div>
+                            <div class="blog-gallery-item hover-target" data-gallery-idx="7">
+                                <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=600" alt="Heritage automobile showcase" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gallery Lightbox -->
+                <div class="gallery-lightbox" id="galleryLightbox">
+                    <button class="gallery-lb-close" aria-label="Close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="gallery-lb-nav gallery-lb-prev" aria-label="Previous">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="gallery-lb-nav gallery-lb-next" aria-label="Next">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                    </button>
+                    <div class="gallery-lb-img-wrap">
+                        <img id="galleryLbImg" src="" alt="Gallery Image">
+                    </div>
+                    <div class="gallery-lb-counter" id="galleryLbCounter"></div>
+                </div>
+
+                <!-- ─── YOUTUBE SECTION ─── -->
+                <section class="blog-youtube-section" id="blog-youtube">
+                    <div class="blog-youtube-inner">
+                        <div class="blog-youtube-header">
+                            <span class="section-label-line"></span>
+                            <h2 class="section-label-text">WATCH THE JOURNEY</h2>
+                            <span class="section-label-line"></span>
+                        </div>
+                        <div class="blog-youtube-embed">
+                            <div class="yt-video-wrapper" data-yt-id="0emw61MbVr4">
+                                <img class="yt-poster" src="https://img.youtube.com/vi/0emw61MbVr4/maxresdefault.jpg" alt="Watch The 1925 Rolls-Royce Road Odyssey">
+                                <div class="yt-play-btn">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="9.5 7.5 16.5 12 9.5 16.5" /></svg>
+                                </div>
+                                <iframe class="yt-iframe-player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="blog-youtube-more">
+                            <h3 class="blog-yt-more-title">MORE FROM ARDENT</h3>
+                            <div class="blog-yt-more-grid">
+                                <div class="blog-yt-more-card hover-target" data-yt-id="GjV3fEPZcdI">
+                                    <div class="blog-yt-more-thumb">
+                                        <img src="https://img.youtube.com/vi/GjV3fEPZcdI/mqdefault.jpg" alt="Ardent Live" loading="lazy">
+                                        <div class="blog-yt-more-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="9.5 7.5 16.5 12 9.5 16.5" /></svg></div>
+                                    </div>
+                                </div>
+                                <div class="blog-yt-more-card hover-target" data-yt-id="CrFMjQScxPY">
+                                    <div class="blog-yt-more-thumb">
+                                        <img src="https://img.youtube.com/vi/CrFMjQScxPY/mqdefault.jpg" alt="Ardent Live" loading="lazy">
+                                        <div class="blog-yt-more-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="9.5 7.5 16.5 12 9.5 16.5" /></svg></div>
+                                    </div>
+                                </div>
+                                <div class="blog-yt-more-card hover-target" data-yt-id="0emw61MbVr4">
+                                    <div class="blog-yt-more-thumb">
+                                        <img src="https://img.youtube.com/vi/0emw61MbVr4/mqdefault.jpg" alt="Ardent Live" loading="lazy">
+                                        <div class="blog-yt-more-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="9.5 7.5 16.5 12 9.5 16.5" /></svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── COMMENT SECTION (White) ─── -->
+                <section class="blog-comments-section" id="blog-comments">
+                    <div class="blog-comments-inner">
+                        <div class="comment-header">
+                            <svg class="comment-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            <h2 class="comment-title">Leave a Comment</h2>
+                        </div>
+                        <p class="comment-notice">Your email address will not be published. Required fields are marked <span class="required-star">*</span></p>
+                        <form class="comment-form" id="comment-form" novalidate>
+                            <div class="form-group form-group-full">
+                                <label for="comment-textarea" class="form-label">Leave a Comment</label>
+                                <textarea id="comment-textarea" name="comment" rows="8" required placeholder="Write your thoughts..."></textarea>
+                            </div>
+                            <div class="form-row-three">
+                                <div class="form-group">
+                                    <label for="comment-name" class="sr-only">Your name</label>
+                                    <input type="text" id="comment-name" name="name" placeholder="Your name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment-email" class="sr-only">Your email</label>
+                                    <input type="email" id="comment-email" name="email" placeholder="Your email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment-website" class="sr-only">Your website</label>
+                                    <input type="url" id="comment-website" name="website" placeholder="Your website">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-comment-submit" id="btn-comment-submit">Post Comment</button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+
+            <!-- FOOTER (SAME as home page) -->
+            <footer class="main-footer">
+                <div class="footer-inner-dark">
+                    <div class="footer-background-lines"></div>
+                    <div class="noise-overlay"></div>
+                    <div class="footer-brand-carousel">
+                        <div class="footer-brand-track">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/porsche/ffffff" alt="Porsche" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/ferrari/ffffff" alt="Ferrari" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/lamborghini/ffffff" alt="Lamborghini" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/mclaren/ffffff" alt="McLaren" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/bugatti/ffffff" alt="Bugatti" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/porsche/ffffff" alt="Porsche" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/ferrari/ffffff" alt="Ferrari" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/lamborghini/ffffff" alt="Lamborghini" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/mclaren/ffffff" alt="McLaren" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/bugatti/ffffff" alt="Bugatti" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                        </div>
+                    </div>
+                    <div class="footer-heading-section">
+                        <div class="footer-heading-icon"><img src="header-images/header-logo.png" alt="Ardent" class="footer-heading-logo"></div>
+                        <h2 class="f-main-heading">ALWAYS <span class="text-primary">BEYOND</span> THE LIMITS.</h2>
+                    </div>
+                    <div class="footer-container">
+                        <div class="footer-nav-section">
+                            <div class="f-nav-col f-nav-left">
+                                <span class="f-label">PAGES</span>
+                                <div class="f-links">
+                                    <a href="index.html" class="hover-target"><span class="text-anim" data-text="HOME"><span>HOME</span></span></a>
+                                    <a href="#" class="hover-target"><span class="text-anim" data-text="ABOUT"><span>ABOUT</span></span></a>
+                                    <a href="#" class="hover-target"><span class="text-anim" data-text="BLOGS"><span>BLOGS</span></span></a>
+                                    <a href="#" class="hover-target"><span class="text-anim" data-text="CONTACT"><span>CONTACT</span></span></a>
+                                </div>
+                                <div class="f-links">
+                                    <a href="#" class="hover-target f-link-store"><span class="text-anim" data-text="STORE"><span>STORE</span></span></a>
+                                </div>
+                            </div>
+                            <div class="f-nav-center"><img src="aaa-logo.png" alt="Automobili Ardent" class="footer-center-logo"></div>
+                            <div class="f-nav-col f-nav-right">
+                                <span class="f-label">FOLLOW ON</span>
+                                <div class="f-links">
+                                    <a href="https://www.facebook.com/share/1ByAXpayXC/?mibextid=wwXIfr" class="hover-target" target="_blank"><span class="text-anim" data-text="FACEBOOK"><span>FACEBOOK</span></span></a>
+                                    <a href="https://www.instagram.com/automobiliardent?igsh=dGt3ZGdsa3hveGdm" class="hover-target" target="_blank"><span class="text-anim" data-text="INSTAGRAM"><span>INSTAGRAM</span></span></a>
+                                    <a href="https://youtube.com/@automobiliardent?si=uphvj8sMBzOWh6aR" class="hover-target" target="_blank"><span class="text-anim" data-text="YOUTUBE"><span>YOUTUBE</span></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-cta-section">
+                        <a href="#" class="btn-primary hover-target">
+                            <span class="text-anim" data-text="BUSINESS ENQUIRIES"><span>BUSINESS ENQUIRIES</span></span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-legal-bar">
+                    <div class="legal-left"><span>&copy; 2026 <strong>Automobili Ardent</strong>. All rights reserved</span></div>
+                    <div class="legal-right">
+                        <a href="#" class="hover-target">PRIVACY POLICY</a>
+                        <a href="#" class="hover-target">TERMS</a>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+    gsap.registerPlugin(ScrollTrigger);
+    document.addEventListener('DOMContentLoaded', () => {
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.8, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), direction: 'vertical', smooth: true, mouseMultiplier: 0.8, smoothTouch: false, touchMultiplier: 2, infinite: false });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        // Header: transparent → black on scroll
+        const header = document.getElementById('main-header');
+        ScrollTrigger.create({
+            start: 'top -80',
+            onUpdate: (self) => {
+                if (self.progress > 0) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
+        });
+
+        // Full Screen Menu
+        const menuBtns = document.querySelectorAll('.menu-btn');
+        const closeBtn = document.querySelector('.menu-close-btn');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        document.querySelectorAll('.v-strip').forEach(strip => {
+            strip.innerHTML += strip.innerHTML;
+            const isUp = strip.parentElement.classList.contains('v-col-up');
+            if (isUp) gsap.to(strip, { yPercent: -50, ease: 'none', duration: 30, repeat: -1 });
+            else { gsap.set(strip, { yPercent: -50 }); gsap.to(strip, { yPercent: 0, ease: 'none', duration: 30, repeat: -1 }); }
+        });
+        const tlMenu = gsap.timeline({ paused: true, onReverseComplete: () => { menuOverlay.classList.remove('menu-active'); lenis.start(); } });
+        tlMenu.to(menuOverlay, { opacity: 1, duration: 0.5, ease: 'expo.inOut' })
+            .from('.vertical-marquee-gallery', { opacity: 0, x: -50, duration: 1.2, ease: 'power3.out' }, '-=0.3')
+            .fromTo('.m-link', { y: '110%' }, { y: '0%', duration: 1, stagger: 0.08, ease: 'expo.out' }, '-=0.8')
+            .from('.menu-footer', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, '-=0.6');
+        menuBtns.forEach(btn => btn.addEventListener('click', () => { menuOverlay.classList.add('menu-active'); lenis.stop(); tlMenu.play(); }));
+        if (closeBtn) closeBtn.addEventListener('click', () => tlMenu.reverse());
+
+        // YouTube
+        document.querySelectorAll('.yt-video-wrapper').forEach(w => {
+            const poster = w.querySelector('.yt-poster'), play = w.querySelector('.yt-play-btn'), iframe = w.querySelector('.yt-iframe-player'), id = w.dataset.ytId;
+            function launch() { iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0'; w.classList.add('playing'); }
+            if (poster) poster.addEventListener('click', launch);
+            if (play) play.addEventListener('click', launch);
+        });
+        document.querySelectorAll('.blog-yt-more-card').forEach(c => c.addEventListener('click', () => window.open('https://www.youtube.com/watch?v=' + c.dataset.ytId, '_blank')));
+
+        // Comment Form
+        document.getElementById('comment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-comment-submit');
+            btn.textContent = 'Comment Posted!'; btn.style.background = '#222'; btn.style.color = '#fff';
+            setTimeout(() => { btn.textContent = 'Post Comment'; btn.style.background = ''; btn.style.color = ''; this.reset(); }, 2500);
+        });
+
+        // Gallery Lightbox
+        const galleryItems = document.querySelectorAll('.blog-gallery-item');
+        const lb = document.getElementById('galleryLightbox');
+        const lbImg = document.getElementById('galleryLbImg');
+        const lbCounter = document.getElementById('galleryLbCounter');
+        const imgs = Array.from(galleryItems).map(i => i.querySelector('img').src.replace('w=600','w=1600'));
+        let cur = 0;
+        function showImg(idx) { cur = (idx + imgs.length) % imgs.length; lbImg.src = imgs[cur]; lbCounter.textContent = (cur+1)+' / '+imgs.length; }
+        function openLb(idx) { showImg(idx); lb.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeLb() { lb.classList.remove('active'); document.body.style.overflow = ''; }
+        galleryItems.forEach(item => item.addEventListener('click', () => openLb(parseInt(item.dataset.galleryIdx))));
+        lb.querySelector('.gallery-lb-close').addEventListener('click', closeLb);
+        lb.querySelector('.gallery-lb-prev').addEventListener('click', () => showImg(cur-1));
+        lb.querySelector('.gallery-lb-next').addEventListener('click', () => showImg(cur+1));
+        lb.addEventListener('click', e => { if(e.target===lb) closeLb(); });
+        document.addEventListener('keydown', e => { if(!lb.classList.contains('active')) return; if(e.key==='Escape') closeLb(); if(e.key==='ArrowLeft') showImg(cur-1); if(e.key==='ArrowRight') showImg(cur+1); });
+
+        // Footer Brand Carousel
+        const brandTrack = document.querySelector('.footer-brand-track');
+        if (brandTrack) gsap.to(brandTrack, { xPercent: -50, ease: 'none', duration: 20, repeat: -1 });
+
+        ScrollTrigger.refresh();
+    });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs — Automobili Ardent</title>
+    <meta name="description" content="Explore the latest stories, journeys, and automotive heritage from Automobili Ardent.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+</head>
+<body>
+    <div class="site-global-grid"></div>
+
+    <!-- Full Screen Menu Overlay (SAME as home page) -->
+    <div class="menu-overlay">
+        <div class="menu-bg-image"></div>
+        <div class="menu-bg-lines"></div>
+        <div class="menu-top-bar">
+            <div class="logo logo-menu"><img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img"></div>
+            <div class="menu-top-right">
+                <a href="#" class="btn-store hover-target">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                </a>
+                <button class="menu-close-btn hover-target" aria-label="Close Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+        <div class="menu-content-wrapper">
+            <div class="menu-left">
+                <div class="vertical-marquee-gallery">
+                    <div class="v-col v-col-up"><div class="v-strip">
+                        <div class="v-img"><img src="header-images/pexels-odobesku-9018708.jpg" alt="Detail"></div>
+                        <div class="v-img"><img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&q=80&w=800" alt="Car Rear"></div>
+                        <div class="v-img"><img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&q=80&w=800" alt="Car Side"></div>
+                        <div class="v-img"><img src="header-images/pexels-michael-obstoj-1772571864-31867049.jpg" alt="Detail Texture"></div>
+                    </div></div>
+                    <div class="v-col v-col-down"><div class="v-strip">
+                        <div class="v-img"><img src="header-images/pexels-dante-juhasz-62201650-16613452.jpg" alt="Drive Action"></div>
+                        <div class="v-img"><img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=800" alt="Road View"></div>
+                        <div class="v-img"><img src="header-images/pexels-julian-largo-622163228-17377373.jpg" alt="Detail Part"></div>
+                        <div class="v-img"><img src="header-images/pexels-wolfart-33397573.jpg" alt="Action Drive"></div>
+                    </div></div>
+                </div>
+            </div>
+            <div class="menu-right">
+                <nav class="menu-nav-links">
+                    <div class="m-link-wrapper"><a href="index.html" class="m-link hover-target"><span class="text-anim" data-text="HOME"><span>HOME</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="#" class="m-link hover-target"><span class="text-anim" data-text="ABOUT"><span>ABOUT</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="blogs.html" class="m-link hover-target m-active"><span class="text-anim" data-text="BLOGS"><span>BLOGS</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="#" class="m-link hover-target"><span class="text-anim" data-text="CONTACT"><span>CONTACT</span></span></a></div>
+                </nav>
+                <div class="menu-footer">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%; flex-wrap: wrap; gap: 1.5rem;">
+                        <div class="m-wreath">ARDENT NETWORK <br> EST. 2026</div>
+                        <div class="m-social">
+                            <a href="https://www.facebook.com/share/1ByAXpayXC/?mibextid=wwXIfr" class="hover-target" target="_blank"><span class="text-anim" data-text="FACEBOOK"><span>FACEBOOK</span></span></a>
+                            <a href="https://www.instagram.com/automobiliardent?igsh=dGt3ZGdsa3hveGdm" class="hover-target" target="_blank"><span class="text-anim" data-text="INSTAGRAM"><span>INSTAGRAM</span></span></a>
+                            <a href="https://youtube.com/@automobiliardent?si=uphvj8sMBzOWh6aR" class="hover-target" target="_blank"><span class="text-anim" data-text="YOUTUBE"><span>YOUTUBE</span></span></a>
+                        </div>
+                    </div>
+                    <div class="m-bottom-section">
+                        <div class="m-sub-links">
+                            <a href="#" class="hover-target"><span class="text-anim" data-text="BUSINESS ENQUIRIES"><span>BUSINESS ENQUIRIES</span></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="main-header" class="hover-target">
+        <div class="mobile-nav-trigger mobile-only">
+            <button class="menu-btn hover-target" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <a href="#" class="mobile-login-text">LOGIN</a>
+        </div>
+        <div class="logo"><img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img"></div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-link-btn hover-target desktop-only">
+                <span class="text-anim" data-text="LOGIN"><span>LOGIN</span></span>
+            </a>
+            <a href="#" class="btn-primary hover-target header-store-btn">
+                <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            </a>
+            <button class="menu-btn hover-target desktop-only" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Smooth Scroll Wrapper -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- ─── HERO BANNER ─── -->
+            <section class="blogs-listing-hero">
+                <img class="blogs-listing-hero-bg" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920" alt="Automobili Ardent Blogs">
+                <div class="noise-overlay"></div>
+                <div class="blogs-listing-hero-content">
+                    <h1 class="blogs-listing-heading">Blogs</h1>
+                    <p class="blogs-listing-sub">Stories, journeys, and heritage from the world of Ardent.</p>
+                </div>
+            </section>
+
+            <!-- ─── BLOG CARDS GRID ─── -->
+            <section class="blogs-grid-section">
+                <div class="blogs-grid-inner">
+                    <div class="blogs-grid">
+
+                        <!-- Card 1 -->
+                        <article class="blogs-card hover-target">
+                            <div class="blogs-card-img">
+                                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0637?auto=format&fit=crop&q=80&w=600" alt="1925 Rolls-Royce Road Odyssey" loading="lazy">
+                            </div>
+                            <div class="blogs-card-body">
+                                <span class="blogs-card-tag">FINAL TIMELINE</span>
+                                <h2 class="blogs-card-title">The 1925 Rolls-Royce Road Odyssey</h2>
+                                <p class="blogs-card-desc">The final showcase of celebrating a century of the Rolls-Royce Phantom. A 4,000 km expedition across India.</p>
+                            </div>
+                            <div class="blogs-card-footer">
+                                <a href="blog.html" class="btn-read-more">READ MORE</a>
+                            </div>
+                        </article>
+
+                        <!-- Card 2 -->
+                        <article class="blogs-card hover-target">
+                            <div class="blogs-card-img">
+                                <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&q=80&w=600" alt="Phantom V1 Hot Weather Testing" loading="lazy">
+                            </div>
+                            <div class="blogs-card-body">
+                                <span class="blogs-card-tag">TESTING</span>
+                                <h2 class="blogs-card-title">Phantom V1 Hot Weather Testing in Arizona</h2>
+                                <p class="blogs-card-desc">Discover how we pushed the V1 to balance its world-beating supercar performance with capability in the most challenging conditions.</p>
+                            </div>
+                            <div class="blogs-card-footer">
+                                <a href="blog.html" class="btn-read-more">READ MORE</a>
+                            </div>
+                        </article>
+
+                        <!-- Card 3 -->
+                        <article class="blogs-card hover-target">
+                            <div class="blogs-card-img">
+                                <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=600" alt="Ardent V1 Aerodynamics" loading="lazy">
+                            </div>
+                            <div class="blogs-card-body">
+                                <span class="blogs-card-tag">ENGINEERING</span>
+                                <h2 class="blogs-card-title">Ardent V1 Aerodynamics: Formula 1™ Ground Effect Reimagined</h2>
+                                <p class="blogs-card-desc">Discover Ardent's aerodynamics. Advanced Aerodynamics Architect reveals how Formula 1™-inspired ground effect delivers unprecedented grip.</p>
+                            </div>
+                            <div class="blogs-card-footer">
+                                <a href="blog.html" class="btn-read-more">READ MORE</a>
+                            </div>
+                        </article>
+
+                        <!-- Card 4 -->
+                        <article class="blogs-card hover-target">
+                            <div class="blogs-card-img">
+                                <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=600" alt="Introducing Ardent Golf" loading="lazy">
+                            </div>
+                            <div class="blogs-card-body">
+                                <span class="blogs-card-tag">LIFESTYLE</span>
+                                <h2 class="blogs-card-title">Introducing Ardent Golf</h2>
+                                <p class="blogs-card-desc">Ardent today announces the launch of an exciting new venture, Ardent Golf — where performance meets the fairway.</p>
+                            </div>
+                            <div class="blogs-card-footer">
+                                <a href="blog.html" class="btn-read-more">READ MORE</a>
+                            </div>
+                        </article>
+
+                        <!-- Card 5 -->
+                        <article class="blogs-card hover-target">
+                            <div class="blogs-card-img">
+                                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600" alt="Heritage Collection" loading="lazy">
+                            </div>
+                            <div class="blogs-card-body">
+                                <span class="blogs-card-tag">HERITAGE</span>
+                                <h2 class="blogs-card-title">The Poonawalla Heritage Collection Unveiled</h2>
+                                <p class="blogs-card-desc">A rare look inside the world's most prestigious private collection of vintage Rolls-Royce and classic automobiles.</p>
+                            </div>
+                            <div class="blogs-card-footer">
+                                <a href="blog.html" class="btn-read-more">READ MORE</a>
+                            </div>
+                        </article>
+
+                        <!-- Card 6 -->
+                        <article class="blogs-card hover-target">
+                            <div class="blogs-card-img">
+                                <img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&q=80&w=600" alt="Concours d'Elegance" loading="lazy">
+                            </div>
+                            <div class="blogs-card-body">
+                                <span class="blogs-card-tag">EVENTS</span>
+                                <h2 class="blogs-card-title">Ardent at the Concours d'Elegance 2025</h2>
+                                <p class="blogs-card-desc">Our presence at one of the world's most celebrated automotive gatherings — a weekend of timeless elegance and motoring passion.</p>
+                            </div>
+                            <div class="blogs-card-footer">
+                                <a href="blog.html" class="btn-read-more">READ MORE</a>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER (SAME as home page) -->
+            <footer class="main-footer">
+                <div class="footer-inner-dark">
+                    <div class="footer-background-lines"></div>
+                    <div class="noise-overlay"></div>
+                    <div class="footer-brand-carousel">
+                        <div class="footer-brand-track">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/porsche/ffffff" alt="Porsche" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/ferrari/ffffff" alt="Ferrari" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/lamborghini/ffffff" alt="Lamborghini" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/mclaren/ffffff" alt="McLaren" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/bugatti/ffffff" alt="Bugatti" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/porsche/ffffff" alt="Porsche" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/ferrari/ffffff" alt="Ferrari" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/lamborghini/ffffff" alt="Lamborghini" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/mclaren/ffffff" alt="McLaren" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/bugatti/ffffff" alt="Bugatti" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                        </div>
+                    </div>
+                    <div class="footer-heading-section">
+                        <div class="footer-heading-icon"><img src="header-images/header-logo.png" alt="Ardent" class="footer-heading-logo"></div>
+                        <h2 class="f-main-heading">ALWAYS <span class="text-primary">BEYOND</span> THE LIMITS.</h2>
+                    </div>
+                    <div class="footer-container">
+                        <div class="footer-nav-section">
+                            <div class="f-nav-col f-nav-left">
+                                <span class="f-label">PAGES</span>
+                                <div class="f-links">
+                                    <a href="index.html" class="hover-target"><span class="text-anim" data-text="HOME"><span>HOME</span></span></a>
+                                    <a href="#" class="hover-target"><span class="text-anim" data-text="ABOUT"><span>ABOUT</span></span></a>
+                                    <a href="blogs.html" class="hover-target"><span class="text-anim" data-text="BLOGS"><span>BLOGS</span></span></a>
+                                    <a href="#" class="hover-target"><span class="text-anim" data-text="CONTACT"><span>CONTACT</span></span></a>
+                                </div>
+                                <div class="f-links">
+                                    <a href="#" class="hover-target f-link-store"><span class="text-anim" data-text="STORE"><span>STORE</span></span></a>
+                                </div>
+                            </div>
+                            <div class="f-nav-center"><img src="aaa-logo.png" alt="Automobili Ardent" class="footer-center-logo"></div>
+                            <div class="f-nav-col f-nav-right">
+                                <span class="f-label">FOLLOW ON</span>
+                                <div class="f-links">
+                                    <a href="https://www.facebook.com/share/1ByAXpayXC/?mibextid=wwXIfr" class="hover-target" target="_blank"><span class="text-anim" data-text="FACEBOOK"><span>FACEBOOK</span></span></a>
+                                    <a href="https://www.instagram.com/automobiliardent?igsh=dGt3ZGdsa3hveGdm" class="hover-target" target="_blank"><span class="text-anim" data-text="INSTAGRAM"><span>INSTAGRAM</span></span></a>
+                                    <a href="https://youtube.com/@automobiliardent?si=uphvj8sMBzOWh6aR" class="hover-target" target="_blank"><span class="text-anim" data-text="YOUTUBE"><span>YOUTUBE</span></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-cta-section">
+                        <a href="#" class="btn-primary hover-target">
+                            <span class="text-anim" data-text="BUSINESS ENQUIRIES"><span>BUSINESS ENQUIRIES</span></span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-legal-bar">
+                    <div class="legal-left"><span>&copy; 2026 <strong>Automobili Ardent</strong>. All rights reserved</span></div>
+                    <div class="legal-right">
+                        <a href="#" class="hover-target">PRIVACY POLICY</a>
+                        <a href="#" class="hover-target">TERMS</a>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+    gsap.registerPlugin(ScrollTrigger);
+    document.addEventListener('DOMContentLoaded', () => {
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.8, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), direction: 'vertical', smooth: true, mouseMultiplier: 0.8, smoothTouch: false, touchMultiplier: 2, infinite: false });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        // Header: transparent → black on scroll
+        const header = document.getElementById('main-header');
+        ScrollTrigger.create({
+            start: 'top -80',
+            onUpdate: (self) => {
+                if (self.progress > 0) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
+        });
+
+        // Full Screen Menu
+        const menuBtns = document.querySelectorAll('.menu-btn');
+        const closeBtn = document.querySelector('.menu-close-btn');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        document.querySelectorAll('.v-strip').forEach(strip => {
+            strip.innerHTML += strip.innerHTML;
+            const isUp = strip.parentElement.classList.contains('v-col-up');
+            if (isUp) gsap.to(strip, { yPercent: -50, ease: 'none', duration: 30, repeat: -1 });
+            else { gsap.set(strip, { yPercent: -50 }); gsap.to(strip, { yPercent: 0, ease: 'none', duration: 30, repeat: -1 }); }
+        });
+        const tlMenu = gsap.timeline({ paused: true, onReverseComplete: () => { menuOverlay.classList.remove('menu-active'); lenis.start(); } });
+        tlMenu.to(menuOverlay, { opacity: 1, duration: 0.5, ease: 'expo.inOut' })
+            .from('.vertical-marquee-gallery', { opacity: 0, x: -50, duration: 1.2, ease: 'power3.out' }, '-=0.3')
+            .fromTo('.m-link', { y: '110%' }, { y: '0%', duration: 1, stagger: 0.08, ease: 'expo.out' }, '-=0.8')
+            .from('.menu-footer', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, '-=0.6');
+        menuBtns.forEach(btn => btn.addEventListener('click', () => { menuOverlay.classList.add('menu-active'); lenis.stop(); tlMenu.play(); }));
+        if (closeBtn) closeBtn.addEventListener('click', () => tlMenu.reverse());
+
+        // Blog Cards Staggered Reveal
+        const cards = gsap.utils.toArray('.blogs-card');
+        if (cards.length) {
+            gsap.fromTo(cards, { y: 50, opacity: 0 }, {
+                y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'expo.out',
+                scrollTrigger: { trigger: '.blogs-grid', start: 'top 85%', toggleActions: 'play none none reverse' }
+            });
+        }
+
+        // Footer Brand Carousel
+        const brandTrack = document.querySelector('.footer-brand-track');
+        if (brandTrack) gsap.to(brandTrack, { xPercent: -50, ease: 'none', duration: 20, repeat: -1 });
+
+        ScrollTrigger.refresh();
+    });
+    </script>
+</body>
+</html>
