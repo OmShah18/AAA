@@ -405,7 +405,7 @@
         // YouTube
         document.querySelectorAll('.yt-video-wrapper').forEach(w => {
             const poster = w.querySelector('.yt-poster'), play = w.querySelector('.yt-play-btn'), iframe = w.querySelector('.yt-iframe-player'), id = w.dataset.ytId;
-            function launch() { iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0'; w.classList.add('playing'); }
+            function launch() { iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&controls=1&rel=0&playsinline=1'; w.classList.add('is-playing'); }
             if (poster) poster.addEventListener('click', launch);
             if (play) play.addEventListener('click', launch);
         });
