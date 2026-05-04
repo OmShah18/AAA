@@ -1901,9 +1901,11 @@ header.scrolled .header-logo-img {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 6rem 5% 6rem 15vw; /* Much more left padding to push text away from boundary */
+    padding: 4rem 5% 4rem 10%;
+    min-width: 0;
     position: relative;
     z-index: 2;
+    overflow: visible;
 }
 
 /* Horizontal line divider — animates width on reveal */
@@ -2038,6 +2040,10 @@ header.scrolled .header-logo-img {
 /* --- Reveal Animation Helpers (for scroll) --- */
 .fb-reveal {
     overflow: hidden;
+}
+
+.fb-reveal:last-child {
+    overflow: visible; /* Allow the button row to be fully visible */
 }
 
 .fb-reveal > * {
@@ -3939,6 +3945,7 @@ header.scrolled .header-logo-img {
 .product-item {
     display: flex;
     flex-direction: column;
+    height: 100%;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
 }
 
@@ -3991,6 +3998,7 @@ header.scrolled .header-logo-img {
 .product-details {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .product-title {
@@ -4017,8 +4025,9 @@ header.scrolled .header-logo-img {
     color: #666;
     margin-bottom: 1.5rem;
 }
-.product-item:nth-child(1) .product-price {
-    margin-bottom: 2rem;
+.product-item .btn-primary {
+    margin-top: auto;
+    width: 100%;
 }
 
 
