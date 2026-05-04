@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pin: true,
             pinSpacing: true,
             start: "top top",
-            end: () => "+=" + (window.innerHeight * fbTotal),
+            end: "+=50",
             invalidateOnRefresh: true,
             onEnter: () => { fbSectionPinned = true; lenis.stop(); },
             onLeave: () => { fbSectionPinned = false; lenis.start(); },
