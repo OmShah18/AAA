@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Reveal Animations (Clip and Fade)
-    const clipReveals = gsap.utils.toArray('.panel:not(.section-machines):not(.hero) .clip-reveal > *');
+    const clipReveals = gsap.utils.toArray('.panel:not(.hero) .clip-reveal > *');
     clipReveals.forEach(elem => {
         gsap.to(elem, {
             y: "0%",
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Image Clip Reveals — elegant wipe-in
-    const imgReveals = gsap.utils.toArray('.panel:not(.section-machines) .clip-img-reveal');
+    const imgReveals = gsap.utils.toArray('.panel .clip-img-reveal');
     imgReveals.forEach(imgCont => {
         gsap.fromTo(imgCont,
             { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
@@ -158,110 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
             start: "top bottom",
             end: "bottom top",
             scrub: true
-        }
-    });
-
-    // Horizontal Scroll for Machines Section
-    const machinesWrapper = document.querySelector(".machines-wrapper");
-    const machinePanels = gsap.utils.toArray(".machine-panel");
-    const progressBar = document.querySelector(".scroll-progress-bar");
-    const progressDots = document.querySelectorAll(".progress-dot");
-
-    // Create the horizontal scroll tween on the wrapper
-    const scrollTween = gsap.to(machinesWrapper, {
-        x: () => -(machinesWrapper.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-            id: "machinesST",
-            trigger: ".section-machines",
-            pin: true,
-            scrub: true,
-            invalidateOnRefresh: true,
-            end: () => "+=" + (machinesWrapper.scrollWidth - window.innerWidth),
-            onUpdate: (self) => {
-                // Update progress bar
-                gsap.set(progressBar, { width: (self.progress * 100) + "%" });
-                
-                // Update active dot
-                const totalPanels = machinePanels.length;
-                const activeIndex = Math.round(self.progress * (totalPanels - 1));
-                progressDots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === activeIndex);
-                });
-            }
-        }
-    });
-
-    // Add intentional inner animations tied to the horizontal container
-    const isMobile = window.innerWidth <= 768;
-    
-    machinePanels.forEach((panel, i) => {
-        // Image Parallax Effect — desktop only (mobile uses full-bleed bg)
-        if (!isMobile) {
-            const img = panel.querySelector(".machine-img");
-            if (img) {
-                gsap.fromTo(img,
-                    { xPercent: -15 },
-                    {
-                        xPercent: 15,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: panel,
-                            containerAnimation: scrollTween,
-                            start: "left right",
-                            end: "right left",
-                            scrub: true
-                        }
-                    }
-                );
-            }
-
-            // Clip-path reveal for images — desktop only
-            const imgCont = panel.querySelector(".clip-img-reveal");
-            if (imgCont) {
-                gsap.fromTo(imgCont,
-                    { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
-                    {
-                        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-                        duration: 1.5,
-                        ease: "expo.out",
-                        scrollTrigger: i === 0 ? {
-                            trigger: ".section-machines",
-                            start: "top 75%",
-                            toggleActions: "play none none reverse"
-                        } : {
-                            trigger: panel,
-                            containerAnimation: scrollTween,
-                            start: "left 75%",
-                            toggleActions: "play none none reverse"
-                        }
-                    }
-                );
-            }
-        }
-
-        // Text reveals (works on both desktop and mobile)
-        const textElements = panel.querySelectorAll(".clip-reveal > *");
-        if (textElements.length) {
-            gsap.fromTo(textElements,
-                { y: "110%" },
-                {
-                    y: "0%",
-                    duration: 1.2,
-                    stagger: 0.1,
-                    ease: "power3.out",
-                    scrollTrigger: i === 0 ? {
-                        trigger: ".section-machines",
-                        start: "top 75%",
-                        toggleActions: "play none none reverse"
-                    } : {
-                        trigger: panel,
-                        containerAnimation: scrollTween,
-                        start: "left 75%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
         }
     });
 
@@ -559,6 +455,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const deltaY = fbTouchStartY - e.changedTouches[0].clientY;
             if (Math.abs(deltaY) < 50) return;
 
+            // At edges, release to normal page scroll
+            if (deltaY > 0 && fbCurrentIndex === fbTotal - 1) {
+                lenis.start();
+                fbSectionPinned = false;
+                return;
+            }
+            if (deltaY < 0 && fbCurrentIndex === 0) {
+                lenis.start();
+                fbSectionPinned = false;
+                return;
+            }
+
             if (deltaY > 0 && fbCurrentIndex < fbTotal - 1) {
                 fbGoToSlide(fbCurrentIndex + 1);
             } else if (deltaY < 0 && fbCurrentIndex > 0) {
@@ -598,30 +506,6 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         });
     }
-
-    // ===== SPEC NUMBER COUNTER ANIMATION =====
-    const specValues = gsap.utils.toArray('.spec-value');
-    specValues.forEach(el => {
-        const target = parseFloat(el.textContent);
-        const isDecimal = el.textContent.includes('.');
-        const obj = { val: 0 };
-        
-        ScrollTrigger.create({
-            trigger: el.closest('.machine-panel') || el,
-            start: "top 80%",
-            onEnter: () => {
-                gsap.to(obj, {
-                    val: target,
-                    duration: 2,
-                    ease: "power2.out",
-                    onUpdate: () => {
-                        el.textContent = isDecimal ? obj.val.toFixed(1) : Math.round(obj.val);
-                    }
-                });
-            },
-            once: true
-        });
-    });
 
     // ===== ABOUT SECTION IMAGE PARALLAX =====
     const aboutImages = gsap.utils.toArray('.about-img-main img, .about-img-sub img');

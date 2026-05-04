@@ -1913,7 +1913,7 @@ header.scrolled .header-logo-img {
     width: 0;
     height: 1px;
     background: var(--black);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1926,7 +1926,7 @@ header.scrolled .header-logo-img {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     overflow: hidden;
 }
 
@@ -1949,7 +1949,7 @@ header.scrolled .header-logo-img {
 
 /* Heading group */
 .fb-heading-group {
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
 }
 
 .fb-heading {
@@ -1971,7 +1971,7 @@ header.scrolled .header-logo-img {
     line-height: 1.75;
     color: var(--text-dark);
     max-width: 440px;
-    margin: 0 0 2.5rem 0;
+    margin: 0 0 1.5rem 0;
     opacity: 0.85;
 }
 
@@ -2058,22 +2058,28 @@ header.scrolled .header-logo-img {
 
 /* --- Mobile Responsive --- */
 @media (max-width: 1024px) {
+    .section-featured-blogs {
+        height: 100svh;
+    }
+
     .fb-item {
         flex-direction: column;
         width: 100vw;
-        height: 100vh;
+        height: 100svh;
     }
 
     .fb-text-col {
         flex: none;
-        padding: 4rem 5% 1.5rem;
-        height: 50vh;
+        padding: 5rem 5% 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .fb-img-col {
-        flex: none;
+        flex: 1;
         width: 100%;
-        height: 50vh;
+        min-height: 0;
     }
 
     .fb-video-card {
@@ -2096,27 +2102,31 @@ header.scrolled .header-logo-img {
 
 @media (max-width: 768px) {
     .fb-text-col {
-        padding: 3rem 5% 1.5rem;
+        padding: 4.5rem 5% 1.5rem;
     }
 
     .fb-heading {
-        font-size: clamp(2rem, 11vw, 3rem);
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
     }
 
     .fb-desc {
-        display: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
     }
 
     .fb-category {
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.8rem;
     }
 
     .fb-heading-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .fb-line-divider {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 }
 
