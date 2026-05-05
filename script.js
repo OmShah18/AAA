@@ -708,10 +708,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hero Landing Animation
     const tlHero = gsap.timeline({ paused: true });
-    tlHero.from(".hero-subheading", { opacity: 0, y: 30, duration: 1.5, ease: "expo.out", delay: 0.1 })
-        .to(".hero .hero-heading", { y: "0%", duration: 2, stagger: 0.15, ease: "expo.out" }, "-=1.2")
-        .to(".hero .btn-primary", { opacity: 1, y: "0%", duration: 1.2, ease: "expo.out" }, "-=1.0")
-        .from(".hero-socials .social-icon", { opacity: 0, x: -30, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=1.5");
+    tlHero.from(".hero-socials .social-icon", { opacity: 0, x: -30, duration: 1, stagger: 0.1, ease: "power3.out" });
 
     // ===== PRODUCT GRID STAGGERED REVEAL =====
     const productItems = gsap.utils.toArray('.product-item');
