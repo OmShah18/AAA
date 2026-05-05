@@ -1798,21 +1798,21 @@ header.scrolled .header-logo-img {
 }
 
 /* ======================================================= */
-/* SECTION 5.6: FEATURED BLOGS (Charles Leclerc Style)     */
+/* SECTION 5.6: FEATURED BLOGS (Vertical Scroll)           */
 /* ======================================================= */
 .section-featured-blogs {
     background-color: var(--white);
     padding: 0;
     position: relative;
     overflow: hidden;
-    height: 100vh; /* Fixed height for pinning */
+    height: 100vh;
 }
 
 /* Pinned vertical title on the left */
 .fb-pinned-title {
     position: absolute;
     top: 50%;
-    left: 4%;
+    left: 3%;
     transform: translateY(-50%);
     z-index: 20;
     pointer-events: none;
@@ -1820,105 +1820,154 @@ header.scrolled .header-logo-img {
 
 .fb-title-text {
     font-family: var(--font-primary);
-    font-size: clamp(3rem, 5vw, 4rem);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
     font-weight: 700;
     color: transparent;
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.15);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     writing-mode: vertical-lr;
     transform: rotate(180deg);
 }
 
-/* Scroll Progress Tracker */
+/* --- Slide Counter (bottom-left) --- */
+.fb-slide-counter {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 10%;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    z-index: 20;
+    font-family: var(--font-primary);
+    letter-spacing: 0.1em;
+    pointer-events: none;
+}
+
+.fb-counter-current {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fb-counter-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.fb-counter-total {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.4);
+    line-height: 1;
+}
+
+/* --- Progress Indicator (right side, vertical) --- */
 .fb-progress-container {
     position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1rem;
     z-index: 20;
 }
 
 .fb-progress-dots {
     display: flex;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .fb-progress-dots .progress-dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.2);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(0, 0, 0, 0.15);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
 }
 
 .fb-progress-dots .progress-dot.active {
     background: var(--primary);
-    transform: scale(1.5);
+    transform: scale(1.6);
+    box-shadow: 0 0 12px rgba(255, 202, 39, 0.4);
 }
 
-.fb-progress-container .scroll-progress-bar-track {
-    width: 100px;
-    height: 2px;
-    background: rgba(0, 0, 0, 0.1);
+.fb-progress-bar-track {
+    width: 2px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.08);
     border-radius: 2px;
     overflow: hidden;
 }
 
 .fb-progress-bar {
-    width: 0%;
-    height: 100%;
+    width: 100%;
+    height: 0%;
     background: var(--primary);
+    border-radius: 2px;
+    transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Wrapper for horizontal scrolling */
+/* --- Wrapper: stacked layout --- */
 .featured-blogs-wrapper {
-    display: flex;
+    position: relative;
+    width: 100%;
     height: 100vh;
-    width: max-content;
 }
 
-/* --- Each Blog Item: Full Viewport Panel --- */
+/* --- Each Blog Item: stacked absolutely --- */
 .fb-item {
-    width: 100vw;
-    min-width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    flex-shrink: 0;
-    height: 100vh;
     display: flex;
     align-items: stretch;
-    position: relative;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.fb-item.fb-item-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 5;
 }
 
 /* --- Text Column --- */
 .fb-text-col {
-    flex: 0 0 50%;
+    flex: 0 0 48%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4rem 5% 4rem 10%;
+    padding: 4rem 4% 4rem 10%;
     min-width: 0;
     position: relative;
     z-index: 2;
     overflow: visible;
 }
 
-/* Horizontal line divider — animates width on reveal */
+/* Horizontal line divider — animates via scaleX */
 .fb-line-divider {
-    width: 0;
+    width: 100%;
     height: 1px;
     background: var(--black);
     margin-bottom: 1.5rem;
-    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.fb-line-divider.is-revealed {
-    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
 }
 
 /* Category label with dot */
@@ -1936,6 +1985,7 @@ header.scrolled .header-logo-img {
     border-radius: 50%;
     background: var(--black);
     flex-shrink: 0;
+    will-change: transform, opacity;
 }
 
 .fb-cat-text {
@@ -1945,6 +1995,7 @@ header.scrolled .header-logo-img {
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--black);
+    will-change: transform, opacity;
 }
 
 /* Heading group */
@@ -1961,6 +2012,7 @@ header.scrolled .header-logo-img {
     letter-spacing: -0.02em;
     color: var(--black);
     margin: 0;
+    will-change: transform, opacity;
 }
 
 /* Description */
@@ -1973,17 +2025,14 @@ header.scrolled .header-logo-img {
     max-width: 440px;
     margin: 0 0 1.5rem 0;
     opacity: 0.85;
+    will-change: transform, opacity;
 }
-
-/* Explore Button — pill shape, dark bg with arrow */
-
 
 /* --- Image Column --- */
 .fb-img-col {
-    flex: 0 0 50%;
+    flex: 0 0 52%;
     box-sizing: border-box;
     position: relative;
-    /* overflow: hidden; Removed to allow video card overlap */
 }
 
 .fb-img-wrapper {
@@ -1992,22 +2041,20 @@ header.scrolled .header-logo-img {
     overflow: hidden;
     position: relative;
     clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-}
-
-.fb-img-wrapper.is-revealed {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    will-change: clip-path;
 }
 
 .fb-img-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     filter: contrast(1.05) brightness(0.92) saturate(1.05);
+    will-change: transform;
 }
 
-.fb-item:hover .fb-img-wrapper img {
+.fb-item.fb-item-active:hover .fb-img-wrapper img {
     transform: scale(1.03);
+    transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* --- Video Widget (Overlapping Card) --- */
@@ -2015,15 +2062,16 @@ header.scrolled .header-logo-img {
     position: absolute;
     bottom: 8%;
     left: 5%;
-    width: 280px;
+    width: 260px;
     aspect-ratio: 16/10;
     z-index: 20;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     background: var(--black);
-    /* For Reveal Animation */
     opacity: 0;
+    transform: translateY(40px) scale(0.92);
+    will-change: transform, opacity;
 }
 
 .fb-video-card video {
@@ -2037,13 +2085,13 @@ header.scrolled .header-logo-img {
     transform: scale(1.05);
 }
 
-/* --- Reveal Animation Helpers (for scroll) --- */
+/* --- Reveal Animation Helpers --- */
 .fb-reveal {
     overflow: hidden;
 }
 
 .fb-reveal:last-child {
-    overflow: visible; /* Allow the button row to be fully visible */
+    overflow: visible;
 }
 
 .fb-reveal > * {
@@ -2051,26 +2099,25 @@ header.scrolled .header-logo-img {
     opacity: 0;
 }
 
-.fb-reveal.is-revealed > * {
-    transform: translateY(0);
-    opacity: 1;
-}
+/* --- Mobile / Tablet Responsive --- */
 
-/* --- Mobile Responsive --- */
+/* Tablet landscape and below */
 @media (max-width: 1024px) {
     .section-featured-blogs {
         height: 100svh;
     }
 
+    .featured-blogs-wrapper {
+        height: 100svh;
+    }
+
     .fb-item {
         flex-direction: column;
-        width: 100vw;
-        height: 100svh;
     }
 
     .fb-text-col {
         flex: none;
-        padding: 5rem 5% 1.5rem;
+        padding: 5rem 6% 1.5rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -2095,11 +2142,17 @@ header.scrolled .header-logo-img {
         font-size: 0.85rem;
     }
 
+    .fb-slide-counter {
+        left: 6%;
+        bottom: 1.5rem;
+    }
+
     .fb-progress-container {
-        display: none;
+        right: 1.5rem;
     }
 }
 
+/* Mobile portrait */
 @media (max-width: 768px) {
     .fb-text-col {
         padding: 4.5rem 5% 1.5rem;
@@ -2127,6 +2180,52 @@ header.scrolled .header-logo-img {
 
     .fb-line-divider {
         margin-bottom: 1rem;
+    }
+
+    .fb-slide-counter {
+        left: 5%;
+        bottom: 1.2rem;
+        gap: 0.5rem;
+    }
+
+    .fb-counter-current {
+        font-size: 1.4rem;
+    }
+
+    .fb-counter-divider {
+        width: 25px;
+    }
+
+    .fb-counter-total {
+        font-size: 0.75rem;
+    }
+
+    .fb-progress-container {
+        right: 1rem;
+    }
+
+    .fb-progress-bar-track {
+        height: 40px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .fb-text-col {
+        padding: 4rem 5% 1rem;
+    }
+
+    .fb-heading {
+        font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+
+    .fb-desc {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 2;
+    }
+
+    .fb-slide-counter {
+        bottom: 1rem;
     }
 }
 

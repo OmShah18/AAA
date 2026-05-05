@@ -256,28 +256,36 @@
 
 
 
-            <!-- SECTION 5.6: FEATURED BLOGS (Charles Leclerc Style) -->
+            <!-- SECTION 5.6: FEATURED BLOGS (Vertical Scroll) -->
             <section class="panel section-featured-blogs" id="featured-blogs">
                 <!-- Pinned Left Title -->
                 <div class="fb-pinned-title desktop-only">
                     <span class="fb-title-text">FEATURED BLOGS</span>
                 </div>
-                
-                <div class="scroll-progress-container fb-progress-container">
-                    <div class="scroll-progress-dots fb-progress-dots">
+
+                <!-- Slide Counter -->
+                <div class="fb-slide-counter">
+                    <span class="fb-counter-current">01</span>
+                    <span class="fb-counter-divider"></span>
+                    <span class="fb-counter-total">03</span>
+                </div>
+
+                <!-- Progress Indicator (right side, vertical) -->
+                <div class="fb-progress-container">
+                    <div class="fb-progress-dots">
                         <span class="progress-dot active" data-index="0"></span>
                         <span class="progress-dot" data-index="1"></span>
                         <span class="progress-dot" data-index="2"></span>
                     </div>
-                    <div class="scroll-progress-bar-track">
-                        <div class="scroll-progress-bar fb-progress-bar"></div>
+                    <div class="fb-progress-bar-track">
+                        <div class="fb-progress-bar"></div>
                     </div>
                 </div>
 
                 <div class="featured-blogs-wrapper">
 
                     <!-- Blog Item 1 -->
-                    <div class="fb-item hover-target">
+                    <div class="fb-item fb-item-active hover-target" data-index="0">
                         <div class="fb-text-col">
                             <div class="fb-line-divider fb-reveal-line"></div>
                             <div class="fb-category fb-reveal">
@@ -313,7 +321,7 @@
                     </div>
 
                     <!-- Blog Item 2 -->
-                    <div class="fb-item hover-target">
+                    <div class="fb-item hover-target" data-index="1">
                         <div class="fb-text-col">
                             <div class="fb-line-divider fb-reveal-line"></div>
                             <div class="fb-category fb-reveal">
@@ -348,7 +356,7 @@
                     </div>
 
                     <!-- Blog Item 3 -->
-                    <div class="fb-item hover-target">
+                    <div class="fb-item hover-target" data-index="2">
                         <div class="fb-text-col">
                             <div class="fb-line-divider fb-reveal-line"></div>
                             <div class="fb-category fb-reveal">

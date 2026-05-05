@@ -289,97 +289,316 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ===== FEATURED BLOGS — REFINED SLIDE-BY-SLIDE SCROLL =====
+    // ===== FEATURED BLOGS — CINEMATIC VERTICAL SCROLL =====
     const fbWrapper = document.querySelector('.featured-blogs-wrapper');
     const fbItems = gsap.utils.toArray('.fb-item');
     const fbProgressBar = document.querySelector('.fb-progress-bar');
     const fbProgressDots = document.querySelectorAll('.fb-progress-dots .progress-dot');
+    const fbCounterCurrent = document.querySelector('.fb-counter-current');
+    const fbCounterDivider = document.querySelector('.fb-counter-divider');
 
     if (fbWrapper && fbItems.length) {
         let fbCurrentIndex = 0;
         let fbAnimating = false;
         const fbTotal = fbItems.length;
         let fbSectionPinned = false;
-        const fbRevealed = new Set();
 
-        // ── Progress indicators ──
+        // Cinematic easing curves
+        const EASE_REVEAL = "power4.out";
+        const EASE_HIDE = "power3.in";
+        const EASE_IMAGE = "expo.inOut";
+        const EASE_SPRING = "back.out(1.2)";
+
+        // ── Progress & Counter updates ──
         function fbUpdateProgress(index) {
-            const progress = index / (fbTotal - 1);
-            if (fbProgressBar) gsap.to(fbProgressBar, { width: (progress * 100) + "%", duration: 0.8, ease: "power2.out" });
-            if (fbProgressDots.length) {
-                fbProgressDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            const progress = (index + 1) / fbTotal;
+
+            // Vertical progress bar
+            if (fbProgressBar) {
+                gsap.to(fbProgressBar, { height: (progress * 100) + "%", duration: 1.2, ease: "power3.out" });
             }
-        }
 
-        // ── Reveal animation (plays once per panel) ──
-        function fbRevealPanel(item, index) {
-            if (fbRevealed.has(index)) return;
-            fbRevealed.add(index);
-
-            const tl = gsap.timeline();
-            const line = item.querySelector('.fb-line-divider');
-            const reveals = item.querySelectorAll('.fb-reveal');
-            const imgWrapper = item.querySelector('.fb-img-wrapper');
-            const videoCard = item.querySelector('.fb-video-card');
-
-            if (line) tl.to(line, { width: "100%", duration: 1.2, ease: "expo.out" }, 0);
-
-            if (reveals.length) {
-                reveals.forEach((el, idx) => {
-                    const children = el.querySelectorAll(':scope > *');
-                    if (children.length) {
-                        tl.to(children, {
-                            y: "0%", opacity: 1,
-                            duration: 1.4, stagger: 0.08, ease: "expo.out"
-                        }, 0.15 + idx * 0.1);
-                    }
+            // Dots — animated scale with trail
+            if (fbProgressDots.length) {
+                fbProgressDots.forEach((dot, i) => {
+                    const isActive = i === index;
+                    const isPast = i < index;
+                    gsap.to(dot, {
+                        scale: isActive ? 1.6 : 1,
+                        backgroundColor: isActive ? "#ffca27" : isPast ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.15)",
+                        boxShadow: isActive ? "0 0 14px rgba(255,202,39,0.5)" : "none",
+                        duration: 0.6,
+                        ease: EASE_SPRING,
+                        delay: isActive ? 0 : 0.05
+                    });
+                    dot.classList.toggle('active', isActive);
                 });
             }
 
-            if (imgWrapper) {
-                tl.fromTo(imgWrapper,
-                    { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
-                    { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", duration: 1.8, ease: "expo.inOut" },
+            // Counter — cinematic number flip
+            if (fbCounterCurrent) {
+                const counterTl = gsap.timeline();
+                counterTl.to(fbCounterCurrent, {
+                    y: -20, opacity: 0, scale: 0.8,
+                    duration: 0.3, ease: "power3.in"
+                })
+                .call(() => {
+                    fbCounterCurrent.textContent = String(index + 1).padStart(2, '0');
+                })
+                .fromTo(fbCounterCurrent,
+                    { y: 20, opacity: 0, scale: 0.8 },
+                    { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: EASE_SPRING }
+                );
+
+                // Pulse the divider line
+                if (fbCounterDivider) {
+                    gsap.fromTo(fbCounterDivider,
+                        { scaleX: 0 },
+                        { scaleX: 1, duration: 0.8, ease: "expo.out", delay: 0.2 }
+                    );
+                }
+            }
+        }
+
+        // ── Cinematic reveal animation ──
+        function fbRevealPanel(item, direction) {
+            const dir = direction || 1;
+            const tl = gsap.timeline();
+            const line = item.querySelector('.fb-line-divider');
+            const catDot = item.querySelector('.fb-cat-dot');
+            const catText = item.querySelector('.fb-cat-text');
+            const headings = item.querySelectorAll('.fb-heading');
+            const desc = item.querySelector('.fb-desc');
+            const btn = item.querySelector('.btn-primary');
+            const imgWrapper = item.querySelector('.fb-img-wrapper');
+            const imgEl = item.querySelector('.fb-img-wrapper img');
+            const videoCard = item.querySelector('.fb-video-card');
+
+            // Entry direction offsets
+            const yIn = dir > 0 ? "80%" : "-80%";
+
+            // ─── LINE DIVIDER: expanding from center ───
+            if (line) {
+                tl.fromTo(line,
+                    { scaleX: 0, transformOrigin: "left center" },
+                    { scaleX: 1, duration: 1.2, ease: "expo.out" },
+                    0
+                );
+            }
+
+            // ─── CATEGORY: dot scales in + text slides ───
+            if (catDot) {
+                tl.fromTo(catDot,
+                    { scale: 0, opacity: 0 },
+                    { scale: 1, opacity: 1, duration: 0.6, ease: EASE_SPRING },
+                    0.15
+                );
+            }
+            if (catText) {
+                tl.fromTo(catText,
+                    { y: yIn, opacity: 0 },
+                    { y: "0%", opacity: 1, duration: 0.9, ease: EASE_REVEAL },
                     0.2
                 );
             }
 
-            if (videoCard) {
-                tl.fromTo(videoCard,
-                    { y: 100, opacity: 0, scale: 0.9 },
-                    { y: 0, opacity: 1, scale: 1, duration: 1.6, ease: "expo.out" },
-                    0.5
+            // ─── HEADINGS: cinematic stagger with slight scale ───
+            if (headings.length) {
+                headings.forEach((heading, idx) => {
+                    tl.fromTo(heading,
+                        { y: yIn, opacity: 0, skewY: dir > 0 ? 3 : -3 },
+                        { y: "0%", opacity: 1, skewY: 0, duration: 1.3, ease: EASE_REVEAL },
+                        0.2 + idx * 0.1
+                    );
+                });
+            }
+
+            // ─── DESCRIPTION: smooth fade-slide ───
+            if (desc) {
+                tl.fromTo(desc,
+                    { y: dir > 0 ? 40 : -40, opacity: 0 },
+                    { y: 0, opacity: 0.85, duration: 1.1, ease: EASE_REVEAL },
+                    0.45
                 );
             }
+
+            // ─── BUTTON: springs in with overshoot ───
+            if (btn) {
+                tl.fromTo(btn,
+                    { y: dir > 0 ? 30 : -30, opacity: 0, scale: 0.92 },
+                    { y: 0, opacity: 1, scale: 1, duration: 1, ease: EASE_SPRING },
+                    0.55
+                );
+            }
+
+            // ─── IMAGE: sliding curtain reveal + Ken Burns zoom ───
+            if (imgWrapper) {
+                const clipFrom = dir > 0
+                    ? "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)"   // reveal from bottom
+                    : "polygon(0 0, 100% 0, 100% 0, 0 0)";              // reveal from top
+                const clipTo = "polygon(0 0, 100% 0, 100% 100%, 0 100%)";
+
+                tl.fromTo(imgWrapper,
+                    { clipPath: clipFrom },
+                    { clipPath: clipTo, duration: 1.6, ease: EASE_IMAGE },
+                    0.05
+                );
+
+                // Ken Burns: image starts zoomed in + shifted, settles to neutral
+                if (imgEl) {
+                    tl.fromTo(imgEl,
+                        { scale: 1.2, y: dir > 0 ? "8%" : "-8%" },
+                        { scale: 1, y: "0%", duration: 2.2, ease: "power2.out" },
+                        0.05
+                    );
+                }
+            }
+
+            // ─── VIDEO CARD: delayed spring entrance ───
+            if (videoCard && window.innerWidth > 1024) {
+                tl.fromTo(videoCard,
+                    { y: 80, opacity: 0, scale: 0.85, rotation: dir > 0 ? 3 : -3 },
+                    { y: 0, opacity: 1, scale: 1, rotation: 0, duration: 1.6, ease: EASE_SPRING },
+                    0.7
+                );
+            }
+
+            return tl;
         }
 
-        // ── Slide navigation ──
-        function fbGoToSlide(index) {
-            if (fbAnimating || index === fbCurrentIndex || index < 0 || index >= fbTotal) return;
+        // ── Cinematic hide animation ──
+        function fbHidePanel(item, direction) {
+            const tl = gsap.timeline();
+            const line = item.querySelector('.fb-line-divider');
+            const catDot = item.querySelector('.fb-cat-dot');
+            const catText = item.querySelector('.fb-cat-text');
+            const headings = item.querySelectorAll('.fb-heading');
+            const desc = item.querySelector('.fb-desc');
+            const btn = item.querySelector('.btn-primary');
+            const imgWrapper = item.querySelector('.fb-img-wrapper');
+            const imgEl = item.querySelector('.fb-img-wrapper img');
+            const videoCard = item.querySelector('.fb-video-card');
+
+            // Exit direction
+            const yOut = direction > 0 ? "-50%" : "50%";
+            const clipOut = direction > 0
+                ? "polygon(0 0, 100% 0, 100% 0, 0 0)"       // wipe upward
+                : "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)"; // wipe downward
+
+            // ─── VIDEO CARD: exits first (fastest) ───
+            if (videoCard && window.innerWidth > 1024) {
+                tl.to(videoCard, {
+                    y: direction > 0 ? -50 : 50, opacity: 0,
+                    scale: 0.85, rotation: direction > 0 ? -2 : 2,
+                    duration: 0.5, ease: EASE_HIDE
+                }, 0);
+            }
+
+            // ─── BUTTON: fades quickly ───
+            if (btn) {
+                tl.to(btn, {
+                    y: direction > 0 ? -20 : 20, opacity: 0, scale: 0.9,
+                    duration: 0.35, ease: EASE_HIDE
+                }, 0);
+            }
+
+            // ─── DESCRIPTION: slides out ───
+            if (desc) {
+                tl.to(desc, {
+                    y: direction > 0 ? -30 : 30, opacity: 0,
+                    duration: 0.4, ease: EASE_HIDE
+                }, 0.03);
+            }
+
+            // ─── HEADINGS: staggered cascade out with skew ───
+            if (headings.length) {
+                const headArr = gsap.utils.toArray(headings);
+                // Reverse order for exit (bottom heading goes first when scrolling down)
+                const orderedHeads = direction > 0 ? [...headArr].reverse() : headArr;
+                orderedHeads.forEach((heading, idx) => {
+                    tl.to(heading, {
+                        y: yOut, opacity: 0, skewY: direction > 0 ? -2 : 2,
+                        duration: 0.5, ease: EASE_HIDE
+                    }, 0.05 + idx * 0.04);
+                });
+            }
+
+            // ─── CATEGORY: dot + text ───
+            if (catText) {
+                tl.to(catText, { y: yOut, opacity: 0, duration: 0.35, ease: EASE_HIDE }, 0.08);
+            }
+            if (catDot) {
+                tl.to(catDot, { scale: 0, opacity: 0, duration: 0.3, ease: EASE_HIDE }, 0.1);
+            }
+
+            // ─── LINE: shrinks to center ───
+            if (line) {
+                tl.to(line, {
+                    scaleX: 0, transformOrigin: "center center",
+                    duration: 0.5, ease: EASE_HIDE
+                }, 0);
+            }
+
+            // ─── IMAGE: curtain close + parallax drift ───
+            if (imgWrapper) {
+                tl.to(imgWrapper, {
+                    clipPath: clipOut,
+                    duration: 0.7, ease: "power2.inOut"
+                }, 0.05);
+
+                if (imgEl) {
+                    tl.to(imgEl, {
+                        scale: 1.08, y: direction > 0 ? "-6%" : "6%",
+                        duration: 0.7, ease: "power2.in"
+                    }, 0.05);
+                }
+            }
+
+            return tl;
+        }
+
+        // ── Master slide transition ──
+        function fbGoToSlide(newIndex, direction) {
+            if (fbAnimating || newIndex === fbCurrentIndex || newIndex < 0 || newIndex >= fbTotal) return;
             fbAnimating = true;
 
-            gsap.to(fbWrapper, {
-                x: -(index * window.innerWidth),
-                duration: 1.2,
-                ease: "cubic-bezier(0.76, 0, 0.24, 1)",
+            const outItem = fbItems[fbCurrentIndex];
+            const inItem = fbItems[newIndex];
+
+            // Master timeline with overlapping phases
+            const masterTl = gsap.timeline({
                 onComplete: () => {
-                    fbCurrentIndex = index;
+                    fbCurrentIndex = newIndex;
                     fbAnimating = false;
-                    fbRevealPanel(fbItems[index], index);
                 }
             });
 
-            fbUpdateProgress(index);
+            // Phase 1: Hide outgoing panel
+            const hideTl = fbHidePanel(outItem, direction);
+            masterTl.add(hideTl, 0);
+
+            // Swap visibility at the crossover point
+            masterTl.call(() => {
+                outItem.classList.remove('fb-item-active');
+                inItem.classList.add('fb-item-active');
+            }, null, 0.4);
+
+            // Phase 2: Reveal incoming — starts overlapping with hide phase
+            const revealTl = fbRevealPanel(inItem, direction);
+            masterTl.add(revealTl, 0.45);
+
+            fbUpdateProgress(newIndex);
         }
 
-        // ── Initial setup ──
+        // ── Initial setup: reveal first panel ──
         fbUpdateProgress(0);
 
+        // First panel cinematic entrance when scrolled into view
         ScrollTrigger.create({
             trigger: ".section-featured-blogs",
             start: "top 75%",
             once: true,
-            onEnter: () => fbRevealPanel(fbItems[0], 0)
+            onEnter: () => fbRevealPanel(fbItems[0], 1)
         });
 
         // ── Pin section & pause Lenis while pinned ──
@@ -397,7 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // ── Wheel handler with accumulated delta ──
-        const FB_WHEEL_THRESHOLD = 60;  // px of accumulated delta before triggering
+        const FB_WHEEL_THRESHOLD = 60;
         let fbAccumulatedDelta = 0;
         let fbDeltaResetTimer = null;
 
@@ -424,19 +643,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (fbAnimating) return;
 
-            // Accumulate wheel delta for smooth threshold
+            // Accumulate wheel delta
             fbAccumulatedDelta += e.deltaY;
 
-            // Reset accumulated delta if user stops scrolling briefly
+            // Reset if user stops scrolling
             clearTimeout(fbDeltaResetTimer);
             fbDeltaResetTimer = setTimeout(() => { fbAccumulatedDelta = 0; }, 200);
 
             // Trigger slide change when threshold is crossed
             if (Math.abs(fbAccumulatedDelta) >= FB_WHEEL_THRESHOLD) {
                 if (fbAccumulatedDelta > 0) {
-                    fbGoToSlide(fbCurrentIndex + 1);
+                    fbGoToSlide(fbCurrentIndex + 1, 1);
                 } else {
-                    fbGoToSlide(fbCurrentIndex - 1);
+                    fbGoToSlide(fbCurrentIndex - 1, -1);
                 }
                 fbAccumulatedDelta = 0;
             }
@@ -455,7 +674,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const deltaY = fbTouchStartY - e.changedTouches[0].clientY;
             if (Math.abs(deltaY) < 50) return;
 
-            // At edges, release to normal page scroll
+            // At edges, release
             if (deltaY > 0 && fbCurrentIndex === fbTotal - 1) {
                 lenis.start();
                 fbSectionPinned = false;
@@ -468,11 +687,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (deltaY > 0 && fbCurrentIndex < fbTotal - 1) {
-                fbGoToSlide(fbCurrentIndex + 1);
+                fbGoToSlide(fbCurrentIndex + 1, 1);
             } else if (deltaY < 0 && fbCurrentIndex > 0) {
-                fbGoToSlide(fbCurrentIndex - 1);
+                fbGoToSlide(fbCurrentIndex - 1, -1);
             }
         }, { passive: true });
+
+        // ── Dot click navigation ──
+        fbProgressDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                if (!fbSectionPinned || fbAnimating || i === fbCurrentIndex) return;
+                const direction = i > fbCurrentIndex ? 1 : -1;
+                fbGoToSlide(i, direction);
+            });
+        });
     }
 
     // Refresh ScrollTrigger
