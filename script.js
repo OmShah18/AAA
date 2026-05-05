@@ -108,11 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
     clipReveals.forEach(elem => {
         gsap.to(elem, {
             y: "0%",
-            duration: 1.8,
+            duration: 1.2,
             ease: "expo.out",
             scrollTrigger: {
                 trigger: elem.parentElement,
-                start: "top 90%",
+                start: "top 95%",
                 toggleActions: "play none none reverse"
             }
         });
@@ -125,11 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
             { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
             {
                 clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-                duration: 1.8,
-                ease: "expo.inOut",
+                duration: 1.2,
+                ease: "expo.out",
                 scrollTrigger: {
                     trigger: imgCont,
-                    start: "top 85%",
+                    start: "top 95%",
                     toggleActions: "play none none reverse"
                 }
             }
