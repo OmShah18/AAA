@@ -689,113 +689,191 @@ header.scrolled .header-logo-img {
     transform: translateX(6px) rotate(-45deg);
 }
 
-/* SECTION 1: ABOUT (Minimalist Redesign) */
-.about-minimal {
+/* SECTION 1: ABOUT (Premium Redesign) */
+.about-premium {
     background-color: var(--white);
-    padding: 100px 5%;
+    padding: 8rem 5%;
     position: relative;
     color: var(--black);
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.about-min-container {
-    max-width: 1300px;
+.about-premium-container {
+    max-width: 1400px;
     margin: 0 auto;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 6rem;
+    align-items: center;
 }
 
-.about-min-top {
+.about-premium-content {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 6rem;
+    flex-direction: column;
 }
 
-.about-min-left {
-    flex: 0 0 100%;
-    max-width: 800px;
+.about-premium-header {
+    margin-bottom: 3rem;
 }
 
-.about-min-left p {
+.about-premium-title {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 2rem;
+}
+
+.about-line-divider {
+    width: 60px;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.about-premium-text p {
     font-family: var(--font-body);
     font-size: 1.05rem;
     line-height: 1.8;
-    color: #333;
+    color: #444;
     margin-bottom: 1.8rem;
     font-weight: 400;
 }
 
-.about-min-left p:last-child {
-    margin-bottom: 0;
-}
-
-.about-min-left strong {
+.about-premium-text strong {
     font-weight: 600;
     color: var(--black);
+    font-size: 1.1rem;
 }
 
-.about-min-right {
-    flex: 0 0 30%;
-    display: flex;
-    flex-direction: column;
-}
-
-.about-min-info-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.about-min-info-block span {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--black);
-    margin-bottom: 0.6rem;
-}
-
-.about-min-info-block a {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: #444;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.about-min-info-block a:hover {
-    color: var(--primary);
-}
-
-.about-min-bottom {
+.about-premium-visual {
+    position: relative;
     width: 100%;
+    aspect-ratio: 4/5;
     border-radius: 4px;
     overflow: hidden;
-    background: #eee;
-    aspect-ratio: 16/7;
+    background: var(--black-light);
 }
 
-.about-min-bottom img {
+.about-slideshow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.about-slide {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    transition: transform 1s ease;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: opacity, transform;
 }
 
-.about-min-bottom:hover img {
-    transform: scale(1.03);
+.about-slide.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
 }
 
-@media (max-width: 900px) {
-    .about-min-top {
-        flex-direction: column;
+.about-slide-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.slide-btn {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.slide-btn:hover {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.slide-indicators {
+    display: flex;
+    gap: 8px;
+}
+
+.indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.indicator.active {
+    background: var(--primary);
+    transform: scale(1.3);
+}
+
+@media (max-width: 1024px) {
+    .about-premium-container {
+        grid-template-columns: 1fr 1fr;
         gap: 3rem;
-        margin-bottom: 4rem;
     }
-    .about-min-left, .about-min-right {
-        flex: 1 1 100%;
+}
+
+@media (max-width: 768px) {
+    .about-premium {
+        padding: 120px 5% 5rem 5%;
+        align-items: flex-start;
+        min-height: 100vh;
     }
-    .about-min-bottom {
-        aspect-ratio: 4/3;
+    .about-premium-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        margin: auto 0;
+    }
+    .about-premium-visual {
+        aspect-ratio: 1/1;
+        order: -1;
+    }
+    .about-premium-title {
+        text-align: center;
+        font-size: 2.2rem;
+    }
+    .about-line-divider {
+        margin: 0 auto;
+    }
+    .about-premium-content {
+        text-align: center;
+    }
+    .about-premium-text p {
+        text-align: left;
+    }
+    .about-premium-text .btn-primary {
+        margin: 0 auto;
     }
 }
 
@@ -4538,4 +4616,54 @@ header.scrolled .header-logo-img {
     .blogs-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .blogs-grid-section { padding: 50px 5%; }
     .blogs-listing-hero { height: 60vh; min-height: 400px; }
+} 
+ 
+/* Global Mobile Refinements */
+@media (max-width: 768px) {
+    /* Header Alignment Fix */
+    header {
+        padding: 0 1rem;
+    }
+    
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .header-logo-img {
+        height: 75px;
+    }
+
+    header.scrolled .header-logo-img {
+        height: 65px;
+    }
+
+    /* Appropriate Button Sizing on Phone */
+    .btn-primary {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 0.65rem !important;
+        gap: 0.5rem;
+    }
+    
+    .btn-primary svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .btn-read-more {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 0.65rem !important;
+    }
+
+    /* Make the mobile store button more compact */
+    .header-store-btn {
+        padding: 0.5rem 1rem !important;
+    }
+    
+    /* Ensure the mobile nav trigger aligns cleanly */
+    .mobile-nav-trigger .menu-btn {
+        margin-left: 0;
+    }
 }
+
