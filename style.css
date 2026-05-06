@@ -165,7 +165,7 @@ body {
     display: flex !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .mobile-only {
         display: flex !important;
     }
@@ -1999,11 +1999,11 @@ header.scrolled .header-logo-img {
 
 .fb-heading {
     font-family: var(--font-primary);
-    font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+    font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 700;
     text-transform: uppercase;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
     color: var(--black);
     margin: 0;
     will-change: transform, opacity;
@@ -2457,11 +2457,11 @@ header.scrolled .header-logo-img {
         mix-blend-mode: normal;
         background: transparent;
         height: 100px;
-        display: grid !important;
-        grid-template-columns: 1fr auto 1fr;
+        display: flex !important;
+        justify-content: space-between;
         padding: 0 5%;
         align-items: center;
-        justify-content: center;
+        /* justify-content removed */
         transition: background-color 0.4s ease, height 0.4s ease;
     }
 
@@ -2488,7 +2488,9 @@ header.scrolled .header-logo-img {
     }
 
     .logo {
-        justify-self: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: 1.5rem;
         margin: 0;
     }
@@ -2504,6 +2506,9 @@ header.scrolled .header-logo-img {
         flex-direction: row;
         align-items: center;
         gap: 0.8rem;
+        padding: 0;
+        border: none;
+        background: transparent;
     }
 
     .header-store-btn .text-anim {
