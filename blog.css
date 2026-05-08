@@ -168,7 +168,7 @@ header.scrolled .header-logo-img { height: 92px; }
 .blog-body p {
     font-family: var(--font-body); font-size: clamp(.9rem, 1.2vw, 1.05rem);
     font-weight: 300; line-height: 1.85; color: rgba(255,255,255,.82);
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.8rem; letter-spacing: 0.02em;
 }
 .blog-inline-tags { margin: 2rem 0; }
 .blog-inline-image {
