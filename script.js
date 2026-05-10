@@ -59,49 +59,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.querySelector('.menu-close-btn');
     const menuOverlay = document.querySelector('.menu-overlay');
 
-    // Infinite Vertical Marquee in Menu
-    const vStrips = document.querySelectorAll('.v-strip');
-    vStrips.forEach(strip => {
-        // Clone the content for seamless looping
-        strip.innerHTML += strip.innerHTML;
+    if (menuButtons.length > 0 && menuOverlay) {
+        // Infinite Vertical Marquee in Menu
+        const vStrips = document.querySelectorAll('.v-strip');
+        vStrips.forEach(strip => {
+            // Clone the content for seamless looping
+            strip.innerHTML += strip.innerHTML;
 
-        const parent = strip.parentElement;
-        const isUp = parent.classList.contains('v-col-up');
+            const parent = strip.parentElement;
+            const isUp = parent.classList.contains('v-col-up');
 
-        // Use a GSAP tween for the infinite loop
-        if (isUp) {
-            gsap.to(strip, { yPercent: -50, ease: "none", duration: 30, repeat: -1 });
-        } else {
-            gsap.set(strip, { yPercent: -50 }); // start from top (relative) so it can scroll down naturally
-            gsap.to(strip, { yPercent: 0, ease: "none", duration: 30, repeat: -1 });
-        }
-    });
-
-    // Create Menu Timeline
-    const tlMenu = gsap.timeline({
-        paused: true,
-        onReverseComplete: () => {
-            menuOverlay.classList.remove('menu-active');
-            lenis.start();
-        }
-    });
-
-    tlMenu.to(menuOverlay, { opacity: 1, duration: 0.5, ease: "expo.inOut" })
-        .from(".vertical-marquee-gallery", { opacity: 0, x: -50, duration: 1.2, ease: "power3.out" }, "-=0.3")
-        .fromTo(".m-link", { y: "110%" }, { y: "0%", duration: 1, stagger: 0.08, ease: "expo.out" }, "-=0.8")
-        .from(".menu-footer", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.6");
-
-    menuButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            menuOverlay.classList.add('menu-active');
-            lenis.stop(); // Prevent scrolling underneath
-            tlMenu.play();
+            // Use a GSAP tween for the infinite loop
+            if (isUp) {
+                gsap.to(strip, { yPercent: -50, ease: "none", duration: 30, repeat: -1 });
+            } else {
+                gsap.set(strip, { yPercent: -50 }); // start from top (relative) so it can scroll down naturally
+                gsap.to(strip, { yPercent: 0, ease: "none", duration: 30, repeat: -1 });
+            }
         });
-    });
 
-    closeBtn.addEventListener('click', () => {
-        tlMenu.reverse();
-    });
+        // Create Menu Timeline
+        const tlMenu = gsap.timeline({
+            paused: true,
+            onReverseComplete: () => {
+                menuOverlay.classList.remove('menu-active');
+                lenis.start();
+            }
+        });
+
+        tlMenu.to(menuOverlay, { opacity: 1, duration: 0.5, ease: "expo.inOut" })
+            .from(".vertical-marquee-gallery", { opacity: 0, x: -50, duration: 1.2, ease: "power3.out" }, "-=0.3")
+            .fromTo(".m-link", { y: "110%" }, { y: "0%", duration: 1, stagger: 0.08, ease: "expo.out" }, "-=0.8")
+            .from(".menu-footer", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.6");
+
+        menuButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                menuOverlay.classList.add('menu-active');
+                lenis.stop(); // Prevent scrolling underneath
+                tlMenu.play();
+            });
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                tlMenu.reverse();
+            });
+        }
+    }
 
     // Reveal Animations (Clip and Fade)
     const clipReveals = gsap.utils.toArray('.panel:not(.hero) .clip-reveal > *');
@@ -149,17 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Parallax on Experiences Image
-    gsap.to(".parallax-img", {
-        y: "10%",
-        ease: "none",
-        scrollTrigger: {
-            trigger: ".section-experiences",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-        }
-    });
+
 
     // Network Bg Cards Parallax (Subtle drift)
     gsap.utils.toArray(".bg-card").forEach((card, i) => {
@@ -289,84 +283,102 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ===== FEATURED BLOGS — CINEMATIC VERTICAL SCROLL =====
-    const fbWrapper = document.querySelector('.featured-blogs-wrapper');
+    // ===== FEATURED BLOGS — CINEMATIC HORIZONTAL SCROLL =====
+    const fbSection = document.querySelector('.section-featured-blogs');
+    const fbTrack = document.querySelector('.fb-horizontal-track');
     const fbItems = gsap.utils.toArray('.fb-item');
     const fbProgressBar = document.querySelector('.fb-progress-bar');
     const fbProgressDots = document.querySelectorAll('.fb-progress-dots .progress-dot');
     const fbCounterCurrent = document.querySelector('.fb-counter-current');
-    const fbCounterDivider = document.querySelector('.fb-counter-divider');
+    const fbBgText = document.querySelector('.fb-bg-text');
 
-    if (fbWrapper && fbItems.length) {
-        let fbCurrentIndex = 0;
-        let fbAnimating = false;
+
+    if (fbSection && fbTrack && fbItems.length) {
         const fbTotal = fbItems.length;
-        let fbSectionPinned = false;
 
-        // Cinematic easing curves
-        const EASE_REVEAL = "power4.out";
-        const EASE_HIDE = "power3.in";
-        const EASE_IMAGE = "expo.inOut";
+        // ── Background Text (Static Pinned) ──
+        // The fbBgText is positioned in CSS and remains perfectly fixed on the left 
+        // to align beautifully with each incoming blog panel.
+
+        // ── Cinematic Easing Curves ──
         const EASE_SPRING = "back.out(1.2)";
 
-        // ── Progress & Counter updates ──
-        function fbUpdateProgress(index) {
-            const progress = (index + 1) / fbTotal;
-
-            // Vertical progress bar
-            if (fbProgressBar) {
-                gsap.to(fbProgressBar, { height: (progress * 100) + "%", duration: 1.2, ease: "power3.out" });
-            }
-
-            // Dots — animated scale with trail
-            if (fbProgressDots.length) {
-                fbProgressDots.forEach((dot, i) => {
-                    const isActive = i === index;
-                    const isPast = i < index;
-                    gsap.to(dot, {
-                        scale: isActive ? 1.6 : 1,
-                        backgroundColor: isActive ? "#ffca27" : isPast ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.15)",
-                        boxShadow: isActive ? "0 0 14px rgba(255,202,39,0.5)" : "none",
-                        duration: 0.6,
-                        ease: EASE_SPRING,
-                        delay: isActive ? 0 : 0.05
-                    });
-                    dot.classList.toggle('active', isActive);
-                });
-            }
-
-            // Counter — cinematic number flip
-            if (fbCounterCurrent) {
-                const counterTl = gsap.timeline();
-                counterTl.to(fbCounterCurrent, {
-                    y: -20, opacity: 0, scale: 0.8,
-                    duration: 0.3, ease: "power3.in"
-                })
-                .call(() => {
-                    fbCounterCurrent.textContent = String(index + 1).padStart(2, '0');
-                })
-                .fromTo(fbCounterCurrent,
-                    { y: 20, opacity: 0, scale: 0.8 },
-                    { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: EASE_SPRING }
-                );
-
-                // Pulse the divider line
-                if (fbCounterDivider) {
-                    gsap.fromTo(fbCounterDivider,
-                        { scaleX: 0 },
-                        { scaleX: 1, duration: 0.8, ease: "expo.out", delay: 0.2 }
-                    );
-                }
-            }
+        // Calculate the total scroll distance (all panels minus one viewport)
+        function getScrollAmount() {
+            return -(fbTrack.scrollWidth - window.innerWidth);
         }
 
-        // ── Cinematic reveal animation ──
-        function fbRevealPanel(item, direction) {
-            const dir = direction || 1;
-            const tl = gsap.timeline();
+        // ── Main Horizontal Scroll Animation ──
+        const fbHorizontalTween = gsap.to(fbTrack, {
+            x: getScrollAmount,
+            ease: "none",
+            scrollTrigger: {
+                trigger: fbSection,
+                start: "top top",
+                end: () => "+=" + (fbTrack.scrollWidth - window.innerWidth),
+                pin: true,
+                scrub: 1.2,  // Smooth, intentional feel
+                invalidateOnRefresh: true,
+                anticipatePin: 1,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    
+                    // ── Update Progress Bar (width-based, horizontal) ──
+                    if (fbProgressBar) {
+                        fbProgressBar.style.width = (progress * 100) + "%";
+                    }
+
+                    // ── Update Counter ──
+                    const currentIndex = Math.min(
+                        Math.floor(progress * fbTotal),
+                        fbTotal - 1
+                    );
+                    
+                    if (fbCounterCurrent) {
+                        const newText = String(currentIndex + 1).padStart(2, '0');
+                        if (fbCounterCurrent.textContent !== newText) {
+                            // Animate counter change
+                            gsap.to(fbCounterCurrent, {
+                                y: -12, opacity: 0, scale: 0.85,
+                                duration: 0.2, ease: "power2.in",
+                                onComplete: () => {
+                                    fbCounterCurrent.textContent = newText;
+                                    gsap.fromTo(fbCounterCurrent,
+                                        { y: 12, opacity: 0, scale: 0.85 },
+                                        { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: EASE_SPRING }
+                                    );
+                                }
+                            });
+                        }
+                    }
+
+                    // ── Update Dots ──
+                    if (fbProgressDots.length) {
+                        fbProgressDots.forEach((dot, i) => {
+                            const isActive = i === currentIndex;
+                            const isPast = i < currentIndex;
+                            dot.classList.toggle('active', isActive);
+                            gsap.to(dot, {
+                                scale: isActive ? 1.6 : 1,
+                                backgroundColor: isActive
+                                    ? "#ffca27"
+                                    : isPast
+                                        ? "rgba(0,0,0,0.35)"
+                                        : "rgba(0,0,0,0.15)",
+                                boxShadow: isActive ? "0 0 14px rgba(255,202,39,0.5)" : "none",
+                                duration: 0.4,
+                                ease: EASE_SPRING,
+                                overwrite: true
+                            });
+                        });
+                    }
+                }
+            }
+        });
+
+        // ── Per-Panel Reveal Animations (scrub-triggered as each panel enters) ──
+        fbItems.forEach((item, index) => {
             const line = item.querySelector('.fb-line-divider');
-            const catDot = item.querySelector('.fb-cat-dot');
-            const catText = item.querySelector('.fb-cat-text');
             const headings = item.querySelectorAll('.fb-heading');
             const desc = item.querySelector('.fb-desc');
             const btn = item.querySelector('.btn-primary');
@@ -374,10 +386,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const imgEl = item.querySelector('.fb-img-wrapper img');
             const videoCard = item.querySelector('.fb-video-card');
 
-            // Entry direction offsets
-            const yIn = dir > 0 ? "80%" : "-80%";
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: item,
+                    containerAnimation: fbHorizontalTween,
+                    start: "left 80%",
+                    end: "left 20%",
+                    toggleActions: "play none none reverse",
+                }
+            });
 
-            // ─── LINE DIVIDER: expanding from center ───
+            // Line divider expands from left
             if (line) {
                 tl.fromTo(line,
                     { scaleX: 0, transformOrigin: "left center" },
@@ -386,319 +405,63 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
             }
 
-            // ─── CATEGORY: dot scales in + text slides ───
-            if (catDot) {
-                tl.fromTo(catDot,
-                    { scale: 0, opacity: 0 },
-                    { scale: 1, opacity: 1, duration: 0.6, ease: EASE_SPRING },
-                    0.15
-                );
-            }
-            if (catText) {
-                tl.fromTo(catText,
-                    { y: yIn, opacity: 0 },
-                    { y: "0%", opacity: 1, duration: 0.9, ease: EASE_REVEAL },
-                    0.2
-                );
-            }
-
-            // ─── HEADINGS: cinematic stagger with slight scale ───
+            // Headings cascade in with stagger and skew
             if (headings.length) {
                 headings.forEach((heading, idx) => {
                     tl.fromTo(heading,
-                        { y: yIn, opacity: 0, skewY: dir > 0 ? 3 : -3 },
-                        { y: "0%", opacity: 1, skewY: 0, duration: 1.3, ease: EASE_REVEAL },
-                        0.2 + idx * 0.1
+                        { x: 60, opacity: 0, skewX: -3 },
+                        { x: 0, opacity: 1, skewX: 0, duration: 1.2, ease: "power4.out" },
+                        0.15 + idx * 0.08
                     );
                 });
             }
 
-            // ─── DESCRIPTION: smooth fade-slide ───
+            // Description fades in
             if (desc) {
                 tl.fromTo(desc,
-                    { y: dir > 0 ? 40 : -40, opacity: 0 },
-                    { y: 0, opacity: 0.85, duration: 1.1, ease: EASE_REVEAL },
+                    { y: 30, opacity: 0 },
+                    { y: 0, opacity: 0.85, duration: 1, ease: "power3.out" },
+                    0.35
+                );
+            }
+
+            // Button springs in
+            if (btn) {
+                tl.fromTo(btn,
+                    { y: 20, opacity: 0, scale: 0.92 },
+                    { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: EASE_SPRING },
                     0.45
                 );
             }
 
-            // ─── BUTTON: springs in with overshoot ───
-            if (btn) {
-                tl.fromTo(btn,
-                    { y: dir > 0 ? 30 : -30, opacity: 0, scale: 0.92 },
-                    { y: 0, opacity: 1, scale: 1, duration: 1, ease: EASE_SPRING },
-                    0.55
+            // Image: Ken Burns parallax — starts zoomed & shifted, settles to neutral
+            if (imgEl) {
+                tl.fromTo(imgEl,
+                    { scale: 1.15, x: "5%" },
+                    { scale: 1, x: "0%", duration: 2, ease: "power2.out" },
+                    0
                 );
             }
 
-            // ─── IMAGE: sliding curtain reveal + Ken Burns zoom ───
-            if (imgWrapper) {
-                const clipFrom = dir > 0
-                    ? "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)"   // reveal from bottom
-                    : "polygon(0 0, 100% 0, 100% 0, 0 0)";              // reveal from top
-                const clipTo = "polygon(0 0, 100% 0, 100% 100%, 0 100%)";
-
-                tl.fromTo(imgWrapper,
-                    { clipPath: clipFrom },
-                    { clipPath: clipTo, duration: 1.6, ease: EASE_IMAGE },
-                    0.05
-                );
-
-                // Ken Burns: image starts zoomed in + shifted, settles to neutral
-                if (imgEl) {
-                    tl.fromTo(imgEl,
-                        { scale: 1.2, y: dir > 0 ? "8%" : "-8%" },
-                        { scale: 1, y: "0%", duration: 2.2, ease: "power2.out" },
-                        0.05
-                    );
-                }
-            }
-
-            // ─── VIDEO CARD: delayed spring entrance ───
+            // Video card: delayed spring entrance (desktop only)
             if (videoCard && window.innerWidth > 1024) {
                 tl.fromTo(videoCard,
-                    { y: 80, opacity: 0, scale: 0.85, rotation: dir > 0 ? 3 : -3 },
-                    { y: 0, opacity: 1, scale: 1, rotation: 0, duration: 1.6, ease: EASE_SPRING },
-                    0.7
+                    { y: 60, opacity: 0, scale: 0.85, rotation: 3 },
+                    { y: 0, opacity: 1, scale: 1, rotation: 0, duration: 1.4, ease: EASE_SPRING },
+                    0.6
                 );
             }
-
-            return tl;
-        }
-
-        // ── Cinematic hide animation ──
-        function fbHidePanel(item, direction) {
-            const tl = gsap.timeline();
-            const line = item.querySelector('.fb-line-divider');
-            const catDot = item.querySelector('.fb-cat-dot');
-            const catText = item.querySelector('.fb-cat-text');
-            const headings = item.querySelectorAll('.fb-heading');
-            const desc = item.querySelector('.fb-desc');
-            const btn = item.querySelector('.btn-primary');
-            const imgWrapper = item.querySelector('.fb-img-wrapper');
-            const imgEl = item.querySelector('.fb-img-wrapper img');
-            const videoCard = item.querySelector('.fb-video-card');
-
-            // Exit direction
-            const yOut = direction > 0 ? "-50%" : "50%";
-            const clipOut = direction > 0
-                ? "polygon(0 0, 100% 0, 100% 0, 0 0)"       // wipe upward
-                : "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)"; // wipe downward
-
-            // ─── VIDEO CARD: exits first (fastest) ───
-            if (videoCard && window.innerWidth > 1024) {
-                tl.to(videoCard, {
-                    y: direction > 0 ? -50 : 50, opacity: 0,
-                    scale: 0.85, rotation: direction > 0 ? -2 : 2,
-                    duration: 0.5, ease: EASE_HIDE
-                }, 0);
-            }
-
-            // ─── BUTTON: fades quickly ───
-            if (btn) {
-                tl.to(btn, {
-                    y: direction > 0 ? -20 : 20, opacity: 0, scale: 0.9,
-                    duration: 0.35, ease: EASE_HIDE
-                }, 0);
-            }
-
-            // ─── DESCRIPTION: slides out ───
-            if (desc) {
-                tl.to(desc, {
-                    y: direction > 0 ? -30 : 30, opacity: 0,
-                    duration: 0.4, ease: EASE_HIDE
-                }, 0.03);
-            }
-
-            // ─── HEADINGS: staggered cascade out with skew ───
-            if (headings.length) {
-                const headArr = gsap.utils.toArray(headings);
-                // Reverse order for exit (bottom heading goes first when scrolling down)
-                const orderedHeads = direction > 0 ? [...headArr].reverse() : headArr;
-                orderedHeads.forEach((heading, idx) => {
-                    tl.to(heading, {
-                        y: yOut, opacity: 0, skewY: direction > 0 ? -2 : 2,
-                        duration: 0.5, ease: EASE_HIDE
-                    }, 0.05 + idx * 0.04);
-                });
-            }
-
-            // ─── CATEGORY: dot + text ───
-            if (catText) {
-                tl.to(catText, { y: yOut, opacity: 0, duration: 0.35, ease: EASE_HIDE }, 0.08);
-            }
-            if (catDot) {
-                tl.to(catDot, { scale: 0, opacity: 0, duration: 0.3, ease: EASE_HIDE }, 0.1);
-            }
-
-            // ─── LINE: shrinks to center ───
-            if (line) {
-                tl.to(line, {
-                    scaleX: 0, transformOrigin: "center center",
-                    duration: 0.5, ease: EASE_HIDE
-                }, 0);
-            }
-
-            // ─── IMAGE: curtain close + parallax drift ───
-            if (imgWrapper) {
-                tl.to(imgWrapper, {
-                    clipPath: clipOut,
-                    duration: 0.7, ease: "power2.inOut"
-                }, 0.05);
-
-                if (imgEl) {
-                    tl.to(imgEl, {
-                        scale: 1.08, y: direction > 0 ? "-6%" : "6%",
-                        duration: 0.7, ease: "power2.in"
-                    }, 0.05);
-                }
-            }
-
-            return tl;
-        }
-
-        // ── Master slide transition ──
-        function fbGoToSlide(newIndex, direction) {
-            if (fbAnimating || newIndex === fbCurrentIndex || newIndex < 0 || newIndex >= fbTotal) return;
-            fbAnimating = true;
-
-            const outItem = fbItems[fbCurrentIndex];
-            const inItem = fbItems[newIndex];
-
-            // Master timeline with overlapping phases
-            const masterTl = gsap.timeline({
-                onComplete: () => {
-                    fbCurrentIndex = newIndex;
-                    fbAnimating = false;
-                }
-            });
-
-            // Phase 1: Hide outgoing panel
-            const hideTl = fbHidePanel(outItem, direction);
-            masterTl.add(hideTl, 0);
-
-            // Swap visibility at the crossover point
-            masterTl.call(() => {
-                outItem.classList.remove('fb-item-active');
-                inItem.classList.add('fb-item-active');
-            }, null, 0.4);
-
-            // Phase 2: Reveal incoming — starts overlapping with hide phase
-            const revealTl = fbRevealPanel(inItem, direction);
-            masterTl.add(revealTl, 0.45);
-
-            fbUpdateProgress(newIndex);
-        }
-
-        // ── Initial setup: reveal first panel ──
-        fbUpdateProgress(0);
-
-        // First panel cinematic entrance when scrolled into view
-        ScrollTrigger.create({
-            trigger: ".section-featured-blogs",
-            start: "top 75%",
-            once: true,
-            onEnter: () => fbRevealPanel(fbItems[0], 1)
         });
 
-        // ── Pin section & pause Lenis while pinned ──
-        ScrollTrigger.create({
-            trigger: ".section-featured-blogs",
-            pin: true,
-            pinSpacing: true,
-            start: "top top",
-            end: "+=50",
-            invalidateOnRefresh: true,
-            onEnter: () => { fbSectionPinned = true; lenis.stop(); },
-            onLeave: () => { fbSectionPinned = false; lenis.start(); },
-            onEnterBack: () => { fbSectionPinned = true; lenis.stop(); },
-            onLeaveBack: () => { fbSectionPinned = false; lenis.start(); },
-        });
-
-        // ── Wheel handler with accumulated delta ──
-        const FB_WHEEL_THRESHOLD = 60;
-        let fbAccumulatedDelta = 0;
-        let fbDeltaResetTimer = null;
-
-        window.addEventListener('wheel', (e) => {
-            if (!fbSectionPinned) return;
-
-            const goingDown = e.deltaY > 0;
-            const goingUp = e.deltaY < 0;
-
-            // At edges, release to normal page scroll
-            if (goingUp && fbCurrentIndex === 0) {
-                lenis.start();
-                fbSectionPinned = false;
-                return;
-            }
-            if (goingDown && fbCurrentIndex === fbTotal - 1) {
-                lenis.start();
-                fbSectionPinned = false;
-                return;
-            }
-
-            // Hijack scroll while between slides
-            e.preventDefault();
-
-            if (fbAnimating) return;
-
-            // Accumulate wheel delta
-            fbAccumulatedDelta += e.deltaY;
-
-            // Reset if user stops scrolling
-            clearTimeout(fbDeltaResetTimer);
-            fbDeltaResetTimer = setTimeout(() => { fbAccumulatedDelta = 0; }, 200);
-
-            // Trigger slide change when threshold is crossed
-            if (Math.abs(fbAccumulatedDelta) >= FB_WHEEL_THRESHOLD) {
-                if (fbAccumulatedDelta > 0) {
-                    fbGoToSlide(fbCurrentIndex + 1, 1);
-                } else {
-                    fbGoToSlide(fbCurrentIndex - 1, -1);
-                }
-                fbAccumulatedDelta = 0;
-            }
-        }, { passive: false });
-
-        // ── Touch support ──
-        let fbTouchStartY = 0;
-        const fbSection = document.querySelector('.section-featured-blogs');
-
-        fbSection.addEventListener('touchstart', (e) => {
-            fbTouchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        fbSection.addEventListener('touchend', (e) => {
-            if (!fbSectionPinned || fbAnimating) return;
-            const deltaY = fbTouchStartY - e.changedTouches[0].clientY;
-            if (Math.abs(deltaY) < 50) return;
-
-            // At edges, release
-            if (deltaY > 0 && fbCurrentIndex === fbTotal - 1) {
-                lenis.start();
-                fbSectionPinned = false;
-                return;
-            }
-            if (deltaY < 0 && fbCurrentIndex === 0) {
-                lenis.start();
-                fbSectionPinned = false;
-                return;
-            }
-
-            if (deltaY > 0 && fbCurrentIndex < fbTotal - 1) {
-                fbGoToSlide(fbCurrentIndex + 1, 1);
-            } else if (deltaY < 0 && fbCurrentIndex > 0) {
-                fbGoToSlide(fbCurrentIndex - 1, -1);
-            }
-        }, { passive: true });
 
         // ── Dot click navigation ──
         fbProgressDots.forEach((dot, i) => {
             dot.addEventListener('click', () => {
-                if (!fbSectionPinned || fbAnimating || i === fbCurrentIndex) return;
-                const direction = i > fbCurrentIndex ? 1 : -1;
-                fbGoToSlide(i, direction);
+                // Calculate target scroll position for this dot
+                const st = fbHorizontalTween.scrollTrigger;
+                const targetProgress = i / (fbTotal - 1);
+                const scrollTo = st.start + (st.end - st.start) * targetProgress;
+                lenis.scrollTo(scrollTo, { duration: 1.8 });
             });
         });
     }
@@ -890,6 +653,67 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ===== BLOG GALLERY LIGHTBOX =====
+    const blogGalleryItems = document.querySelectorAll('.blog-gallery-item');
+    const blogLb = document.getElementById('galleryLightbox');
+    const blogLbImg = document.getElementById('galleryLbImg');
+    const blogLbCounter = document.getElementById('galleryLbCounter');
+    
+    if (blogGalleryItems.length && blogLb) {
+        const imgs = Array.from(blogGalleryItems).map(i => i.querySelector('img').src.replace('w=600', 'w=1600'));
+        let cur = 0;
+        
+        const showImg = (idx) => { 
+            cur = (idx + imgs.length) % imgs.length; 
+            blogLbImg.src = imgs[cur]; 
+            blogLbCounter.textContent = (cur + 1) + ' / ' + imgs.length; 
+        };
+        
+        const openLb = (idx) => { 
+            showImg(idx); 
+            blogLb.classList.add('active'); 
+            lenis.stop(); // Stop Lenis scroll
+        };
+        
+        const closeLb = () => { 
+            blogLb.classList.remove('active'); 
+            lenis.start(); // Resume Lenis scroll
+        };
+        
+        blogGalleryItems.forEach(item => item.addEventListener('click', () => openLb(parseInt(item.dataset.galleryIdx))));
+        
+        const closeBtnLb = blogLb.querySelector('.gallery-lb-close');
+        if (closeBtnLb) closeBtnLb.addEventListener('click', closeLb);
+        
+        const prevBtnLb = blogLb.querySelector('.gallery-lb-prev');
+        if (prevBtnLb) prevBtnLb.addEventListener('click', () => showImg(cur - 1));
+        
+        const nextBtnLb = blogLb.querySelector('.gallery-lb-next');
+        if (nextBtnLb) nextBtnLb.addEventListener('click', () => showImg(cur + 1));
+        
+        blogLb.addEventListener('click', e => { if (e.target === blogLb) closeLb(); });
+        
+        document.addEventListener('keydown', e => { 
+            if (!blogLb.classList.contains('active')) return; 
+            if (e.key === 'Escape') closeLb(); 
+            if (e.key === 'ArrowLeft') showImg(cur - 1); 
+            if (e.key === 'ArrowRight') showImg(cur + 1); 
+        });
+    }
+
+    // ===== BLOG LISTING REVEAL =====
+    const listingCards = gsap.utils.toArray('.blogs-card');
+    if (listingCards.length) {
+        gsap.fromTo(listingCards, { y: 50, opacity: 0 }, {
+            y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'expo.out',
+            scrollTrigger: { 
+                trigger: '.blogs-grid', 
+                start: 'top 85%', 
+                toggleActions: 'play none none reverse' 
+            }
+        });
+    }
 
     // ===== ABOUT PREMIUM SLIDESHOW =====
     const aboutSlides = document.querySelectorAll('.about-slide');

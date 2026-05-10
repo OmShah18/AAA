@@ -120,28 +120,36 @@
 
     <!-- HEADER (SAME as home page) -->
     <header id="main-header" class="hover-target">
-        <div class="mobile-nav-trigger mobile-only">
+        <div class="header-left">
             <button class="menu-btn hover-target" aria-label="Menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <div class="hamburger-container">
+                    <span class="bar bar-top"></span>
+                    <span class="bar bar-bot"></span>
+                </div>
+                <span class="menu-text">
+                    <span class="text-anim" data-text="MENU"><span>MENU</span></span>
+                </span>
             </button>
         </div>
-        <div class="logo"><img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img">
+
+        <div class="header-center">
+            <div class="logo">
+                <img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img">
+            </div>
         </div>
-        <nav class="nav-menu">
-            <a href="#" class="btn-primary hover-target header-store-btn">
-                <span class="text-anim" data-text="STORE"><span>STORE</span></span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+        <div class="header-right">
+            <a href="#" class="header-store-link hover-target">
+                <span class="store-text">
+                    <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                </span>
+                <svg class="bag-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
             </a>
-            <button class="menu-btn hover-target desktop-only" aria-label="Menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </nav>
+        </div>
     </header>
 
     <!-- Smooth Scroll Wrapper for Lenis -->
@@ -512,84 +520,7 @@
         </div>
     </div>
 
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-        document.addEventListener('DOMContentLoaded', () => {
-            // Lenis Smooth Scroll
-            const lenis = new Lenis({ duration: 1.8, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), direction: 'vertical', smooth: true, mouseMultiplier: 0.8, smoothTouch: false, touchMultiplier: 2, infinite: false });
-            lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add((time) => lenis.raf(time * 1000));
-            gsap.ticker.lagSmoothing(0);
-
-            // Header: transparent → black on scroll
-            const header = document.getElementById('main-header');
-            ScrollTrigger.create({
-                start: 'top -80',
-                onUpdate: (self) => {
-                    if (self.progress > 0) header.classList.add('scrolled');
-                    else header.classList.remove('scrolled');
-                }
-            });
-
-            // Full Screen Menu
-            const menuBtns = document.querySelectorAll('.menu-btn');
-            const closeBtn = document.querySelector('.menu-close-btn');
-            const menuOverlay = document.querySelector('.menu-overlay');
-            document.querySelectorAll('.v-strip').forEach(strip => {
-                strip.innerHTML += strip.innerHTML;
-                const isUp = strip.parentElement.classList.contains('v-col-up');
-                if (isUp) gsap.to(strip, { yPercent: -50, ease: 'none', duration: 30, repeat: -1 });
-                else { gsap.set(strip, { yPercent: -50 }); gsap.to(strip, { yPercent: 0, ease: 'none', duration: 30, repeat: -1 }); }
-            });
-            const tlMenu = gsap.timeline({ paused: true, onReverseComplete: () => { menuOverlay.classList.remove('menu-active'); lenis.start(); } });
-            tlMenu.to(menuOverlay, { opacity: 1, duration: 0.5, ease: 'expo.inOut' })
-                .from('.vertical-marquee-gallery', { opacity: 0, x: -50, duration: 1.2, ease: 'power3.out' }, '-=0.3')
-                .fromTo('.m-link', { y: '110%' }, { y: '0%', duration: 1, stagger: 0.08, ease: 'expo.out' }, '-=0.8')
-                .from('.menu-footer', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, '-=0.6');
-            menuBtns.forEach(btn => btn.addEventListener('click', () => { menuOverlay.classList.add('menu-active'); lenis.stop(); tlMenu.play(); }));
-            if (closeBtn) closeBtn.addEventListener('click', () => tlMenu.reverse());
-
-            // YouTube
-            document.querySelectorAll('.yt-video-wrapper').forEach(w => {
-                const poster = w.querySelector('.yt-poster'), play = w.querySelector('.yt-play-btn'), iframe = w.querySelector('.yt-iframe-player'), id = w.dataset.ytId;
-                function launch() { iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&controls=1&rel=0&playsinline=1'; w.classList.add('is-playing'); }
-                if (poster) poster.addEventListener('click', launch);
-                if (play) play.addEventListener('click', launch);
-            });
-            document.querySelectorAll('.blog-yt-more-card').forEach(c => c.addEventListener('click', () => window.open('https://www.youtube.com/watch?v=' + c.dataset.ytId, '_blank')));
-
-            // Comment Form
-            document.getElementById('comment-form').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const btn = document.getElementById('btn-comment-submit');
-                btn.textContent = 'Comment Posted!'; btn.style.background = '#222'; btn.style.color = '#fff';
-                setTimeout(() => { btn.textContent = 'Post Comment'; btn.style.background = ''; btn.style.color = ''; this.reset(); }, 2500);
-            });
-
-            // Gallery Lightbox
-            const galleryItems = document.querySelectorAll('.blog-gallery-item');
-            const lb = document.getElementById('galleryLightbox');
-            const lbImg = document.getElementById('galleryLbImg');
-            const lbCounter = document.getElementById('galleryLbCounter');
-            const imgs = Array.from(galleryItems).map(i => i.querySelector('img').src.replace('w=600', 'w=1600'));
-            let cur = 0;
-            function showImg(idx) { cur = (idx + imgs.length) % imgs.length; lbImg.src = imgs[cur]; lbCounter.textContent = (cur + 1) + ' / ' + imgs.length; }
-            function openLb(idx) { showImg(idx); lb.classList.add('active'); document.body.style.overflow = 'hidden'; }
-            function closeLb() { lb.classList.remove('active'); document.body.style.overflow = ''; }
-            galleryItems.forEach(item => item.addEventListener('click', () => openLb(parseInt(item.dataset.galleryIdx))));
-            lb.querySelector('.gallery-lb-close').addEventListener('click', closeLb);
-            lb.querySelector('.gallery-lb-prev').addEventListener('click', () => showImg(cur - 1));
-            lb.querySelector('.gallery-lb-next').addEventListener('click', () => showImg(cur + 1));
-            lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-            document.addEventListener('keydown', e => { if (!lb.classList.contains('active')) return; if (e.key === 'Escape') closeLb(); if (e.key === 'ArrowLeft') showImg(cur - 1); if (e.key === 'ArrowRight') showImg(cur + 1); });
-
-            // Footer Brand Carousel
-            const brandTrack = document.querySelector('.footer-brand-track');
-            if (brandTrack) gsap.to(brandTrack, { xPercent: -50, ease: 'none', duration: 20, repeat: -1 });
-
-            ScrollTrigger.refresh();
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

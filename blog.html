@@ -360,6 +360,41 @@
         </div>
     </div>
 
+    <!-- HEADER (SAME as home page) -->
+    <header id="main-header" class="hover-target">
+        <div class="header-left">
+            <button class="menu-btn hover-target" aria-label="Menu">
+                <div class="hamburger-container">
+                    <span class="bar bar-top"></span>
+                    <span class="bar bar-bot"></span>
+                </div>
+                <span class="menu-text">
+                    <span class="text-anim" data-text="MENU"><span>MENU</span></span>
+                </span>
+            </button>
+        </div>
+
+        <div class="header-center">
+            <div class="logo">
+                <img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img">
+            </div>
+        </div>
+
+        <div class="header-right">
+            <a href="#" class="header-store-link hover-target">
+                <span class="store-text">
+                    <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                </span>
+                <svg class="bag-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <script src="script.js"></script>
     <script>
     gsap.registerPlugin(ScrollTrigger);
     document.addEventListener('DOMContentLoaded', () => {
@@ -440,4 +475,3 @@
     </script>
 </body>
 </html>
-

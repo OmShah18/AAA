@@ -112,8 +112,8 @@ body {
     position: fixed;
     inset: 0;
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
     z-index: 9999;
@@ -262,28 +262,92 @@ body {
     }
 }
 
-/* Header */
+/* Header - Modern Grid Layout */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
+    height: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     padding: 0 5%;
     z-index: 100;
     transition: background-color 0.4s ease, height 0.4s ease, border-color 0.4s ease;
+    mix-blend-mode: normal; /* Force normal mix-blend-mode to ensure visibility */
 }
 
 header.scrolled {
     background-color: rgba(11, 12, 10, 0.95);
     backdrop-filter: blur(20px) saturate(1.2);
     -webkit-backdrop-filter: blur(20px) saturate(1.2);
-    height: 60px;
+    height: 80px;
     border-bottom: 1px solid rgba(255, 202, 39, 0.08);
     box-shadow: 0 1px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Header Left: Menu Section */
+.header-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-btn:hover {
+    opacity: 0.7;
+}
+
+.hamburger-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 28px;
+    height: 20px;
+}
+
+.hamburger-container .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--white);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), width 0.4s ease;
+}
+
+.hamburger-container .bar-bot {
+    width: 70%;
+}
+
+.menu-btn:hover .bar-bot {
+    width: 100%;
+}
+
+.menu-text {
+    color: var(--white);
+    font-family: var(--font-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* Header Center: Logo Section */
+.header-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo {
@@ -302,60 +366,112 @@ header.scrolled .header-logo-img {
     height: 32px;
 }
 
-.nav-menu {
+/* Header Right: Store Section */
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header-store-link {
     display: flex;
     align-items: center;
     gap: 1.2rem;
-}
-
-.nav-link-btn {
-    color: var(--white);
     text-decoration: none;
+    color: var(--white);
+    transition: opacity 0.3s ease;
+}
+
+.header-store-link:hover {
+    opacity: 0.7;
+}
+
+.store-text {
+    font-family: var(--font-primary);
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.2em;
-    font-family: var(--font-editorial);
-    padding: 0;
-    transition: opacity 0.4s;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    text-transform: uppercase;
 }
 
-.nav-link-btn:hover {
-    opacity: 0.6;
-    color: var(--white);
+.bag-icon {
+    width: 22px;
+    height: 22px;
+    stroke: var(--white);
+    stroke-width: 1.5;
 }
 
-.btn-highlight {
-    color: var(--white);
-}
+/* Mobile Header Overrides */
+@media (max-width: 768px) {
+    header {
+        height: 70px;
+        padding: 0 1.5rem;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    header.scrolled {
+        height: 60px;
+    }
 
-.btn-highlight:hover {
-    opacity: 0.6;
-    color: var(--white);
-}
+    .header-left, .header-center, .header-right {
+        display: flex;
+        align-items: center;
+    }
 
-.menu-btn {
-    background: none;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 12px;
-    width: 35px;
-    margin-left: 1rem;
-}
+    .header-center {
+        justify-content: center;
+    }
 
-.menu-btn .bar {
-    width: 100%;
-    height: 2px;
-    background-color: var(--white);
-    transition: width 0.3s ease;
-}
+    .logo {
+        position: static;
+        transform: none;
+    }
 
-.menu-btn:hover .bar:nth-child(2) {
-    width: 60%;
+    .menu-btn {
+        gap: 0.6rem;
+    }
+
+    .menu-text, .store-text {
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        display: inline-block; /* Ensure text is visible on mobile */
+    }
+
+    .header-store-link {
+        gap: 0.6rem;
+    }
+
+    .header-logo-img {
+        height: 28px;
+    }
+
+    header.scrolled .header-logo-img {
+        height: 22px;
+    }
+    
+    .hamburger-container {
+        width: 22px;
+        height: 16px;
+        gap: 4px;
+    }
+    
+    .bag-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Appropriate Button Sizing on Phone */
+    .btn-primary {
+        padding: 0.7rem 1.4rem !important;
+        font-size: 0.6rem !important;
+        gap: 0.4rem;
+    }
+    
+    .btn-primary svg {
+        width: 12px;
+        height: 12px;
+    }
 }
 
 /* Common Panel Styling */
@@ -639,8 +755,7 @@ header.scrolled .header-logo-img {
 
 /* Red Button / Inverted Button Support */
 .bg-black .btn-primary,
-.footer-inner-dark .btn-primary,
-.header-store-btn {
+.footer-inner-dark .btn-primary {
     color: var(--white);
     border-color: rgba(255, 255, 255, 0.4);
     padding: 0.6rem 1.8rem;
@@ -648,24 +763,17 @@ header.scrolled .header-logo-img {
 }
 
 .bg-black .btn-primary .text-anim span,
-.footer-inner-dark .btn-primary .text-anim span,
-.header-store-btn .text-anim span {
+.footer-inner-dark .btn-primary .text-anim span {
     color: var(--white);
-}
-.header-store-btn svg {
-    width: 15px;
-    height: 15px;
 }
 
 .bg-black .btn-primary .text-anim::after,
-.footer-inner-dark .btn-primary .text-anim::after,
-.header-store-btn .text-anim::after {
+.footer-inner-dark .btn-primary .text-anim::after {
     color: var(--white);
 }
 
 .bg-black .btn-primary:hover,
-.footer-inner-dark .btn-primary:hover,
-.header-store-btn:hover {
+.footer-inner-dark .btn-primary:hover {
     border-color: var(--primary);
     box-shadow: 0 8px 30px rgba(255, 202, 39, 0.2);
 }
@@ -673,9 +781,7 @@ header.scrolled .header-logo-img {
 .bg-black .btn-primary:hover .text-anim span,
 .bg-black .btn-primary:hover .text-anim::after,
 .footer-inner-dark .btn-primary:hover .text-anim span,
-.footer-inner-dark .btn-primary:hover .text-anim::after,
-.header-store-btn:hover .text-anim span,
-.header-store-btn:hover .text-anim::after {
+.footer-inner-dark .btn-primary:hover .text-anim::after {
     color: var(--black);
 }
 
@@ -1798,7 +1904,7 @@ header.scrolled .header-logo-img {
 }
 
 /* ======================================================= */
-/* SECTION 5.6: FEATURED BLOGS (Vertical Scroll)           */
+/* SECTION 5.6: FEATURED BLOGS (Horizontal Scroll)         */
 /* ======================================================= */
 .section-featured-blogs {
     background-color: var(--white);
@@ -1806,35 +1912,45 @@ header.scrolled .header-logo-img {
     position: relative;
     overflow: hidden;
     height: 100vh;
+    /* min-height ensures the section is visible */
+    min-height: 100vh;
 }
 
-/* Pinned vertical title on the left */
-.fb-pinned-title {
+/* Vertical background text (rotated) perfectly aligned to the grid */
+.fb-bg-text {
     position: absolute;
     top: 50%;
-    left: 3%;
-    transform: translateY(-50%);
-    z-index: 20;
+    left: 60px; /* Align perfectly with the first vertical line of the 60px global grid */
+    transform: translate(-50%, -50%) rotate(-90deg);
+    font-family: var(--font-primary);
+    font-size: clamp(4rem, 8vh, 7rem); /* Sized to span the vertical height nicely */
+    font-weight: 700;
+    color: transparent; /* Hollow text */
+    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.12); /* Crisp, visible outline */
+    white-space: nowrap;
+    letter-spacing: 0.05em; /* Subtle spacing */
+    z-index: 1;
+    pointer-events: none;
+    text-transform: uppercase;
+}
+
+/* --- Fixed UI Layer (overlays the pinned section) --- */
+.fb-ui-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
     pointer-events: none;
 }
 
-.fb-title-text {
-    font-family: var(--font-primary);
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    font-weight: 700;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
-}
+
+
+
 
 /* --- Slide Counter (bottom-left) --- */
 .fb-slide-counter {
     position: absolute;
     bottom: 2.5rem;
-    left: 10%;
+    left: 5%;
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -1849,7 +1965,7 @@ header.scrolled .header-logo-img {
     font-weight: 700;
     color: var(--black);
     line-height: 1;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-block;
 }
 
 .fb-counter-divider {
@@ -1865,22 +1981,22 @@ header.scrolled .header-logo-img {
     line-height: 1;
 }
 
-/* --- Progress Indicator (right side, vertical) --- */
+/* --- Progress Indicator (bottom-center, horizontal) --- */
 .fb-progress-container {
     position: absolute;
-    right: 2.5rem;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 2.8rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.2rem;
     z-index: 20;
+    pointer-events: auto;
 }
 
 .fb-progress-dots {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.8rem;
 }
 
@@ -1900,102 +2016,71 @@ header.scrolled .header-logo-img {
 }
 
 .fb-progress-bar-track {
-    width: 2px;
-    height: 60px;
+    width: 120px;
+    height: 2px;
     background: rgba(0, 0, 0, 0.08);
     border-radius: 2px;
     overflow: hidden;
 }
 
 .fb-progress-bar {
-    width: 100%;
-    height: 0%;
+    height: 100%;
+    width: 0%;
     background: var(--primary);
     border-radius: 2px;
-    transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- Wrapper: stacked layout --- */
+/* --- Horizontal Wrapper --- */
 .featured-blogs-wrapper {
     position: relative;
     width: 100%;
     height: 100vh;
+    overflow: hidden;
 }
 
-/* --- Each Blog Item: stacked absolutely --- */
-.fb-item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+/* --- Horizontal Track (GSAP moves this via x) --- */
+.fb-horizontal-track {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
     height: 100%;
+    will-change: transform;
+}
+
+/* --- Each Blog Item: flex row, full viewport width --- */
+.fb-item {
+    width: 100vw;
+    height: 100vh;
+    flex-shrink: 0;
     box-sizing: border-box;
     display: flex;
     align-items: stretch;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.fb-item.fb-item-active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    z-index: 5;
+    position: relative;
 }
 
 /* --- Text Column --- */
 .fb-text-col {
-    flex: 0 0 48%;
+    flex: 0 0 45%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4rem 4% 4rem 10%;
+    padding: 6rem 4% 6rem clamp(120px, 8vw, 160px); /* Safely avoid the 60px vertical text */
     min-width: 0;
     position: relative;
     z-index: 2;
     overflow: visible;
 }
 
-/* Horizontal line divider — animates via scaleX */
+/* Horizontal line divider */
 .fb-line-divider {
     width: 100%;
     height: 1px;
     background: var(--black);
     margin-bottom: 1.5rem;
-    transform: scaleX(0);
     transform-origin: left center;
     will-change: transform;
-}
-
-/* Category label with dot */
-.fb-category {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    overflow: hidden;
-}
-
-.fb-cat-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--black);
-    flex-shrink: 0;
-    will-change: transform, opacity;
-}
-
-.fb-cat-text {
-    font-family: var(--font-secondary);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--black);
-    will-change: transform, opacity;
 }
 
 /* Heading group */
@@ -2005,7 +2090,7 @@ header.scrolled .header-logo-img {
 
 .fb-heading {
     font-family: var(--font-primary);
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size: clamp(2rem, 3.8vw, 3.5rem);
     font-weight: 700;
     text-transform: uppercase;
     line-height: 1.1;
@@ -2023,16 +2108,16 @@ header.scrolled .header-logo-img {
     line-height: 1.75;
     color: var(--text-dark);
     max-width: 440px;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1.8rem 0;
     opacity: 0.85;
-    will-change: transform, opacity;
 }
 
 /* --- Image Column --- */
 .fb-img-col {
-    flex: 0 0 52%;
+    flex: 0 0 55%;
     box-sizing: border-box;
     position: relative;
+    overflow: hidden;
 }
 
 .fb-img-wrapper {
@@ -2040,8 +2125,6 @@ header.scrolled .header-logo-img {
     height: 100%;
     overflow: hidden;
     position: relative;
-    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-    will-change: clip-path;
 }
 
 .fb-img-wrapper img {
@@ -2050,11 +2133,11 @@ header.scrolled .header-logo-img {
     object-fit: cover;
     filter: contrast(1.05) brightness(0.92) saturate(1.05);
     will-change: transform;
+    transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.fb-item.fb-item-active:hover .fb-img-wrapper img {
-    transform: scale(1.03);
-    transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+.fb-item:hover .fb-img-wrapper img {
+    transform: scale(1.04);
 }
 
 /* --- Video Widget (Overlapping Card) --- */
@@ -2062,15 +2145,13 @@ header.scrolled .header-logo-img {
     position: absolute;
     bottom: 8%;
     left: 5%;
-    width: 260px;
+    width: 220px;
     aspect-ratio: 16/10;
     z-index: 20;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
     background: var(--black);
-    opacity: 0;
-    transform: translateY(40px) scale(0.92);
     will-change: transform, opacity;
 }
 
@@ -2085,39 +2166,30 @@ header.scrolled .header-logo-img {
     transform: scale(1.05);
 }
 
-/* --- Reveal Animation Helpers --- */
-.fb-reveal {
-    overflow: hidden;
-}
-
-.fb-reveal:last-child {
-    overflow: visible;
-}
-
-.fb-reveal > * {
-    transform: translateY(110%);
-    opacity: 0;
-}
-
-/* --- Mobile / Tablet Responsive --- */
-
-/* Tablet landscape and below */
+/* --- Responsive: Tablet landscape and below --- */
 @media (max-width: 1024px) {
     .section-featured-blogs {
         height: 100svh;
+        min-height: 100svh;
     }
 
     .featured-blogs-wrapper {
         height: 100svh;
     }
 
+    .fb-bg-text {
+        display: none;
+    }
+
     .fb-item {
+        width: 100vw;
+        height: 100svh;
         flex-direction: column;
     }
 
     .fb-text-col {
         flex: none;
-        padding: 5rem 6% 1.5rem;
+        padding: 5.5rem 6% 1.5rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -2129,12 +2201,8 @@ header.scrolled .header-logo-img {
         min-height: 0;
     }
 
-    .fb-video-card {
-        display: none !important;
-    }
-
     .fb-heading {
-        font-size: clamp(2rem, 8vw, 3rem);
+        font-size: clamp(2rem, 7vw, 3rem);
     }
 
     .fb-desc {
@@ -2148,14 +2216,21 @@ header.scrolled .header-logo-img {
     }
 
     .fb-progress-container {
-        right: 1.5rem;
+        left: auto;
+        right: 6%;
+        transform: none;
+    }
+
+    .fb-section-label {
+        top: 1.5rem;
+        left: 6%;
     }
 }
 
 /* Mobile portrait */
 @media (max-width: 768px) {
     .fb-text-col {
-        padding: 4.5rem 5% 1.5rem;
+        padding: 5rem 5% 1.5rem;
     }
 
     .fb-heading {
@@ -2168,10 +2243,6 @@ header.scrolled .header-logo-img {
         -webkit-box-orient: vertical;
         overflow: hidden;
         margin-bottom: 1.5rem;
-    }
-
-    .fb-category {
-        margin-bottom: 0.8rem;
     }
 
     .fb-heading-group {
@@ -2200,19 +2271,19 @@ header.scrolled .header-logo-img {
         font-size: 0.75rem;
     }
 
-    .fb-progress-container {
-        right: 1rem;
+    .fb-progress-bar-track {
+        width: 80px;
     }
 
-    .fb-progress-bar-track {
-        height: 40px;
+    .fb-section-label {
+        top: 1.2rem;
     }
 }
 
 /* Small phones */
 @media (max-width: 480px) {
     .fb-text-col {
-        padding: 4rem 5% 1rem;
+        padding: 4.5rem 5% 1rem;
     }
 
     .fb-heading {
@@ -2226,6 +2297,10 @@ header.scrolled .header-logo-img {
 
     .fb-slide-counter {
         bottom: 1rem;
+    }
+
+    .fb-progress-bar-track {
+        width: 60px;
     }
 }
 
@@ -2458,23 +2533,6 @@ header.scrolled .header-logo-img {
         font-size: 0.6rem;
     }
 
-
-    header {
-        mix-blend-mode: normal;
-        background: transparent;
-        height: 100px;
-        display: flex !important;
-        justify-content: space-between;
-        padding: 0 5%;
-        align-items: center;
-        /* justify-content removed */
-        transition: background-color 0.4s ease, height 0.4s ease;
-    }
-
-    header.scrolled {
-        background-color: var(--black);
-        height: 80px;
-    }
 
     .mobile-nav-trigger {
         display: flex;
@@ -4634,54 +4692,6 @@ header.scrolled .header-logo-img {
     .blogs-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .blogs-grid-section { padding: 50px 5%; }
     .blogs-listing-hero { height: 60vh; min-height: 400px; }
-} 
- 
-/* Global Mobile Refinements */
-@media (max-width: 768px) {
-    /* Header Alignment Fix */
-    header {
-        padding: 0 1rem;
-    }
-    
-    .logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+} 
 
-    .header-logo-img {
-        height: 32px;
-    }
-
-    header.scrolled .header-logo-img {
-        height: 24px;
-    }
-
-    /* Appropriate Button Sizing on Phone */
-    .btn-primary {
-        padding: 0.75rem 1.5rem !important;
-        font-size: 0.65rem !important;
-        gap: 0.5rem;
-    }
-    
-    .btn-primary svg {
-        width: 14px;
-        height: 14px;
-    }
-
-    .btn-read-more {
-        padding: 0.75rem 1.5rem !important;
-        font-size: 0.65rem !important;
-    }
-
-    /* Make the mobile store button more compact */
-    .header-store-btn {
-        padding: 0.5rem 1rem !important;
-    }
-    
-    /* Ensure the mobile nav trigger aligns cleanly */
-    .mobile-nav-trigger .menu-btn {
-        margin-left: 0;
-    }
-}
 

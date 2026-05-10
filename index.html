@@ -129,35 +129,36 @@
     </div>
 
     <header id="main-header" class="hover-target">
-        <!-- Left side for Mobile, hidden on Desktop -->
-        <div class="mobile-nav-trigger mobile-only">
+        <div class="header-left">
             <button class="menu-btn hover-target" aria-label="Menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <div class="hamburger-container">
+                    <span class="bar bar-top"></span>
+                    <span class="bar bar-bot"></span>
+                </div>
+                <span class="menu-text">
+                    <span class="text-anim" data-text="MENU"><span>MENU</span></span>
+                </span>
             </button>
         </div>
 
-        <div class="logo"><img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img">
+        <div class="header-center">
+            <div class="logo">
+                <img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img">
+            </div>
         </div>
 
-        <nav class="nav-menu">
-
-            <!-- Visible on Both -->
-            <a href="#" class="btn-primary hover-target header-store-btn">
-                <span class="text-anim" data-text="STORE"><span>STORE</span></span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="header-right">
+            <a href="#" class="header-store-link hover-target">
+                <span class="store-text">
+                    <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                </span>
+                <svg class="bag-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
             </a>
-
-            <!-- Desktop Only: Menu Toggle -->
-            <button class="menu-btn hover-target desktop-only" aria-label="Menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </nav>
+        </div>
     </header>
 
     <!-- Smooth Scroll Wrapper for Lenis -->
@@ -238,52 +239,45 @@
 
 
 
-            <!-- SECTION 5.6: FEATURED BLOGS (Vertical Scroll) -->
-            <section class="panel section-featured-blogs" id="featured-blogs">
-                <!-- Pinned Left Title -->
-                <div class="fb-pinned-title desktop-only">
-                    <span class="fb-title-text">FEATURED BLOGS</span>
-                </div>
-
-                <!-- Slide Counter -->
-                <div class="fb-slide-counter">
-                    <span class="fb-counter-current">01</span>
-                    <span class="fb-counter-divider"></span>
-                    <span class="fb-counter-total">03</span>
-                </div>
-
-                <!-- Progress Indicator (right side, vertical) -->
-                <div class="fb-progress-container">
-                    <div class="fb-progress-dots">
-                        <span class="progress-dot active" data-index="0"></span>
-                        <span class="progress-dot" data-index="1"></span>
-                        <span class="progress-dot" data-index="2"></span>
+            <!-- SECTION 3: FEATURED BLOGS (Cinematic Horizontal Scroll) -->
+            <section class="panel section-featured-blogs">
+                <div class="fb-bg-text">FEATURED BLOGS</div>
+                <!-- Fixed UI Layer (Overlays the pinned section) -->
+                <div class="fb-ui-layer">
+                    <!-- Slide Counter (bottom-left) -->
+                    <div class="fb-slide-counter">
+                        <span class="fb-counter-current">01</span>
+                        <span class="fb-counter-divider"></span>
+                        <span class="fb-counter-total">03</span>
                     </div>
-                    <div class="fb-progress-bar-track">
-                        <div class="fb-progress-bar"></div>
+
+                    <!-- Horizontal Progress Bar (bottom) -->
+                    <div class="fb-progress-container">
+                        <div class="fb-progress-dots">
+                            <span class="progress-dot active" data-index="0"></span>
+                            <span class="progress-dot" data-index="1"></span>
+                            <span class="progress-dot" data-index="2"></span>
+                        </div>
+                        <div class="fb-progress-bar-track">
+                            <div class="fb-progress-bar"></div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Horizontal Track (moves left on scroll) -->
                 <div class="featured-blogs-wrapper">
+                    <div class="fb-horizontal-track">
 
-                    <!-- Blog Item 1 -->
-                    <div class="fb-item fb-item-active hover-target" data-index="0">
-                        <div class="fb-text-col">
-                            <div class="fb-line-divider fb-reveal-line"></div>
-
-                            <div class="fb-heading-group">
-                                <div class="fb-reveal">
+                        <!-- Blog Item 1 -->
+                        <div class="fb-item hover-target" data-index="0">
+                            <div class="fb-text-col">
+                                <div class="fb-line-divider"></div>
+                                <div class="fb-heading-group">
                                     <h3 class="fb-heading">THE 1925 ROLLS-ROYCE</h3>
-                                </div>
-                                <div class="fb-reveal">
                                     <h3 class="fb-heading">ROAD ODYSSEY</h3>
                                 </div>
-                            </div>
-                            <div class="fb-reveal">
                                 <p class="fb-desc">The final showcase of celebrating a century of the Rolls-Royce
                                     Phantom. A 4,000 km expedition across India.</p>
-                            </div>
-                            <div class="fb-reveal">
                                 <a href="blog-1.html" class="btn-primary hover-target">
                                     <span class="text-anim" data-text="EXPLORE"><span>EXPLORE</span></span>
                                     <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -293,40 +287,29 @@
                                     </svg>
                                 </a>
                             </div>
-                        </div>
-                        <div class="fb-img-col">
-                            <div class="fb-img-wrapper fb-reveal-img">
-                                <img src="blog-images/RR/ISH04972-Edit.webp" alt="The 1925 Rolls-Royce Road Odyssey"
-                                    loading="lazy" class="fb-img">
-                            </div>
-
-                            <!-- Small overlay card where video plays -->
-                            <div class="fb-video-card hover-target">
-                                <video autoplay loop muted playsinline>
-                                    <source src="hero-mobile.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Blog Item 2 -->
-                    <div class="fb-item hover-target" data-index="1">
-                        <div class="fb-text-col">
-                            <div class="fb-line-divider fb-reveal-line"></div>
-
-                            <div class="fb-heading-group">
-                                <div class="fb-reveal">
-                                    <h3 class="fb-heading">AN ODE TO THE</h3>
+                            <div class="fb-img-col">
+                                <div class="fb-img-wrapper">
+                                    <img src="blog-images/RR/ISH04972-Edit.webp" alt="The 1925 Rolls-Royce Road Odyssey"
+                                        class="fb-img">
                                 </div>
-                                <div class="fb-reveal">
+                                <div class="fb-video-card hover-target desktop-only">
+                                    <video autoplay loop muted playsinline>
+                                        <source src="hero-mobile.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Item 2 -->
+                        <div class="fb-item hover-target" data-index="1">
+                            <div class="fb-text-col">
+                                <div class="fb-line-divider"></div>
+                                <div class="fb-heading-group">
+                                    <h3 class="fb-heading">AN ODE TO THE</h3>
                                     <h3 class="fb-heading">TYPE 991 PORSCHE 911</h3>
                                 </div>
-                            </div>
-                            <div class="fb-reveal">
                                 <p class="fb-desc">Exploring the soul of one of the most iconic generations of the 911,
                                     a masterclass in balance and performance.</p>
-                            </div>
-                            <div class="fb-reveal">
                                 <a href="blog-2.html" class="btn-primary hover-target">
                                     <span class="text-anim" data-text="EXPLORE"><span>EXPLORE</span></span>
                                     <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -336,39 +319,29 @@
                                     </svg>
                                 </a>
                             </div>
-                        </div>
-                        <div class="fb-img-col">
-                            <div class="fb-img-wrapper fb-reveal-img">
-                                <img src="blog-images/An ode to the Type 991 Porsche 911.jpeg"
-                                    alt="An ode to the Type 991 Porsche 911" loading="lazy" class="fb-img">
-                            </div>
-                            <!-- Small overlay card where video plays -->
-                            <div class="fb-video-card hover-target">
-                                <video autoplay loop muted playsinline>
-                                    <source src="hero.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Blog Item 3 -->
-                    <div class="fb-item hover-target" data-index="2">
-                        <div class="fb-text-col">
-                            <div class="fb-line-divider fb-reveal-line"></div>
-
-                            <div class="fb-heading-group">
-                                <div class="fb-reveal">
-                                    <h3 class="fb-heading">FIAT TO</h3>
+                            <div class="fb-img-col">
+                                <div class="fb-img-wrapper">
+                                    <img src="blog-images/An ode to the Type 991 Porsche 911.jpeg"
+                                        alt="An ode to the Type 991 Porsche 911" class="fb-img">
                                 </div>
-                                <div class="fb-reveal">
+                                <div class="fb-video-card hover-target desktop-only">
+                                    <video autoplay loop muted playsinline>
+                                        <source src="hero.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Item 3 -->
+                        <div class="fb-item hover-target" data-index="2">
+                            <div class="fb-text-col">
+                                <div class="fb-line-divider"></div>
+                                <div class="fb-heading-group">
+                                    <h3 class="fb-heading">FIAT TO</h3>
                                     <h3 class="fb-heading">FERRARI!</h3>
                                 </div>
-                            </div>
-                            <div class="fb-reveal">
                                 <p class="fb-desc">Tracing the incredible evolution of Italian automotive passion from
                                     humble beginnings to supercar supremacy.</p>
-                            </div>
-                            <div class="fb-reveal">
                                 <a href="blog-3.html" class="btn-primary hover-target">
                                     <span class="text-anim" data-text="EXPLORE"><span>EXPLORE</span></span>
                                     <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -378,21 +351,20 @@
                                     </svg>
                                 </a>
                             </div>
-                        </div>
-                        <div class="fb-img-col">
-                            <div class="fb-img-wrapper fb-reveal-img">
-                                <img src="blog-images/Fiat to Ferrari!.jpeg" alt="Fiat to Ferrari!" loading="lazy"
-                                    class="fb-img">
+                            <div class="fb-img-col">
+                                <div class="fb-img-wrapper">
+                                    <img src="blog-images/Fiat to Ferrari!.jpeg" alt="Fiat to Ferrari!"
+                                        class="fb-img">
+                                </div>
+                                <div class="fb-video-card hover-target desktop-only">
+                                    <video autoplay loop muted playsinline>
+                                        <source src="hero-mobile.mp4" type="video/mp4">
+                                    </video>
+                                </div>
                             </div>
-                            <!-- Small overlay card where video plays -->
-                            <div class="fb-video-card hover-target">
-                                <video autoplay loop muted playsinline>
-                                    <source src="hero-mobile.mp4" type="video/mp4">
-                                </video>
-                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </section>
 
