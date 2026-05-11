@@ -276,24 +276,27 @@
                         <div class="blog-youtube-more">
                             <h3 class="blog-yt-more-title">MORE FROM ARDENT</h3>
                             <div class="blog-yt-more-grid">
-                                <div class="blog-yt-more-card hover-target" data-yt-id="GjV3fEPZcdI">
+                                <a href="blog-2.html" class="blog-yt-more-card hover-target">
                                     <div class="blog-yt-more-thumb">
-                                        <img src="https://img.youtube.com/vi/GjV3fEPZcdI/mqdefault.jpg" alt="Ardent Live" loading="lazy">
-                                        <div class="blog-yt-more-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="9.5 7.5 16.5 12 9.5 16.5" /></svg></div>
+                                        <img src="blog-images/An ode to the Type 991 Porsche 911.jpeg"
+                                            alt="An ode to the Type 991 Porsche 911" loading="lazy">
                                     </div>
-                                </div>
-                                <div class="blog-yt-more-card hover-target" data-yt-id="CrFMjQScxPY">
+                                    <span class="blog-yt-more-label">An ode to the Type 991 Porsche 911</span>
+                                </a>
+                                <a href="blog-3.html" class="blog-yt-more-card hover-target">
                                     <div class="blog-yt-more-thumb">
-                                        <img src="https://img.youtube.com/vi/CrFMjQScxPY/mqdefault.jpg" alt="Ardent Live" loading="lazy">
-                                        <div class="blog-yt-more-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="9.5 7.5 16.5 12 9.5 16.5" /></svg></div>
+                                        <img src="blog-images/Fiat to Ferrari!.jpeg"
+                                            alt="Fiat to Ferrari!" loading="lazy">
                                     </div>
-                                </div>
-                                <div class="blog-yt-more-card hover-target" data-yt-id="0emw61MbVr4">
+                                    <span class="blog-yt-more-label">Fiat to Ferrari!</span>
+                                </a>
+                                <a href="blog-4.html" class="blog-yt-more-card hover-target">
                                     <div class="blog-yt-more-thumb">
-                                        <img src="https://img.youtube.com/vi/0emw61MbVr4/mqdefault.jpg" alt="Ardent Live" loading="lazy">
-                                        <div class="blog-yt-more-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="9.5 7.5 16.5 12 9.5 16.5" /></svg></div>
+                                        <img src="blog-images/Generation Gap!.jpeg"
+                                            alt="Generation Gap!" loading="lazy">
                                     </div>
-                                </div>
+                                    <span class="blog-yt-more-label">Generation Gap!</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -451,7 +454,6 @@
             if (poster) poster.addEventListener('click', launch);
             if (play) play.addEventListener('click', launch);
         });
-        document.querySelectorAll('.blog-yt-more-card').forEach(c => c.addEventListener('click', () => window.open('https://www.youtube.com/watch?v=' + c.dataset.ytId, '_blank')));
 
         // Comment Form
         document.getElementById('comment-form').addEventListener('submit', function(e) {

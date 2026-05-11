@@ -4501,10 +4501,15 @@ header.scrolled .header-logo-img {
     color: rgba(0,0,0,0.4); margin-bottom: 1.2rem; text-transform: uppercase;
 }
 .blog-yt-more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.blog-yt-more-card { cursor: pointer; border-radius: 6px; overflow: hidden; position: relative; }
-.blog-yt-more-thumb { position: relative; aspect-ratio: 16/9; background: #eee; }
+.blog-yt-more-card { cursor: pointer; border-radius: 6px; overflow: hidden; position: relative; text-decoration: none; color: var(--black); display: block; }
+.blog-yt-more-thumb { position: relative; aspect-ratio: 16/9; background: #eee; overflow: hidden; border-radius: 6px; }
 .blog-yt-more-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
 .blog-yt-more-card:hover .blog-yt-more-thumb img { transform: scale(1.06); }
+.blog-yt-more-label {
+    display: block; font-family: var(--font-primary); font-size: 0.85rem; font-weight: 400;
+    line-height: 1.35; margin-top: 0.7rem; color: var(--black); transition: color 0.3s ease;
+}
+.blog-yt-more-card:hover .blog-yt-more-label { color: var(--primary); }
 .blog-yt-more-play {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
     width: 44px; height: 44px; border-radius: 50%; background: rgba(255,202,39,0.85);
