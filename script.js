@@ -28,17 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: "expo.inOut"
         }, "-=0.3");
 
-    // Initialize Lenis for Smooth Scrolling — Premium ultra-smooth feel
+    // Initialize Lenis for Smooth Scrolling — Optimized for performance
     const lenis = new Lenis({
-        duration: 1.8,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        mouseMultiplier: 0.8,
-        smoothTouch: false,
+        lerp: 0.1, // Faster interpolation for better performance
+        wheelMultiplier: 1,
         touchMultiplier: 2,
-        infinite: false,
+        smoothWheel: true,
+        smoothTouch: false,
     });
 
     // Keep ScrollTrigger in sync with Lenis
@@ -238,50 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    // Footer Reveal Animations
-    // Heading section
-    gsap.from('.footer-heading-section', {
-        y: 40,
-        opacity: 0,
-        duration: 1.5,
-        ease: "expo.out",
-        scrollTrigger: {
-            trigger: '.main-footer',
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-        }
-    });
 
-    // Nav columns stagger
-    const footerNavItems = gsap.utils.toArray('.main-footer .f-nav-col, .main-footer .f-nav-center');
-    footerNavItems.forEach((col, i) => {
-        gsap.from(col, {
-            y: 30,
-            opacity: 0,
-            duration: 1.2,
-            delay: i * 0.12,
-            ease: "expo.out",
-            scrollTrigger: {
-                trigger: '.footer-container',
-                start: "top 85%",
-                toggleActions: "play none none reverse"
-            }
-        });
-    });
-
-    // CTA button
-    gsap.from('.footer-cta-section', {
-        y: 20,
-        opacity: 0,
-        duration: 1,
-        delay: 0.2,
-        ease: "expo.out",
-        scrollTrigger: {
-            trigger: '.footer-cta-section',
-            start: "top 95%",
-            toggleActions: "play none none reverse"
-        }
-    });
 
     // ===== FEATURED BLOGS — CINEMATIC HORIZONTAL SCROLL =====
     const fbSection = document.querySelector('.section-featured-blogs');
@@ -317,9 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: "top top",
                 end: () => "+=" + (fbTrack.scrollWidth - window.innerWidth),
                 pin: true,
-                scrub: 1.2,  // Smooth, intentional feel
+                scrub: 1, // Reduced scrub for lower latency
                 invalidateOnRefresh: true,
                 anticipatePin: 1,
+                fastScrollEnd: true,
+                preventOverlaps: true,
                 onUpdate: (self) => {
                     const progress = self.progress;
                     
@@ -760,4 +715,55 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize autoplay
         resetInterval();
     }
+
+    // ===== FOOTER ENTRANCE REVEAL =====
+    // Move to end to ensure ScrollTrigger calculates positions after all other sections (like pinned horizontal scroll)
+    if (document.querySelector('.main-footer')) {
+        // Heading section
+        gsap.from('.footer-heading-section', {
+            y: 40,
+            opacity: 0,
+            duration: 1.5,
+            ease: "expo.out",
+            scrollTrigger: {
+                trigger: '.main-footer',
+                start: "top 90%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Nav columns stagger
+        const footerNavItems = gsap.utils.toArray('.main-footer .f-nav-col, .main-footer .f-nav-center');
+        footerNavItems.forEach((col, i) => {
+            gsap.from(col, {
+                y: 30,
+                opacity: 0,
+                duration: 1.2,
+                delay: i * 0.12,
+                ease: "expo.out",
+                scrollTrigger: {
+                    trigger: '.footer-container',
+                    start: "top 92%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // CTA button
+        gsap.from('.footer-cta-section', {
+            y: 20,
+            opacity: 0,
+            duration: 1,
+            delay: 0.2,
+            ease: "expo.out",
+            scrollTrigger: {
+                trigger: '.footer-cta-section',
+                start: "top 95%",
+                toggleActions: "play none none reverse"
+            }
+        });
+    }
+
+    // Final refresh to lock in all trigger positions
+    ScrollTrigger.refresh();
 });

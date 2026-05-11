@@ -95,6 +95,18 @@ body {
     display: inline-block;
 }
 
+/* Performance Optimization */
+.fb-horizontal-track, 
+.blog-carousel-track,
+.v-strip,
+.panel,
+.clip-reveal > *,
+.clip-img-reveal {
+    will-change: transform, clip-path;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
 /* Noise Texture Overlay (for dark sections) */
 .noise-overlay {
     position: absolute;
