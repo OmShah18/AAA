@@ -2159,7 +2159,7 @@ header.scrolled .header-logo-img {
     left: 5%;
     width: 220px;
     aspect-ratio: 16/10;
-    z-index: 20;
+    z-index: 40;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
