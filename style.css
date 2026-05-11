@@ -4686,6 +4686,23 @@ header.scrolled .header-logo-img {
     .blogs-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .blogs-grid-section { padding: 50px 5%; }
     .blogs-listing-hero { height: 60vh; min-height: 400px; }
+}
+
+/* Make entire blog cards clickable */
+.fb-item, .blog-card, .blogs-card {
+    position: relative;
+}
+
+.fb-item a.btn-primary::after,
+.blog-card a.btn-primary::after,
+.blogs-card a.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
 } 
 
 
