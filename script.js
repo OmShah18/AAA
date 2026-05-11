@@ -103,6 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Logo Click Navigation
+    const logos = document.querySelectorAll('.logo');
+    logos.forEach(logo => {
+        logo.style.cursor = 'pointer';
+        logo.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    });
+
     // Reveal Animations (Clip and Fade)
     const clipReveals = gsap.utils.toArray('.panel:not(.hero) .clip-reveal > *');
     clipReveals.forEach(elem => {
