@@ -2386,7 +2386,9 @@ header.scrolled .header-logo-img {
 .blog-carousel-wrapper {
     width: 100%;
     overflow: hidden;
-    padding: 0 5%;
+    padding: 20px 5% 40px;
+    margin-top: -20px;
+    margin-bottom: -40px;
 }
 
 .blog-carousel-track {
@@ -2411,6 +2413,7 @@ header.scrolled .header-logo-img {
     text-decoration: none;
     color: var(--black);
     height: 100%;
+    padding-bottom: 15px;
 }
 
 .blog-img-wrapper {
@@ -4671,41 +4674,8 @@ header.scrolled .header-logo-img {
     color: rgba(0,0,0,0.55); line-height: 1.6; flex: 1; margin-bottom: 1.2rem;
 }
 .blogs-card-footer { padding: 0 1.5rem 1.5rem; }
-.btn-read-more {
-    display: flex; align-items: center; justify-content: center;
-    width: 100%; padding: 1.1rem 1.5rem;
-    border: 1.5px solid rgba(255,255,255,0.1); border-radius: 100px;
-    background: #000; color: #fff;
-    font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700;
-    letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
-    position: relative; overflow: hidden; cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
-    z-index: 1;
-}
-.btn-read-more::before {
-    content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
-    background: var(--primary); transform: translateY(100%);
-    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); z-index: -1;
-}
-.btn-read-more::after {
-    content: "\2192";
-    margin-left: 0;
-    opacity: 0;
-    font-size: 1.1rem;
-    line-height: 1;
-    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-    transform: translateX(-10px);
-    display: inline-block;
-}
-.btn-read-more:hover {
-    border-color: var(--primary); color: var(--black); transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(255, 202, 39, 0.25);
-}
-.btn-read-more:hover::before { transform: translateY(0); }
-.btn-read-more:hover::after {
-    margin-left: 10px;
-    opacity: 1;
-    transform: translateX(0);
+.blogs-card-footer .btn-primary {
+    width: 100%;
 }
 
 /* Blogs Listing Responsive */

@@ -773,6 +773,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Make blog cards clickable
+    const blogCardsClick = document.querySelectorAll('.blog-card');
+    blogCardsClick.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            // If the click was on the button itself, don't interfere
+            if (e.target.closest('.btn-primary')) return;
+            
+            const link = card.querySelector('.btn-primary');
+            if (link) {
+                window.location.href = link.getAttribute('href');
+            }
+        });
+    });
+
     // Final refresh to lock in all trigger positions
     ScrollTrigger.refresh();
 });
