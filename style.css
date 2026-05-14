@@ -4277,7 +4277,7 @@ header.scrolled .header-logo-img {
 
 /* Blog Hero (Full Screen) */
 .blog-hero {
-    position: relative; width: 100%; height: 100vh; display: flex;
+    position: relative; width: 100%; height: 100vh; height: 100dvh; display: flex;
     align-items: flex-end; justify-content: center; overflow: hidden;
     background: var(--black);
 }
@@ -4578,6 +4578,11 @@ header.scrolled .header-logo-img {
     .blog-gallery-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 768px) {
+    .blog-hero { height: 100dvh; }
+    .blog-hero-content { padding-bottom: 180px; }
+    .blog-hero-meta { bottom: 110px; padding: 0 6%; font-size: 0.65rem; }
+    .blog-hero-scroll { bottom: 62px; }
+
     .blog-article { padding: 110px 5% 20px; }
     .blog-title { font-size: 1.6rem; }
     .blog-hero-image { aspect-ratio: 4/3; }
