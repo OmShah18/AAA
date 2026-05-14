@@ -128,7 +128,7 @@ body {
     linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
-    z-index: 9999;
+    z-index: -1;
     transform: translateZ(0);
     mix-blend-mode: multiply;
 }
