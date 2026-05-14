@@ -133,6 +133,28 @@ body {
     mix-blend-mode: multiply;
 }
 
+/* Prevent grid checks from bleeding through images, videos and iframes */
+img,
+video,
+iframe,
+.video-container,
+.fb-img-wrapper,
+.fb-video-card,
+.blog-img-wrapper,
+.yt-video-wrapper,
+.social-card,
+.about-slideshow,
+.product-img-box,
+.v-img,
+.blogs-card-img,
+.blog-hero-image,
+.blog-inline-image,
+.cta-main-img,
+.cta-float-product,
+.cta-float-secondary {
+    isolation: isolate;
+}
+
 .accent-text {
     color: var(--primary);
     font-weight: 400;
