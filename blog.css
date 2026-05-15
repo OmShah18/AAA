@@ -27,7 +27,7 @@
 body {
     font-family: var(--font-secondary);
     color: var(--black);
-    background: var(--white);
+    background: transparent;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
@@ -39,19 +39,14 @@ body {
 /* White Checks Grid (same as home) */
 .site-global-grid {
     position: fixed; inset: 0;
+    background-color: var(--white);
     background-image:
-        linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px);
-    background-size: 60px 60px;
+        linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center center;
     pointer-events: none; z-index: -1;
-    mix-blend-mode: multiply;
-}
-
-/* Prevent grid checks from bleeding through images, videos and iframes */
-img, video, iframe,
-.yt-video-wrapper, .blog-hero-image, .blog-inline-image,
-.yt-more-thumb, .blogs-card-img {
-    isolation: isolate;
+    transform: translateZ(0);
 }
 
 .noise-overlay {

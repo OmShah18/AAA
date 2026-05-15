@@ -70,7 +70,7 @@ html.lenis, html.lenis body {
 body {
     font-family: var(--font-secondary);
     color: var(--black);
-    background-color: var(--white);
+    background-color: transparent;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -123,36 +123,15 @@ body {
 .site-global-grid {
     position: fixed;
     inset: 0;
-    background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
+    background-color: var(--white);
+    background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center center;
     pointer-events: none;
     z-index: -1;
     transform: translateZ(0);
-    mix-blend-mode: multiply;
-}
-
-/* Prevent grid checks from bleeding through images, videos and iframes */
-img,
-video,
-iframe,
-.video-container,
-.fb-img-wrapper,
-.fb-video-card,
-.blog-img-wrapper,
-.yt-video-wrapper,
-.social-card,
-.about-slideshow,
-.product-img-box,
-.v-img,
-.blogs-card-img,
-.blog-hero-image,
-.blog-inline-image,
-.cta-main-img,
-.cta-float-product,
-.cta-float-secondary {
-    isolation: isolate;
 }
 
 .accent-text {
@@ -238,7 +217,7 @@ iframe,
 }
 
 .bg-white {
-    background-color: var(--white);
+    background-color: transparent;
 }
 
 .bg-black {
@@ -840,7 +819,7 @@ header.scrolled .header-logo-img {
 
 /* SECTION 1: ABOUT (Premium Redesign) */
 .about-premium {
-    background-color: var(--white);
+    background-color: transparent;
     padding: 8rem 5%;
     position: relative;
     color: var(--black);
@@ -1030,7 +1009,7 @@ header.scrolled .header-logo-img {
 /* SECTION 2: MACHINES — Refined Editorial */
 /* ======================================= */
 .section-machines {
-    background-color: var(--white);
+    background-color: transparent;
     padding: 0;
     position: relative;
     overflow: hidden;
@@ -1364,7 +1343,7 @@ header.scrolled .header-logo-img {
 
 /* SECTION 3: EXPERIENCES */
 .section-experiences {
-    background-color: var(--white);
+    background-color: transparent;
     padding: 0;
 }
 
@@ -1421,7 +1400,7 @@ header.scrolled .header-logo-img {
 
 /* SECTION 4: NETWORK */
 .section-network {
-    background-color: var(--white);
+    background-color: transparent;
     padding: 10% 0;
     text-align: center;
     position: relative;
@@ -1507,7 +1486,7 @@ header.scrolled .header-logo-img {
 /* SECTION 4: ARDENT LIVE (Video Showcase) */
 .section-yt-videos {
     padding: 60px 5% 60px;
-    background-color: var(--white);
+    background-color: transparent;
     position: relative;
     z-index: 5;
     min-height: auto !important;
@@ -1685,7 +1664,7 @@ header.scrolled .header-logo-img {
 /* SECTION 5: SHOP CTA */
 .section-shop-cta {
     position: relative;
-    background-color: var(--white);
+    background-color: transparent;
     padding: 80px 5%;
     overflow: hidden;
     min-height: 100vh;
@@ -1944,7 +1923,7 @@ header.scrolled .header-logo-img {
 /* SECTION 5.6: FEATURED BLOGS (Horizontal Scroll)         */
 /* ======================================================= */
 .section-featured-blogs {
-    background-color: var(--white);
+    background-color: transparent;
     padding: 0;
     position: relative;
     overflow: hidden;
@@ -2344,7 +2323,7 @@ header.scrolled .header-logo-img {
 /* SECTION 6: LATEST NEWS CAROUSEL */
 .section-blog {
     padding: 50px 0 60px;
-    background-color: var(--white);
+    background-color: transparent;
     color: var(--black);
     overflow: hidden;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -2681,7 +2660,7 @@ header.scrolled .header-logo-img {
 /* SECTION 7: SOCIALS (Refined Fan Layout) */
 .section-socials {
     padding: 60px 5% 50px;
-    background-color: var(--white);
+    background-color: transparent;
     color: var(--black);
     text-align: center;
     overflow: hidden;
@@ -4148,7 +4127,7 @@ header.scrolled .header-logo-img {
 /* SECTION 5.5: PRODUCTS / NEW IN */
 .section-products {
     padding: 40px 5% 40px;
-    background-color: var(--white);
+    background-color: transparent;
     color: var(--black);
 }
 
@@ -4396,7 +4375,7 @@ header.scrolled .header-logo-img {
 
 /* Article (White with Checks) */
 .blog-article {
-    position: relative; background: var(--white); color: var(--black);
+    position: relative; background: transparent; color: var(--black);
     padding: 80px 5% 20px; overflow: hidden;
 }
 .blog-article-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
@@ -4439,7 +4418,7 @@ header.scrolled .header-logo-img {
 
 /* Photo Gallery */
 .blog-gallery-section {
-    background: var(--white); padding: 40px 5% 20px; position: relative;
+    background: transparent; padding: 40px 5% 20px; position: relative;
     border-top: 1px solid rgba(0,0,0,0.06);
 }
 .blog-gallery-inner { max-width: 1100px; margin: 0 auto; }
@@ -4511,7 +4490,7 @@ header.scrolled .header-logo-img {
 
 /* YouTube Section */
 .blog-youtube-section {
-    background: var(--white); padding: 40px 5% 20px; position: relative; overflow: hidden;
+    background: transparent; padding: 40px 5% 20px; position: relative; overflow: hidden;
     border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 .blog-youtube-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
@@ -4547,7 +4526,7 @@ header.scrolled .header-logo-img {
 .blog-yt-more-card:hover .blog-yt-more-play { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
 
 /* Comment Section */
-.blog-comments-section { background: var(--white); padding: 40px 5% 80px; }
+.blog-comments-section { background: transparent; padding: 40px 5% 80px; }
 .blog-comments-inner { max-width: 900px; margin: 0 auto; }
 .comment-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
 .comment-icon { color: var(--black); flex-shrink: 0; }
@@ -4661,7 +4640,7 @@ header.scrolled .header-logo-img {
 
 /* Blog Cards Grid */
 .blogs-grid-section {
-    background: var(--white); padding: 80px 5%; position: relative;
+    background: transparent; padding: 80px 5%; position: relative;
 }
 .blogs-grid-inner { max-width: 1200px; margin: 0 auto; }
 .blogs-grid {
