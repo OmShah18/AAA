@@ -258,17 +258,87 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fbSection && fbTrack && fbItems.length) {
         const fbTotal = fbItems.length;
 
-        // ── Background Text (Static Pinned) ──
-        // The fbBgText is positioned in CSS and remains perfectly fixed on the left 
-        // to align beautifully with each incoming blog panel.
-
         // ── Cinematic Easing Curves ──
         const EASE_SPRING = "back.out(1.2)";
+        const EASE_CINEMATIC = "power3.out";
+
+        // ── Detect touch vs pointer device ──
+        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        const isMobile = window.innerWidth <= 1024;
 
         // Calculate the total scroll distance (all panels minus one viewport)
         function getScrollAmount() {
             return -(fbTrack.scrollWidth - window.innerWidth);
         }
+
+        // ── Shared UI Update Functions ──
+        let lastRenderedIndex = -1;
+
+        function updateFbUI(progress) {
+            // ── Update Progress Bar (width-based, horizontal) ──
+            if (fbProgressBar) {
+                gsap.to(fbProgressBar, {
+                    width: (progress * 100) + "%",
+                    duration: 0.4,
+                    ease: "power2.out",
+                    overwrite: true
+                });
+            }
+
+            // ── Update Counter ──
+            const currentIndex = Math.min(
+                Math.floor(progress * fbTotal),
+                fbTotal - 1
+            );
+
+            if (currentIndex !== lastRenderedIndex) {
+                lastRenderedIndex = currentIndex;
+
+                if (fbCounterCurrent) {
+                    const newText = String(currentIndex + 1).padStart(2, '0');
+                    if (fbCounterCurrent.textContent !== newText) {
+                        gsap.to(fbCounterCurrent, {
+                            y: -12, opacity: 0, scale: 0.85,
+                            duration: 0.2, ease: "power2.in",
+                            onComplete: () => {
+                                fbCounterCurrent.textContent = newText;
+                                gsap.fromTo(fbCounterCurrent,
+                                    { y: 12, opacity: 0, scale: 0.85 },
+                                    { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: EASE_SPRING }
+                                );
+                            }
+                        });
+                    }
+                }
+
+                // ── Update Dots ──
+                if (fbProgressDots.length) {
+                    fbProgressDots.forEach((dot, i) => {
+                        const isActive = i === currentIndex;
+                        const isPast = i < currentIndex;
+                        dot.classList.toggle('active', isActive);
+                        gsap.to(dot, {
+                            scale: isActive ? 1.6 : 1,
+                            backgroundColor: isActive
+                                ? "#ffca27"
+                                : isPast
+                                    ? "rgba(0,0,0,0.35)"
+                                    : "rgba(0,0,0,0.15)",
+                            boxShadow: isActive ? "0 0 14px rgba(255,202,39,0.5)" : "none",
+                            duration: 0.4,
+                            ease: EASE_SPRING,
+                            overwrite: true
+                        });
+                    });
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════════
+        // MODE A: Desktop — GSAP ScrollTrigger scrub
+        // Tight scrub for responsive mouse wheel, with
+        // continuous parallax on image columns
+        // ═══════════════════════════════════════════════
 
         // ── Main Horizontal Scroll Animation ──
         const fbHorizontalTween = gsap.to(fbTrack, {
@@ -279,64 +349,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: "top top",
                 end: () => "+=" + (fbTrack.scrollWidth - window.innerWidth),
                 pin: true,
-                scrub: 1, // Reduced scrub for lower latency
+                scrub: isTouchDevice ? 0.8 : 0.5, // Tighter scrub: responsive on mouse, slightly softer on touch
                 invalidateOnRefresh: true,
                 anticipatePin: 1,
                 fastScrollEnd: true,
                 preventOverlaps: true,
                 onUpdate: (self) => {
-                    const progress = self.progress;
-                    
-                    // ── Update Progress Bar (width-based, horizontal) ──
-                    if (fbProgressBar) {
-                        fbProgressBar.style.width = (progress * 100) + "%";
-                    }
+                    updateFbUI(self.progress);
+                }
+            }
+        });
 
-                    // ── Update Counter ──
-                    const currentIndex = Math.min(
-                        Math.floor(progress * fbTotal),
-                        fbTotal - 1
-                    );
-                    
-                    if (fbCounterCurrent) {
-                        const newText = String(currentIndex + 1).padStart(2, '0');
-                        if (fbCounterCurrent.textContent !== newText) {
-                            // Animate counter change
-                            gsap.to(fbCounterCurrent, {
-                                y: -12, opacity: 0, scale: 0.85,
-                                duration: 0.2, ease: "power2.in",
-                                onComplete: () => {
-                                    fbCounterCurrent.textContent = newText;
-                                    gsap.fromTo(fbCounterCurrent,
-                                        { y: 12, opacity: 0, scale: 0.85 },
-                                        { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: EASE_SPRING }
-                                    );
-                                }
-                            });
+        // ── Continuous Parallax on Image Columns (cinematic depth) ──
+        // Each image shifts subtly counter to scroll direction creating depth
+        fbItems.forEach((item, index) => {
+            const imgEl = item.querySelector('.fb-img-wrapper img');
+            if (imgEl) {
+                gsap.fromTo(imgEl,
+                    { x: "8%" },
+                    {
+                        x: "-4%",
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: item,
+                            containerAnimation: fbHorizontalTween,
+                            start: "left right",
+                            end: "right left",
+                            scrub: true
                         }
                     }
-
-                    // ── Update Dots ──
-                    if (fbProgressDots.length) {
-                        fbProgressDots.forEach((dot, i) => {
-                            const isActive = i === currentIndex;
-                            const isPast = i < currentIndex;
-                            dot.classList.toggle('active', isActive);
-                            gsap.to(dot, {
-                                scale: isActive ? 1.6 : 1,
-                                backgroundColor: isActive
-                                    ? "#ffca27"
-                                    : isPast
-                                        ? "rgba(0,0,0,0.35)"
-                                        : "rgba(0,0,0,0.15)",
-                                boxShadow: isActive ? "0 0 14px rgba(255,202,39,0.5)" : "none",
-                                duration: 0.4,
-                                ease: EASE_SPRING,
-                                overwrite: true
-                            });
-                        });
-                    }
-                }
+                );
             }
         });
 
@@ -346,8 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const headings = item.querySelectorAll('.fb-heading');
             const desc = item.querySelector('.fb-desc');
             const btn = item.querySelector('.btn-primary');
-            const imgWrapper = item.querySelector('.fb-img-wrapper');
-            const imgEl = item.querySelector('.fb-img-wrapper img');
             const videoCard = item.querySelector('.fb-video-card');
 
             const tl = gsap.timeline({
@@ -398,15 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
             }
 
-            // Image: Ken Burns parallax — starts zoomed & shifted, settles to neutral
-            if (imgEl) {
-                tl.fromTo(imgEl,
-                    { scale: 1.15, x: "5%" },
-                    { scale: 1, x: "0%", duration: 2, ease: "power2.out" },
-                    0
-                );
-            }
-
             // Video card: delayed spring entrance (desktop only)
             if (videoCard && window.innerWidth > 1024) {
                 tl.fromTo(videoCard,
@@ -417,15 +448,123 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // ═══════════════════════════════════════════════
+        // MOBILE TOUCH SNAP ENHANCEMENT
+        // On mobile/touch, layer an Observer on top that
+        // detects swipe gestures and snaps cleanly between
+        // slides with cinematic easing and elastic boundaries
+        // ═══════════════════════════════════════════════
+        if (isTouchDevice && isMobile) {
+            let fbCurrentSlide = 0;
+            let fbIsAnimating = false;
 
-        // ── Dot click navigation ──
+            function navigateToSlide(targetSlide, ease) {
+                // Clamp to valid range
+                targetSlide = Math.max(0, Math.min(targetSlide, fbTotal - 1));
+                if (targetSlide === fbCurrentSlide && !fbIsAnimating) return;
+
+                fbIsAnimating = true;
+                fbCurrentSlide = targetSlide;
+
+                // Calculate target scroll position
+                const st = fbHorizontalTween.scrollTrigger;
+                const targetProgress = targetSlide / (fbTotal - 1);
+                const scrollTo = st.start + (st.end - st.start) * targetProgress;
+
+                // Use Lenis for the smooth scroll so everything stays in sync
+                lenis.scrollTo(scrollTo, {
+                    duration: 1.4,
+                    easing: (t) => {
+                        // Custom cinematic easing: fast start, elegant deceleration
+                        return 1 - Math.pow(1 - t, 4);
+                    },
+                    onComplete: () => {
+                        fbIsAnimating = false;
+                    }
+                });
+            }
+
+            // Elastic overscroll feedback at boundaries
+            function showBoundaryFeedback(direction) {
+                const bounceAmount = direction === 'next' ? -15 : 15;
+                gsap.to(fbTrack, {
+                    x: "+="+ bounceAmount,
+                    duration: 0.15,
+                    ease: "power2.out",
+                    yoyo: true,
+                    repeat: 1,
+                    overwrite: false
+                });
+            }
+
+            // GSAP Observer for touch/swipe detection
+            Observer.create({
+                target: fbSection,
+                type: "touch",
+                tolerance: 30, // Minimum swipe distance in px
+                preventDefault: true,
+                onUp: () => {
+                    // Swipe up = scroll forward (next slide)
+                    if (fbIsAnimating) return;
+                    if (fbCurrentSlide >= fbTotal - 1) {
+                        showBoundaryFeedback('next');
+                        return;
+                    }
+                    navigateToSlide(fbCurrentSlide + 1);
+                },
+                onDown: () => {
+                    // Swipe down = scroll backward (prev slide)
+                    if (fbIsAnimating) return;
+                    if (fbCurrentSlide <= 0) {
+                        showBoundaryFeedback('prev');
+                        return;
+                    }
+                    navigateToSlide(fbCurrentSlide - 1);
+                },
+                onLeft: () => {
+                    // Swipe left = next slide
+                    if (fbIsAnimating) return;
+                    if (fbCurrentSlide >= fbTotal - 1) {
+                        showBoundaryFeedback('next');
+                        return;
+                    }
+                    navigateToSlide(fbCurrentSlide + 1);
+                },
+                onRight: () => {
+                    // Swipe right = prev slide
+                    if (fbIsAnimating) return;
+                    if (fbCurrentSlide <= 0) {
+                        showBoundaryFeedback('prev');
+                        return;
+                    }
+                    navigateToSlide(fbCurrentSlide - 1);
+                }
+            });
+
+            // Keep fbCurrentSlide in sync if user scrolls via other means
+            fbHorizontalTween.scrollTrigger.vars.onUpdate = (self) => {
+                updateFbUI(self.progress);
+                if (!fbIsAnimating) {
+                    fbCurrentSlide = Math.round(self.progress * (fbTotal - 1));
+                }
+            };
+        }
+
+        // ── Dot click navigation (both modes) ──
         fbProgressDots.forEach((dot, i) => {
             dot.addEventListener('click', () => {
-                // Calculate target scroll position for this dot
                 const st = fbHorizontalTween.scrollTrigger;
                 const targetProgress = i / (fbTotal - 1);
                 const scrollTo = st.start + (st.end - st.start) * targetProgress;
-                lenis.scrollTo(scrollTo, { duration: 1.8 });
+                lenis.scrollTo(scrollTo, {
+                    duration: 1.6,
+                    easing: (t) => 1 - Math.pow(1 - t, 3)
+                });
+
+                // Update mobile slide index if applicable
+                if (isTouchDevice && isMobile) {
+                    fbCurrentSlide = i;
+                }
             });
         });
     }

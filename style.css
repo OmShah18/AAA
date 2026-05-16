@@ -125,13 +125,20 @@ body {
     inset: 0;
     background-color: var(--white);
     background-image:
-        linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
-    background-size: 50px 50px;
+        /* Primary grid — very faint, wider spacing */
+        linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        /* Secondary micro-grid — barely perceptible, adds depth */
+        linear-gradient(to right, rgba(0, 0, 0, 0.012) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.012) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
     background-position: center center;
     pointer-events: none;
     z-index: -1;
     transform: translateZ(0);
+    /* Radial vignette: grid fades softly toward edges */
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
 }
 
 .accent-text {
@@ -2053,6 +2060,7 @@ header.scrolled .header-logo-img {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch; /* Smooth inertial scrolling on iOS */
 }
 
 /* --- Horizontal Track (GSAP moves this via x) --- */
@@ -2062,6 +2070,9 @@ header.scrolled .header-logo-img {
     width: max-content;
     height: 100%;
     will-change: transform;
+    transform: translateZ(0); /* Force GPU compositing layer */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* --- Each Blog Item: flex row, full viewport width --- */
@@ -2149,6 +2160,9 @@ header.scrolled .header-logo-img {
     object-fit: cover;
     filter: contrast(1.05) brightness(0.92) saturate(1.05);
     will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -4579,12 +4593,12 @@ header.scrolled .header-logo-img {
     .blog-gallery-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 768px) {
-    .blog-hero { height: 100dvh; }
-    .blog-hero-content { padding-bottom: 180px; }
-    .blog-hero-meta { bottom: 110px; padding: 0 6%; font-size: 0.65rem; }
+    .blog-hero { height: 80dvh; align-items: center; }
+    .blog-hero-content { padding-bottom: 40px; } /* Slightly offset from dead center for better balance */
+    .blog-hero-meta { bottom: 60px; padding: 0 6%; font-size: 0.65rem; }
     .blog-hero-scroll { bottom: 62px; }
 
-    .blog-article { padding: 110px 5% 20px; }
+    .blog-article { padding: 60px 5% 20px; }
     .blog-title { font-size: 1.6rem; }
     .blog-hero-image { aspect-ratio: 4/3; }
     .blog-youtube-section { padding: 30px 5% 20px; }
@@ -4600,7 +4614,7 @@ header.scrolled .header-logo-img {
     .gallery-lb-close { top: 16px; right: 16px; }
 }
 @media (max-width: 480px) {
-    .blog-article { padding: 100px 4% 20px; }
+    .blog-article { padding: 50px 4% 20px; }
     .blog-meta-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .blog-title { font-size: 1.35rem; }
     .blog-body p { font-size: 0.88rem; }
@@ -4693,8 +4707,8 @@ header.scrolled .header-logo-img {
 }
 @media (max-width: 600px) {
     .blogs-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-    .blogs-grid-section { padding: 50px 5%; }
-    .blogs-listing-hero { height: 60vh; min-height: 400px; }
+    .blogs-grid-section { padding: 30px 5%; }
+    .blogs-listing-hero { height: 50vh; min-height: 300px; }
 }
 
 /* Make entire blog cards clickable */
