@@ -2215,11 +2215,12 @@ header.scrolled .header-logo-img {
         width: 100vw;
         height: 100svh;
         flex-direction: column;
+        overflow: visible; /* Prevent clipping text/button if content is tall */
     }
 
     .fb-text-col {
-        flex: none;
-        padding: 5.5rem 6% 1.5rem;
+        flex: 0 1 auto; /* Can shrink if viewport is short — prevents button clipping */
+        padding: 4.5rem 6% 1rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -2266,7 +2267,7 @@ header.scrolled .header-logo-img {
 /* Mobile portrait */
 @media (max-width: 768px) {
     .fb-text-col {
-        padding: 5rem 5% 1.5rem;
+        padding: 4rem 5% 0.8rem;
     }
 
     .fb-heading {
@@ -2323,7 +2324,7 @@ header.scrolled .header-logo-img {
 /* Small phones */
 @media (max-width: 480px) {
     .fb-text-col {
-        padding: 4.5rem 5% 1rem;
+        padding: 3.5rem 5% 0.5rem;
     }
 
     .fb-heading {
