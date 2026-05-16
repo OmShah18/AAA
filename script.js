@@ -359,10 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // ── Main Horizontal Scroll Animation ──
         const fbHorizontalTween = gsap.to(fbTrack, {
             x: getScrollAmount,
-            // Desktop: power1.inOut creates a non-linear curve — text "rests" at
-            // the start and end of the section, elegant entry/exit feel.
-            // Mobile: must be "none" so snap navigation scroll math stays accurate.
-            ease: isMobile ? "none" : "power1.inOut",
+            // Linear ease ensures uniform scroll speed across all panels —
+            // each blog item scrolls at exactly the same rate.
+            ease: "none",
             scrollTrigger: {
                 trigger: fbSection,
                 start: "top top",
