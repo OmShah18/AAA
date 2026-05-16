@@ -2144,13 +2144,13 @@ header.scrolled .header-logo-img {
     flex: 0 0 55%;
     box-sizing: border-box;
     position: relative;
-    overflow: hidden;
+    /* overflow:hidden removed — now on fb-img-wrapper so border-radius shows on mobile */
 }
 
 .fb-img-wrapper {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: hidden; /* Clips image zoom and parallax */
     position: relative;
 }
 
@@ -2229,11 +2229,12 @@ header.scrolled .header-logo-img {
         flex: 1;
         width: 100%;
         min-height: 0;
-        padding: 0 5% 1.5rem; /* Side + bottom padding to shrink image card */
+        padding: 0.5rem 5% 1.5rem; /* All-side padding so rounded corners show fully */
     }
 
     .fb-img-wrapper {
-        border-radius: 10px; /* Rounded corners for a card-like feel on mobile */
+        border-radius: 12px; /* All 4 corners rounded on mobile */
+        overflow: hidden;
     }
 
     .fb-heading {

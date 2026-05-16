@@ -359,7 +359,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // ── Main Horizontal Scroll Animation ──
         const fbHorizontalTween = gsap.to(fbTrack, {
             x: getScrollAmount,
-            ease: "power1.inOut", // Gentle acceleration at start, deceleration at end
+            // Desktop: power1.inOut creates a non-linear curve — text "rests" at
+            // the start and end of the section, elegant entry/exit feel.
+            // Mobile: must be "none" so snap navigation scroll math stays accurate.
+            ease: isMobile ? "none" : "power1.inOut",
             scrollTrigger: {
                 trigger: fbSection,
                 start: "top top",
@@ -465,104 +468,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // ═══════════════════════════════════════════════
-        // MOBILE TOUCH SNAP ENHANCEMENT
-        // On mobile/touch, layer an Observer on top that
-        // detects swipe gestures and snaps cleanly between
-        // slides with cinematic easing and elastic boundaries.
+        // MOBILE TOUCH SNAP — Raw touch listener
         //
-        // Improvements:
-        // - Shorter snap duration (1.0s) for snappier response
-        // - Lower tolerance (20px) for easier swipe detection
-        // - Cubic easing for a more natural deceleration curve
+        // We deliberately avoid GSAP Observer here because
+        // its preventDefault blocks Lenis from receiving
+        // touch events, freezing the scroll entirely.
+        //
+        // Instead we use raw touchstart/touchend events:
+        // - Horizontal swipes → snap to next/prev slide
+        // - Vertical swipes → pass through to native scroll
         // ═══════════════════════════════════════════════
         if (isTouchDevice && isMobile) {
             let fbCurrentSlide = 0;
             let fbIsAnimating = false;
+            let touchStartX = 0;
+            let touchStartY = 0;
 
             function navigateToSlide(targetSlide) {
-                // Clamp to valid range
                 targetSlide = Math.max(0, Math.min(targetSlide, fbTotal - 1));
                 if (targetSlide === fbCurrentSlide && !fbIsAnimating) return;
 
                 fbIsAnimating = true;
                 fbCurrentSlide = targetSlide;
 
-                // Calculate target scroll position
                 const st = fbHorizontalTween.scrollTrigger;
+                // With ease:"none" on mobile, progress maps linearly to scroll position
                 const targetProgress = targetSlide / (fbTotal - 1);
                 const scrollTo = st.start + (st.end - st.start) * targetProgress;
 
-                // Use Lenis for the smooth scroll so everything stays in sync
-                lenis.scrollTo(scrollTo, {
-                    duration: 1.0, // Faster snap for more responsive feel
-                    easing: (t) => {
-                        // Smooth cubic deceleration — feels natural and refined
-                        return 1 - Math.pow(1 - t, 3);
-                    },
-                    onComplete: () => {
-                        fbIsAnimating = false;
-                    }
-                });
+                // Use native smooth scroll — works reliably since Lenis smoothTouch:false
+                window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+
+                // Release lock after estimated animation time
+                setTimeout(() => { fbIsAnimating = false; }, 900);
             }
 
-            // Elastic overscroll feedback at boundaries
-            function showBoundaryFeedback(direction) {
-                const bounceAmount = direction === 'next' ? -12 : 12;
-                gsap.to(fbTrack, {
-                    x: "+="+ bounceAmount,
-                    duration: 0.12,
-                    ease: "power2.out",
-                    yoyo: true,
-                    repeat: 1,
-                    overwrite: false
-                });
-            }
+            fbSection.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
 
-            // GSAP Observer for touch/swipe detection
-            Observer.create({
-                target: fbSection,
-                type: "touch",
-                tolerance: 20, // Lower threshold = easier to trigger swipe
-                preventDefault: true,
-                onUp: () => {
-                    // Swipe up = scroll forward (next slide)
-                    if (fbIsAnimating) return;
-                    if (fbCurrentSlide >= fbTotal - 1) {
-                        showBoundaryFeedback('next');
-                        return;
-                    }
+            fbSection.addEventListener('touchend', (e) => {
+                if (fbIsAnimating) return;
+
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                const dy = e.changedTouches[0].clientY - touchStartY;
+
+                // Only treat as a horizontal swipe if it's clearly horizontal
+                if (Math.abs(dx) < 30 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+                if (dx < 0) {
+                    // Swipe left → next slide
                     navigateToSlide(fbCurrentSlide + 1);
-                },
-                onDown: () => {
-                    // Swipe down = scroll backward (prev slide)
-                    if (fbIsAnimating) return;
-                    if (fbCurrentSlide <= 0) {
-                        showBoundaryFeedback('prev');
-                        return;
-                    }
-                    navigateToSlide(fbCurrentSlide - 1);
-                },
-                onLeft: () => {
-                    // Swipe left = next slide
-                    if (fbIsAnimating) return;
-                    if (fbCurrentSlide >= fbTotal - 1) {
-                        showBoundaryFeedback('next');
-                        return;
-                    }
-                    navigateToSlide(fbCurrentSlide + 1);
-                },
-                onRight: () => {
-                    // Swipe right = prev slide
-                    if (fbIsAnimating) return;
-                    if (fbCurrentSlide <= 0) {
-                        showBoundaryFeedback('prev');
-                        return;
-                    }
+                } else {
+                    // Swipe right → prev slide
                     navigateToSlide(fbCurrentSlide - 1);
                 }
-            });
+            }, { passive: true });
 
-            // Keep fbCurrentSlide in sync if user scrolls via other means
+            // Keep fbCurrentSlide in sync with scroll position
             fbHorizontalTween.scrollTrigger.vars.onUpdate = (self) => {
                 updateFbUI(self.progress);
                 if (!fbIsAnimating) {
