@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Business Enquiries — Automobili Ardent</title>
+    <meta name="description" content="Get in touch with Automobili Ardent for business partnerships, collaborations, media enquiries, and exclusive network access.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- GSAP & ScrollTrigger & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Observer.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+</head>
+
+<body>
+    <div class="site-global-grid"></div>
+
+    <!-- Full Screen Menu Overlay (exact copy from index.html) -->
+    <div class="menu-overlay">
+        <div class="menu-bg-image"></div>
+        <div class="menu-bg-lines"></div>
+        <div class="menu-top-bar">
+            <div class="logo logo-menu"><img src="header-images/header-logo.png" alt="Automobili Ardent Logo"
+                    class="header-logo-img"></div>
+            <div class="menu-top-right">
+                <a href="#" class="btn-store hover-target">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                </a>
+                <button class="menu-close-btn hover-target" aria-label="Close Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="menu-content-wrapper">
+            <div class="menu-left">
+                <div class="vertical-marquee-gallery">
+                    <div class="v-col v-col-up">
+                        <div class="v-strip">
+                            <div class="v-img"><img src="header-images/menu-porsche.jpg" alt="Porsche Detail"></div>
+                            <div class="v-img"><img src="blog-images\Fiat-to-Ferrari\1577633240DSC_0180-2.jpeg" alt="Car Rear"></div>
+                            <div class="v-img"><img src="blog-images\generation-gap\1584809942DSC_0170.jpeg" alt="Car Side"></div>
+                            <div class="v-img"><img src="blog-images/Porsche/1551543670IMG_4254.webp" alt="Detail Texture"></div>
+                        </div>
+                    </div>
+                    <div class="v-col v-col-down">
+                        <div class="v-strip">
+                            <div class="v-img"><img src="blog-images\Fiat-to-Ferrari\1577635131DSC_0058.jpeg" alt="Drive Action"></div>
+                            <div class="v-img"><img src="blog-images\RR\ISH04972-Edit.webp" alt="Road View"></div>
+                            <div class="v-img"><img src="blog-images\Generation Gap!.jpeg" alt="Detail Part"></div>
+                            <div class="v-img"><img src="blog-images\RR\ISH05416.webp" alt="Action Drive"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-right">
+                <nav class="menu-nav-links">
+                    <div class="m-link-wrapper"><a href="index.html" class="m-link hover-target"><span
+                                class="text-anim" data-text="HOME"><span>HOME</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="#" class="m-link hover-target"><span class="text-anim"
+                                data-text="ABOUT"><span>ABOUT</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="/blogs" class="m-link hover-target"><span class="text-anim"
+                                data-text="BLOGS"><span>BLOGS</span></span></a></div>
+                    <div class="m-link-wrapper"><a href="contact.html" class="m-link hover-target m-active"><span class="text-anim"
+                                data-text="CONTACT"><span>CONTACT</span></span></a></div>
+                </nav>
+                <div class="menu-footer">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%; flex-wrap: wrap; gap: 1.5rem;">
+                        <div class="m-wreath">ARDENT NETWORK <br> EST. 2026</div>
+                        <div class="m-social">
+                            <a href="https://www.facebook.com/AutomobiliArdent/" class="hover-target" target="_blank"><span class="text-anim" data-text="FACEBOOK"><span>FACEBOOK</span></span></a>
+                            <a href="https://www.instagram.com/automobiliardent/" class="hover-target" target="_blank"><span class="text-anim" data-text="INSTAGRAM"><span>INSTAGRAM</span></span></a>
+                            <a href="https://www.youtube.com/c/automobiliardent" class="hover-target" target="_blank"><span class="text-anim" data-text="YOUTUBE"><span>YOUTUBE</span></span></a>
+                        </div>
+                    </div>
+                    <div class="m-bottom-section">
+                        <div class="m-sub-links">
+                            <a href="contact.html" class="hover-target"><span class="text-anim"
+                                    data-text="BUSINESS ENQUIRIES"><span>BUSINESS ENQUIRIES</span></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header id="main-header" class="hover-target">
+        <div class="header-left">
+            <button class="menu-btn hover-target" aria-label="Menu">
+                <div class="hamburger-container">
+                    <span class="bar bar-top"></span>
+                    <span class="bar bar-bot"></span>
+                </div>
+                <span class="menu-text">
+                    <span class="text-anim" data-text="MENU"><span>MENU</span></span>
+                </span>
+            </button>
+        </div>
+
+        <div class="header-center">
+            <div class="logo">
+                <img src="header-images/header-logo.png" alt="Automobili Ardent Logo" class="header-logo-img">
+            </div>
+        </div>
+
+        <div class="header-right">
+            <a href="#" class="header-store-link hover-target">
+                <span class="store-text">
+                    <span class="text-anim" data-text="STORE"><span>STORE</span></span>
+                </span>
+                <svg class="bag-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Smooth Scroll Wrapper for Lenis -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- HERO -->
+            <section class="panel contact-hero">
+                <img src="blog-images/RR/ISH05113-Edit.webp" alt="Automobili Ardent" class="contact-hero-bg">
+                <div class="contact-hero-overlay"></div>
+                <div class="noise-overlay"></div>
+                <div class="contact-hero-content">
+                    <div class="clip-reveal">
+                        <span class="contact-hero-label">BUSINESS ENQUIRIES</span>
+                    </div>
+                    <div class="clip-reveal">
+                        <h1 class="contact-hero-title">LET'S CREATE<br><span class="accent-text">TOGETHER</span></h1>
+                    </div>
+                    <div class="clip-reveal delay-1">
+                        <p class="contact-hero-sub">Partnerships · Collaborations · Media · Network Access</p>
+                    </div>
+                </div>
+                <div class="contact-hero-scroll">
+                    <span class="contact-hero-scroll-text">SCROLL</span>
+                    <div class="contact-hero-scroll-line"></div>
+                </div>
+            </section>
+
+            <!-- CONTACT BODY -->
+            <section class="panel contact-body">
+                <div class="contact-container">
+
+                    <!-- LEFT: Info Column -->
+                    <div class="contact-info">
+                        <div class="contact-info-block clip-reveal">
+                            <span class="contact-info-label">GENERAL ENQUIRIES</span>
+                            <a href="mailto:contact@automobiliardent.com" class="contact-info-value hover-target" id="email-general">contact@automobiliardent.com</a>
+                        </div>
+
+                        <div class="contact-info-block clip-reveal delay-1">
+                            <span class="contact-info-label">PARTNERSHIPS & SPONSORSHIPS</span>
+                            <a href="mailto:partnerships@automobiliardent.com" class="contact-info-value hover-target" id="email-partnerships">partnerships@automobiliardent.com</a>
+                        </div>
+
+                        <div class="contact-info-block clip-reveal delay-2">
+                            <span class="contact-info-label">MEDIA & PRESS</span>
+                            <a href="mailto:media@automobiliardent.com" class="contact-info-value hover-target" id="email-media">media@automobiliardent.com</a>
+                        </div>
+
+                        <div class="contact-info-divider"></div>
+
+                        <div class="contact-info-block clip-reveal delay-3">
+                            <span class="contact-info-label">FOLLOW US</span>
+                            <div class="contact-socials">
+                                <a href="https://www.instagram.com/automobiliardent/" target="_blank" class="contact-social-link hover-target" id="social-instagram">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                    <span>Instagram</span>
+                                </a>
+                                <a href="https://www.facebook.com/AutomobiliArdent/" target="_blank" class="contact-social-link hover-target" id="social-facebook">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                    </svg>
+                                    <span>Facebook</span>
+                                </a>
+                                <a href="https://www.youtube.com/c/automobiliardent" target="_blank" class="contact-social-link hover-target" id="social-youtube">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                    </svg>
+                                    <span>YouTube</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Form Column -->
+                    <div class="contact-form-wrapper">
+                        <div class="clip-reveal">
+                            <h2 class="contact-form-title">Send an <span class="accent-text">Enquiry</span></h2>
+                        </div>
+                        <div class="clip-reveal delay-1">
+                            <p class="contact-form-subtitle">Tell us about your project or proposal. We respond within 48 hours.</p>
+                        </div>
+
+                        <form class="contact-form" id="contactForm" action="#" method="POST">
+                            <div class="form-row-two">
+                                <div class="form-group">
+                                    <label class="form-label" for="contact-name">Full Name <span class="required">*</span></label>
+                                    <input type="text" id="contact-name" name="name" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="contact-email">Email Address <span class="required">*</span></label>
+                                    <input type="email" id="contact-email" name="email" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row-two">
+                                <div class="form-group">
+                                    <label class="form-label" for="contact-company">Company / Organisation</label>
+                                    <input type="text" id="contact-company" name="company" placeholder="Your Company">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="contact-subject">Subject <span class="required">*</span></label>
+                                    <select id="contact-subject" name="subject" required>
+                                        <option value="" disabled selected>Select a topic</option>
+                                        <option value="partnership">Partnership & Sponsorship</option>
+                                        <option value="media">Media & Press</option>
+                                        <option value="collaboration">Collaboration</option>
+                                        <option value="network">Network Access</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="contact-message">Your Message <span class="required">*</span></label>
+                                <textarea id="contact-message" name="message" placeholder="Tell us about your enquiry..." rows="6" required></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary hover-target" id="btn-submit-enquiry">
+                                    <span class="text-anim" data-text="SEND ENQUIRY"><span>SEND ENQUIRY</span></span>
+                                    <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                                <p class="form-disclaimer">By submitting, you agree to our privacy policy.</p>
+                            </div>
+                        </form>
+
+                        <!-- Success State -->
+                        <div class="form-success" id="formSuccess">
+                            <div class="success-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <h3 class="success-title">Enquiry Sent</h3>
+                            <p class="success-text">Thank you for reaching out. Our team will review your message and respond within 48 hours.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PREMIUM MAIN FOOTER (exact copy from index.html) -->
+            <footer class="main-footer">
+
+                <div class="footer-inner-dark">
+                    <div class="footer-background-lines"></div>
+                    <div class="noise-overlay"></div>
+
+                    <!-- Infinite Car Brand Icon Carousel (Top of Footer) -->
+                    <div class="footer-brand-carousel">
+                        <div class="footer-brand-track">
+                            <!-- Set 1 -->
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/porsche/ffffff" alt="Porsche" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/ferrari/ffffff" alt="Ferrari" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/lamborghini/ffffff" alt="Lamborghini" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/mclaren/ffffff" alt="McLaren" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/bugatti/ffffff" alt="Bugatti" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <!-- Set 2 (Clone for seamless loop) -->
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/porsche/ffffff" alt="Porsche" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/ferrari/ffffff" alt="Ferrari" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/lamborghini/ffffff" alt="Lamborghini" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/mclaren/ffffff" alt="McLaren" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/bugatti/ffffff" alt="Bugatti" class="f-brand-icon">
+                            <img src="https://cdn.simpleicons.org/astonmartin/ffffff" alt="Aston Martin" class="f-brand-icon">
+                        </div>
+                    </div>
+
+                    <!-- Footer Heading -->
+                    <div class="footer-heading-section">
+                        <div class="footer-heading-icon">
+                            <img src="header-images/header-logo.png" alt="Ardent" class="footer-heading-logo">
+                        </div>
+                        <h2 class="f-main-heading">ALWAYS <span class="text-primary">BEYOND</span> THE LIMITS.</h2>
+                    </div>
+
+                    <!-- Footer Main Content: 3-Column Layout -->
+                    <div class="footer-container">
+                        <div class="footer-nav-section">
+                            <!-- Left Nav Column: Pages -->
+                            <div class="f-nav-col f-nav-left">
+                                <span class="f-label">PAGES</span>
+                                <div class="f-links">
+                                    <a href="index.html" class="hover-target"><span class="text-anim" data-text="HOME"><span>HOME</span></span></a>
+                                    <a href="#" class="hover-target"><span class="text-anim" data-text="ABOUT"><span>ABOUT</span></span></a>
+                                    <a href="/blogs" class="hover-target"><span class="text-anim" data-text="BLOGS"><span>BLOGS</span></span></a>
+                                    <a href="contact.html" class="hover-target"><span class="text-anim" data-text="CONTACT"><span>CONTACT</span></span></a>
+                                </div>
+                                <div class="f-links">
+                                    <a href="#" class="hover-target f-link-store"><span class="text-anim" data-text="STORE"><span>STORE</span></span></a>
+                                </div>
+                            </div>
+
+                            <!-- Center: AAA Logo -->
+                            <div class="f-nav-center">
+                                <img src="aaa-logo.png" alt="Automobili Ardent" class="footer-center-logo">
+                            </div>
+
+                            <!-- Right Nav Column: Social -->
+                            <div class="f-nav-col f-nav-right">
+                                <span class="f-label">FOLLOW ON</span>
+                                <div class="f-links">
+                                    <a href="https://www.facebook.com/AutomobiliArdent/" class="hover-target" target="_blank"><span class="text-anim" data-text="FACEBOOK"><span>FACEBOOK</span></span></a>
+                                    <a href="https://www.instagram.com/automobiliardent/" class="hover-target" target="_blank"><span class="text-anim" data-text="INSTAGRAM"><span>INSTAGRAM</span></span></a>
+                                    <a href="https://www.youtube.com/c/automobiliardent" class="hover-target" target="_blank"><span class="text-anim" data-text="YOUTUBE"><span>YOUTUBE</span></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Enquiries CTA -->
+                    <div class="footer-cta-section">
+                        <a href="contact.html" class="btn-primary hover-target">
+                            <span class="text-anim" data-text="BUSINESS ENQUIRIES"><span>BUSINESS ENQUIRIES</span></span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Legal Bottom Bar -->
+                <div class="footer-legal-bar">
+                    <div class="legal-left">
+                        <span>© 2026 <strong>Automobili Ardent</strong>. All rights reserved</span>
+                    </div>
+                    <div class="legal-right">
+                        <a href="#" class="hover-target">PRIVACY POLICY</a>
+                        <a href="#" class="hover-target">TERMS</a>
+                    </div>
+                </div>
+
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Contact form submission
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contactForm');
+            const successEl = document.getElementById('formSuccess');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const btn = form.querySelector('.btn-primary');
+                    btn.style.opacity = '0.6';
+                    btn.style.pointerEvents = 'none';
+                    setTimeout(() => {
+                        form.style.display = 'none';
+                        successEl.classList.add('visible');
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
