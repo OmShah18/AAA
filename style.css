@@ -2229,6 +2229,11 @@ header.scrolled .header-logo-img {
         flex: 1;
         width: 100%;
         min-height: 0;
+        padding: 0 5% 1.5rem; /* Side + bottom padding to shrink image card */
+    }
+
+    .fb-img-wrapper {
+        border-radius: 10px; /* Rounded corners for a card-like feel on mobile */
     }
 
     .fb-heading {
@@ -2273,6 +2278,10 @@ header.scrolled .header-logo-img {
         -webkit-box-orient: vertical;
         overflow: hidden;
         margin-bottom: 1.5rem;
+    }
+
+    .fb-img-col {
+        padding: 0 4% 1.2rem; /* Tighter padding on smaller screens */
     }
 
     .fb-heading-group {

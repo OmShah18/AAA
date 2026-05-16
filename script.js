@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const EASE_SPRING = "back.out(1.2)";
         const EASE_CINEMATIC = "power3.out";
 
-        // ── Detect touch vs pointer device ──
+        // ── Detect input type more precisely ──
         const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
         const isMobile = window.innerWidth <= 1024;
 
@@ -335,21 +335,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // ═══════════════════════════════════════════════
-        // MODE A: Desktop — GSAP ScrollTrigger scrub
-        // Tight scrub for responsive mouse wheel, with
-        // continuous parallax on image columns
+        // Desktop — GSAP ScrollTrigger scrub
+        //
+        // Two critical design choices for sophistication:
+        //
+        // 1) EASE "power1.inOut" — With scrub, this defines
+        //    the MAPPING between scroll position and track
+        //    movement. The first ~20% of scrolling produces
+        //    very little horizontal movement (text "rests" in
+        //    the white space), then accelerates through the
+        //    middle slides, then decelerates before exit.
+        //    This eliminates the sharp start/stop feel.
+        //
+        // 2) SCROLL MULTIPLIER 1.8× — Stretches the scroll
+        //    distance so each mouse wheel tick covers less
+        //    visual ground, making the experience feel
+        //    proportional and intentional.
         // ═══════════════════════════════════════════════
+
+        // Scroll distance multiplier — higher = more vertical scroll per horizontal panel
+        const scrollMultiplier = isMobile ? 1 : 1.8;
 
         // ── Main Horizontal Scroll Animation ──
         const fbHorizontalTween = gsap.to(fbTrack, {
             x: getScrollAmount,
-            ease: "none",
+            ease: "power1.inOut", // Gentle acceleration at start, deceleration at end
             scrollTrigger: {
                 trigger: fbSection,
                 start: "top top",
-                end: () => "+=" + (fbTrack.scrollWidth - window.innerWidth),
+                end: () => "+=" + ((fbTrack.scrollWidth - window.innerWidth) * scrollMultiplier),
                 pin: true,
-                scrub: isTouchDevice ? 0.8 : 0.5, // Tighter scrub: responsive on mouse, slightly softer on touch
+                scrub: isMobile ? 0.6 : 1, // Generous smoothing for mouse wheel
                 invalidateOnRefresh: true,
                 anticipatePin: 1,
                 fastScrollEnd: true,
@@ -452,13 +468,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // MOBILE TOUCH SNAP ENHANCEMENT
         // On mobile/touch, layer an Observer on top that
         // detects swipe gestures and snaps cleanly between
-        // slides with cinematic easing and elastic boundaries
+        // slides with cinematic easing and elastic boundaries.
+        //
+        // Improvements:
+        // - Shorter snap duration (1.0s) for snappier response
+        // - Lower tolerance (20px) for easier swipe detection
+        // - Cubic easing for a more natural deceleration curve
         // ═══════════════════════════════════════════════
         if (isTouchDevice && isMobile) {
             let fbCurrentSlide = 0;
             let fbIsAnimating = false;
 
-            function navigateToSlide(targetSlide, ease) {
+            function navigateToSlide(targetSlide) {
                 // Clamp to valid range
                 targetSlide = Math.max(0, Math.min(targetSlide, fbTotal - 1));
                 if (targetSlide === fbCurrentSlide && !fbIsAnimating) return;
@@ -473,10 +494,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Use Lenis for the smooth scroll so everything stays in sync
                 lenis.scrollTo(scrollTo, {
-                    duration: 1.4,
+                    duration: 1.0, // Faster snap for more responsive feel
                     easing: (t) => {
-                        // Custom cinematic easing: fast start, elegant deceleration
-                        return 1 - Math.pow(1 - t, 4);
+                        // Smooth cubic deceleration — feels natural and refined
+                        return 1 - Math.pow(1 - t, 3);
                     },
                     onComplete: () => {
                         fbIsAnimating = false;
@@ -486,10 +507,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Elastic overscroll feedback at boundaries
             function showBoundaryFeedback(direction) {
-                const bounceAmount = direction === 'next' ? -15 : 15;
+                const bounceAmount = direction === 'next' ? -12 : 12;
                 gsap.to(fbTrack, {
                     x: "+="+ bounceAmount,
-                    duration: 0.15,
+                    duration: 0.12,
                     ease: "power2.out",
                     yoyo: true,
                     repeat: 1,
@@ -501,7 +522,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Observer.create({
                 target: fbSection,
                 type: "touch",
-                tolerance: 30, // Minimum swipe distance in px
+                tolerance: 20, // Lower threshold = easier to trigger swipe
                 preventDefault: true,
                 onUp: () => {
                     // Swipe up = scroll forward (next slide)
