@@ -190,12 +190,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Intercept form submission
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            e.stopPropagation();
 
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             const usernameInput = document.getElementById('username');
             const username = usernameInput ? usernameInput.value.trim() : '';
             const btn = form.querySelector('.btn-primary');
+
+            if (!email || !password) {
+                showToast('Fields Required', 'Please enter both email and password.', 'error');
+                return;
+            }
 
             // Button visual state transition
             const originalBtnContent = btn.innerHTML;
@@ -213,9 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             user_metadata: { full_name: username || email.split('@')[0] }
                         };
                         localStorage.setItem('ARDENT_MOCK_USER', JSON.stringify(mockUser));
-                        showToast('Account Created', 'Successfully registered in local offline mode!', 'success');
+                        showToast('Account Created', 'Successfully registered!', 'success');
                     } else {
-                        // Mock Login verification (accept any credentials for simplicity in offline mode)
+                        // Mock Login
                         const mockUser = {
                             id: 'mock-uuid-logged-in',
                             email: email,
@@ -230,8 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Redirect to home/index page
                     setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 1000);
+                        window.location.replace('index.html');
+                    }, 800);
                 }, 1200);
 
             } else {
@@ -239,23 +245,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     if (isSignUpMode) {
                         // Real Sign Up
-                        const { data, error } = await supabaseClient.auth.signUp({
+                        const { data: signUpData, error: signUpError } = await supabaseClient.auth.signUp({
                             email,
                             password,
                             options: {
                                 data: {
                                     full_name: username
-                                }
+                                },
+                                emailRedirectTo: window.location.origin + '/index.html'
                             }
                         });
 
-                        if (error) throw error;
+                        if (signUpError) throw signUpError;
 
-                        showToast('Welcome Member', 'Account created successfully! Logging you in...', 'success');
+                        // Immediately sign in after signup (bypasses email verification wait)
+                        const { data: signInData, error: signInError } = await supabaseClient.auth.signInWithPassword({
+                            email,
+                            password
+                        });
+
+                        if (signInError) {
+                            // If auto-login fails (e.g. email confirmation is enforced in dashboard),
+                            // show a helpful message instead of crashing
+                            showToast('Account Created', 'Your account was created. Please check your email to verify, then log in.', 'info');
+                            btn.disabled = false;
+                            btn.innerHTML = originalBtnContent;
+                            return;
+                        }
+
+                        showToast('Welcome Member', 'Account created successfully!', 'success');
 
                         setTimeout(() => {
-                            window.location.href = 'index.html';
-                        }, 1000);
+                            window.location.replace('index.html');
+                        }, 800);
                     } else {
                         // Real Sign In
                         const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -265,11 +287,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         if (error) throw error;
 
-                        showToast('Welcome', `Access granted, welcome to Automobili Ardent!`, 'success');
+                        showToast('Welcome', 'Access granted, welcome to Automobili Ardent!', 'success');
 
                         setTimeout(() => {
-                            window.location.href = 'index.html';
-                        }, 1000);
+                            window.location.replace('index.html');
+                        }, 800);
                     }
                 } catch (err) {
                     console.error('Auth error:', err);
