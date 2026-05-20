@@ -240,6 +240,39 @@ body, html {
     border-radius: 8px; /* Slightly more rounded to fit the panel */
 }
 
+/* Make the login button solid white and highly visible, transitioning to yellow on hover */
+.btn-login.btn-primary {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--black);
+    transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s ease;
+}
+
+.btn-login.btn-primary .text-anim span,
+.btn-login.btn-primary .text-anim::after {
+    color: var(--black);
+}
+
+.btn-login.btn-primary:hover {
+    background: transparent;
+    border-color: var(--primary);
+    box-shadow: 0 8px 30px rgba(255, 202, 39, 0.35);
+}
+
+.btn-login.btn-primary:hover .text-anim span,
+.btn-login.btn-primary:hover .text-anim::after {
+    color: var(--black);
+}
+
+/* Spinner visibility inside white button */
+.btn-login .spinner-btn-loader {
+    border-color: rgba(0, 0, 0, 0.2);
+    border-top-color: var(--black);
+}
+
 /* Quick Access */
 .quick-access {
     display: flex;

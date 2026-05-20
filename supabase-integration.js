@@ -348,59 +348,44 @@
     // ─── HEADER / MENU STATE DYNAMIC LINK ───
     function updateLoginStateUI() {
         const user = getLoggedInUser();
-        const menuNav = document.querySelector('.menu-nav-links');
-        if (!menuNav) return;
-
-        // Check if there is already an Account or Login link in the overlay
+        
         let accountLinkWrapper = document.getElementById('menuAccountWrapper');
+        if (!accountLinkWrapper) return;
 
         if (user) {
             // Logged In State
-            const userInitials = (user.user_metadata?.full_name || user.email || 'U').substring(0, 2).toUpperCase();
-
-            if (accountLinkWrapper) {
-                accountLinkWrapper.innerHTML = `
-                    <a href="#" class="m-link hover-target" id="menuBtnLogout" style="color: var(--primary);">
-                        <span class="text-anim" data-text="LOGOUT"><span>LOGOUT (${user.user_metadata?.full_name || user.email.split('@')[0]})</span></span>
-                    </a>
-                `;
-            } else {
-                accountLinkWrapper = document.createElement('div');
-                accountLinkWrapper.className = 'm-link-wrapper';
-                accountLinkWrapper.id = 'menuAccountWrapper';
-                accountLinkWrapper.innerHTML = `
-                    <a href="#" class="m-link hover-target" id="menuBtnLogout" style="color: var(--primary);">
-                        <span class="text-anim" data-text="LOGOUT"><span>LOGOUT (${user.user_metadata?.full_name || user.email.split('@')[0]})</span></span>
-                    </a>
-                `;
-                menuNav.appendChild(accountLinkWrapper);
-            }
+            accountLinkWrapper.innerHTML = `
+                <a href="#" class="btn-store hover-target" id="menuBtnLogout" style="gap: 1.2rem;">
+                    <span class="store-text">
+                        <span class="text-anim" data-text="LOGOUT"><span>LOGOUT</span></span>
+                    </span>
+                    <svg class="bag-icon" style="stroke: var(--black); width: 20px; height: 20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+            `;
 
             // Bind logout
-            document.getElementById('menuBtnLogout').addEventListener('click', (e) => {
-                e.preventDefault();
-                logoutUser();
-            });
+            const btn = document.getElementById('menuBtnLogout');
+            if (btn) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    logoutUser();
+                });
+            }
 
         } else {
             // Logged Out State
-            if (accountLinkWrapper) {
-                accountLinkWrapper.innerHTML = `
-                    <a href="login.html" class="m-link hover-target">
-                        <span class="text-anim" data-text="LOGIN"><span>LOGIN / SIGN UP</span></span>
-                    </a>
-                `;
-            } else {
-                accountLinkWrapper = document.createElement('div');
-                accountLinkWrapper.className = 'm-link-wrapper';
-                accountLinkWrapper.id = 'menuAccountWrapper';
-                accountLinkWrapper.innerHTML = `
-                    <a href="login.html" class="m-link hover-target">
-                        <span class="text-anim" data-text="LOGIN"><span>LOGIN / SIGN UP</span></span>
-                    </a>
-                `;
-                menuNav.appendChild(accountLinkWrapper);
-            }
+            accountLinkWrapper.innerHTML = `
+                <a href="login.html" class="btn-store hover-target" style="gap: 1.2rem;">
+                    <span class="store-text">
+                        <span class="text-anim" data-text="LOGIN"><span>LOGIN</span></span>
+                    </span>
+                    <svg class="bag-icon" style="stroke: var(--black); width: 20px; height: 20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                </a>
+            `;
         }
     }
 
