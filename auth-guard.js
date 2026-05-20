@@ -40,3 +40,21 @@
         window.location.replace('index.html');
     }
 })();
+
+
+// --- Speed Optimization: Lazy Load Database ---
+// We load Supabase AFTER the window loads and initial GSAP animations start.
+// This prevents the heavy 150KB database library from blocking the main thread
+// and eliminates any jitter during the preloader/hero animations.
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const script1 = document.createElement('script');
+        script1.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+        script1.onload = () => {
+            const script2 = document.createElement('script');
+            script2.src = "supabase-integration.js";
+            document.body.appendChild(script2);
+        };
+        document.body.appendChild(script1);
+    }, 100);
+});
