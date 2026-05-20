@@ -1013,11 +1013,27 @@ create policy "Allow anyone to insert comments"
     }
 
 
+    function checkAuthGuard() {
+        const path = window.location.pathname;
+        const isLoginPage = path.includes('login.html');
+        const user = getLoggedInUser();
+
+        if (!user && !isLoginPage) {
+            // Not logged in -> force redirect to login portal
+            window.location.href = 'login.html';
+        } else if (user && isLoginPage) {
+            // Already logged in -> direct to index/homepage
+            window.location.href = 'index.html';
+        }
+    }
+
+
     // ═══════════════════════════════════════════════
     // BOOTSTRAP INITIALIZATION
     // ═══════════════════════════════════════════════
-    createDevUI();
     initSupabase();
+    checkAuthGuard();
+    createDevUI();
     updateLoginStateUI();
     loadCommentsSection();
     handleLoginForm();
