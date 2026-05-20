@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <!-- SAME stylesheet as home page -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="supabase-integration.css">
     <!-- SAME scripts as home page -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -487,8 +488,9 @@
         if (brandTrack) gsap.to(brandTrack, { xPercent: -50, ease: 'none', duration: 20, repeat: -1 });
 
         ScrollTrigger.refresh();
-    });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-integration.js"></script>
 </body>
 </html>
 
