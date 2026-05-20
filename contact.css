@@ -5,76 +5,6 @@
    ═══════════════════════════════════════════════ */
 
 
-/* ═══════════════════════════════════════════════
-   HERO
-   ═══════════════════════════════════════════════ */
-.contact-hero {
-    position: relative; width: 100%; height: 70vh; min-height: 500px;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--black); overflow: hidden; padding: 0;
-}
-
-.contact-hero-bg {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; opacity: 0.35;
-    transition: transform 12s ease-out;
-}
-.contact-hero:hover .contact-hero-bg { transform: scale(1.04); }
-
-.contact-hero-overlay {
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background:
-        radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%),
-        linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
-}
-
-.contact-hero-content {
-    position: relative; z-index: 10; text-align: center; color: var(--white);
-    padding: 0 5%;
-}
-
-.contact-hero-label {
-    display: inline-block; padding: 0.4rem 1.4rem;
-    border: 1px solid rgba(255,255,255,0.25); border-radius: 3px;
-    font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 0.2em;
-    text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 1.8rem;
-}
-
-.contact-hero-title {
-    font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 7vw, 5rem);
-    font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-    line-height: 1; margin-bottom: 1rem;
-}
-
-.contact-hero-sub {
-    font-family: var(--font-body); font-size: clamp(0.75rem, 1.1vw, 0.95rem);
-    font-weight: 300; color: rgba(255,255,255,0.45); letter-spacing: 0.12em;
-}
-
-/* Scroll indicator */
-.contact-hero-scroll {
-    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-    z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-}
-.contact-hero-scroll-text {
-    font-family: var(--font-heading); font-size: 0.5rem; letter-spacing: 0.3em;
-    text-transform: uppercase; color: rgba(255,255,255,0.3);
-}
-.contact-hero-scroll-line {
-    width: 1px; height: 36px; background: rgba(255,255,255,0.12); position: relative;
-    overflow: hidden;
-}
-.contact-hero-scroll-line::after {
-    content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
-    background: var(--primary);
-    animation: contactScrollPulse 2s ease-in-out infinite;
-}
-@keyframes contactScrollPulse {
-    0% { top: -100%; }
-    50% { top: 100%; }
-    100% { top: 100%; }
-}
 
 
 /* ═══════════════════════════════════════════════
@@ -285,8 +215,6 @@
 }
 
 @media (max-width: 768px) {
-    .contact-hero { height: 60vh; min-height: 400px; }
-    .contact-hero-title { font-size: clamp(2rem, 10vw, 3rem); }
     .contact-body { padding: 50px 5% 70px; }
     .contact-container { grid-template-columns: 1fr; gap: 3rem; }
     .contact-info { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -295,8 +223,6 @@
 }
 
 @media (max-width: 480px) {
-    .contact-hero { min-height: 350px; }
-    .contact-hero-label { font-size: 0.5rem; }
     .contact-body { padding: 40px 4% 60px; }
     .contact-form-title { font-size: 1.4rem; }
 }
