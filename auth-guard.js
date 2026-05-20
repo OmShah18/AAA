@@ -1,7 +1,7 @@
 (function() {
     // Synchronous auth check to prevent page flickering
     const path = window.location.pathname;
-    const isLoginPage = path.includes('login.html');
+    const isLoginPage = path.includes('login');
     const hash = window.location.hash;
     
     // Allow OAuth callback redirects to be handled by supabase-integration.js
