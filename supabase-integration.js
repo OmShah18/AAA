@@ -2,7 +2,7 @@
    SUPABASE INTEGRATION — Core Javascript Engine
    ═══════════════════════════════════════════════ */
 
-document.addEventListener('DOMContentLoaded', () => {
+(function() {
     // ─── CONFIGURATION DEFAULTS ───
     // These are placeholders that can be replaced in code, or overwritten in the browser settings modal.
     const DEFAULT_SUPABASE_URL = "https://ksudtwyrmobmbvyubrvd.supabase.co";
@@ -853,4 +853,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // ═══════════════════════════════════════════════
     initSupabase();
     handleAuthCallback();
-});
+})();
