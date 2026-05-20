@@ -794,14 +794,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ─── HANDLE AUTH CALLBACK (email verify / OAuth redirect) ───
+    // Supabase redirects back with tokens in the URL hash fragment.
+    // We must let the client process them before running any guard.
+    async function handleAuthCallback() {
+        const hash = window.location.hash;
+        const hasAuthTokens = hash && (hash.includes('access_token') || hash.includes('type='));
+
+        if (hasAuthTokens && supabaseClient) {
+            try {
+                // Let the Supabase client exchange the hash tokens for a real session
+                const { data, error } = await supabaseClient.auth.getSession();
+
+                if (error) {
+                    console.warn('Auth callback session error:', error.message);
+                }
+
+                // Strip tokens from URL immediately for security
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+
+                if (data?.session) {
+                    showToast('Welcome', 'Authentication successful! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 800);
+                    return; // Stop further bootstrap; we are redirecting
+                }
+            } catch (err) {
+                console.error('Auth callback processing error:', err);
+                // Clean hash even on error
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        }
+
+        // No callback tokens – run the normal auth guard
+        checkAuthGuard();
+
+        // Continue normal page initialization
+        updateLoginStateUI();
+        loadCommentsSection();
+        handleLoginForm();
+    }
+
 
     // ═══════════════════════════════════════════════
     // BOOTSTRAP INITIALIZATION
     // ═══════════════════════════════════════════════
     initSupabase();
-    checkAuthGuard();
-
-    updateLoginStateUI();
-    loadCommentsSection();
-    handleLoginForm();
+    handleAuthCallback();
 });
