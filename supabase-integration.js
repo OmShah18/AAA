@@ -408,15 +408,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isOfflineMode) {
             localStorage.removeItem('ARDENT_MOCK_USER');
             showToast('Logged Out', 'Successfully logged out.', 'success');
-            updateLoginStateUI();
-            loadCommentsSection(); // refresh pre-fill states
+            setTimeout(() => window.location.replace('login.html'), 800);
         } else {
             try {
                 const { error } = await supabaseClient.auth.signOut();
                 if (error) throw error;
                 showToast('Logged Out', 'Successfully logged out.', 'success');
-                updateLoginStateUI();
-                loadCommentsSection(); // refresh pre-fill states
+                setTimeout(() => window.location.replace('login.html'), 800);
             } catch (err) {
                 console.error(err);
                 showToast('Logout Error', err.message || 'Logout failed.', 'error');
