@@ -251,13 +251,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         if (error) throw error;
 
-                        showToast('Verify Email', 'Account created! Please check your email to verify.', 'success');
+                        showToast('Welcome Member', 'Account created successfully! Logging you in...', 'success');
 
-                        // Instantly transition back to login UI
-                        if (signupLinkParagraph) {
-                            const newLink = signupLinkParagraph.querySelector('a');
-                            if (newLink) newLink.click();
-                        }
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1000);
                     } else {
                         // Real Sign In
                         const { data, error } = await supabaseClient.auth.signInWithPassword({
