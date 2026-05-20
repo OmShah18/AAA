@@ -95,7 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check active session from Supabase
             // Note: In Supabase v2, auth.getSession() is asynchronous, 
             // but we can check if it's cached in localStorage by Supabase
-            const localSessionKey = `sb-${new URL(currentSupabaseUrl).hostname}-auth-token`;
+            const projectRef = new URL(currentSupabaseUrl).hostname.split('.')[0];
+            const localSessionKey = `sb-${projectRef}-auth-token`;
             const localSession = localStorage.getItem(localSessionKey);
             if (localSession) {
                 try {
@@ -803,17 +804,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function checkAuthGuard() {
-        const path = window.location.pathname;
-        const isLoginPage = path.includes('login.html');
-        const user = getLoggedInUser();
-
-        if (!user && !isLoginPage) {
-            // Not logged in -> force redirect to login portal
-            window.location.href = 'login.html';
-        } else if (user && isLoginPage) {
-            // Already logged in -> direct to index/homepage
-            window.location.href = 'index.html';
-        }
+        // Handled instantly by auth-guard.js now to prevent flickering.
     }
 
     // ─── HANDLE AUTH CALLBACK (email verify / OAuth redirect) ───
